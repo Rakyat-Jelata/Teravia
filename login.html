@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masuk Akun - TERAVIA</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        /* Style tambahan opsional agar layout form login rapi dan estetik */
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f6f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .login-container {
+            background: #ffffff;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+            width: 100%;
+            max-width: 400px;
+            box-sizing: border-box;
+        }
+        .brand-title {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+            color: #1e3a8a;
+            margin-bottom: 5px;
+        }
+        .brand-subtitle {
+            text-align: center;
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 25px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 5px;
+            color: #374151;
+            font-weight: 500;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #d1d5db;
+            border-radius: 6px;
+            box-sizing: border-box;
+            font-size: 14px;
+        }
+        .btn-login {
+            width: 100%;
+            padding: 12px;
+            background-color: #2563eb;
+            color: white;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+        .btn-login:disabled {
+            background-color: #93c5fd;
+        }
+        .alert {
+            padding: 10px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 14px;
+            display: none;
+        }
+        .alert-error {
+            background-color: #fee2e2;
+            color: #991b1b;
+            border: 1px solid #fca5a5;
+        }
+        .alert-success {
+            background-color: #dcfce7;
+            color: #166534;
+            border: 1px solid #86efac;
+        }
+        .switch-link {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 14px;
+            color: #4b5563;
+        }
+        .switch-link a {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 500;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="login-container">
+        <div class="brand-title">TERAVIA</div>
+        <div class="brand-subtitle">Silakan masuk untuk mengelola properti Anda</div>
+
+        <div id="alert-msg" class="alert"></div>
+
+        <form id="login-form" onsubmit="return false;">
+            <div class="form-group">
+                <label for="login-email">Alamat Email</label>
+                <input type="email" id="login-email" placeholder="nama@email.com" required>
+            </div>
+
+            <div class="form-group">
+                <label for="login-password">Password</label>
+                <input type="password" id="login-password" placeholder="Masukkan password" required>
+            </div>
+
+            <button type="button" id="btn-submit-login" class="btn-login">Masuk Sekarang</button>
+        </form>
+
+        <div class="switch-link">
+            Belum punya akun? <a href="index.html">Daftar di sini</a>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // URL & KEY yang sudah terbukti sukses kemarin
+            const SUPABASE_URL = "https://jqlcuilrzfvtdlrbitbn.supabase.co";
+            const SUPABASE_ANON_KEY = "EyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpxbGN1aWxyemZ2dGRscmJpdGJuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM0NzU1MzgsImV4cCI6MjA5OTA1MTUzOH0.FYPFhXvaHupd5O1_JuEJYBmS7zDuzcTq4G2MvYjdqjQ";
+
+            const btnLogin = document.getElementById("btn-submit-login");
+            const alertMsg = document.getElementById("alert-msg");
+
+            const showAlert = (message, type = "error") => {
+                alertMsg.innerText = message;
+                alertMsg.className = `alert alert-${type}`;
+                alertMsg.style.display = "block";
+            };
+
+            if (btnLogin) {
+                btnLogin.addEventListener("click", async () => {
+                    const email = document.getElementById("login-email").value.trim();
+                    const password = document.getElementById("login-password").value.trim();
+
+                    // Validasi input kosong
+                    if (!email || !password) {
+                        showAlert("Email dan Password wajib diisi!", "error");
+                        return;
+                    }
+
+                    btnLogin.innerText = "Memverifikasi...";
+                    btnLogin.disabled = true;
+                    alertMsg.style.display = "none";
+
+                    try {
+                        // Tembak API Login Supabase (SignIn dengan Email & Password)
+                        const response = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
+                            method: "POST",
+                            headers: {
+                                "Content-Type": "application/json",
+                                "apikey": SUPABASE_ANON_KEY,
+                                "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
+                            },
+                            body: JSON.stringify({ email, password })
+                        });
+
+                        const data = await response.json();
+
+                        if (!response.ok) {
+                            // Jika email/password salah, Supabase melemparkan error di sini
+                            throw new Error(data.error_description || data.message || "Email atau password salah!");
+                        }
+
+                        // JIKA LOGIN SUKSES:
+                        if (data && data.access_token) {
+                            showAlert("Login Berhasil! Mengalihkan...", "success");
+                            
+                            // Simpan token login ke memori browser (agar user tetap login saat pindah halaman)
+                            localStorage.setItem("teravia_session", JSON.stringify(data));
+
+                            // Alihkan ke halaman dashboard utama setelah 1.5 detik
+                            setTimeout(() => {
+                                window.location.href = "dashboard.html";
+                            }, 1500);
+                        }
+
+                    } catch (error) {
+                        console.error(error);
+                        showAlert("Gagal Masuk: " + error.message, "error");
+                    } finally {
+                        btnLogin.innerText = "Masuk Sekarang";
+                        btnLogin.disabled = false;
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
