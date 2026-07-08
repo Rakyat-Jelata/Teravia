@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blog & Berita - TERAVIA</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        body { font-family: 'Segoe UI', sans-serif; margin: 0; padding: 0; background-color: #f8fafc; color: #1e293b; }
+        .navbar { background: white; padding: 15px 5%; display: flex; justify-content: space-between; align-items: center; box-shadow: 0 2px 10px rgba(0,0,0,0.05); }
+        .brand-logo { font-size: 24px; font-weight: bold; color: #2563eb; text-decoration: none; }
+        .nav-links a { text-decoration: none; color: #4b5563; margin-left: 20px; font-weight: 500; }
+        .nav-links a.active { color: #2563eb; font-weight: 700; }
+        .container { padding: 40px 5%; max-width: 1200px; margin: 0 auto; }
+        .blog-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 30px; margin-top: 30px; }
+        .blog-card { background: white; border-radius: 12px; overflow: hidden; border: 1px solid #e2e8f0; }
+        .blog-thumb { height: 200px; background: #cbd5e1; display: flex; justify-content: center; align-items: center; color: #64748b; }
+        .blog-content { padding: 20px; }
+        .blog-date { font-size: 12px; color: #94a3b8; margin-bottom: 5px; }
+        .blog-title { font-size: 18px; margin: 0 0 10px 0; color: #1e3a8a; }
+        .blog-desc { font-size: 14px; color: #64748b; line-height: 1.6; }
+    </style>
+</head>
+<body>
+    <nav class="navbar">
+        <a href="index.html" class="brand-logo">TERAVIA</a>
+        <div class="nav-links">
+            <a href="index.html">Beranda</a>
+            <a href="properti.html">Properti</a>
+            <a href="blog.html" class="active">Blog</a>
+            <a href="tentang.html">Tentang</a>
+        </div>
+    </nav>
+    <div class="container">
+        <h1 style="color: #1e3a8a; margin: 0;">Blog & Edukasi Properti</h1>
+        <p style="color: #64748b;">Tips, trik, dan berita terbaru seputar dunia properti Indonesia.</p>
+        <div class="blog-grid">
+            <div class="blog-card">
+                <div class="blog-thumb">[ Gambar Artikel ]</div>
+                <div class="blog-content">
+                    <div class="blog-date">8 Juli 2026</div>
+                    <h3 class="blog-title">5 Tips Membeli Rumah Pertama untuk Pasangan Muda</h3>
+                    <p class="blog-desc">Membeli rumah pertama bisa membingungkan. Simak panduan lengkap legalitas dan simulasi KPR di sini...</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+
