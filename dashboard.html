@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Pengguna - TERAVIA</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f1f5f9;
+            color: #1e293b;
+        }
+        /* Navbar Dashboard */
+        .dash-nav {
+            background-color: #1e3a8a;
+            color: white;
+            padding: 15px 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 4px 6px rgba(0,0,0,0.05);
+        }
+        .dash-brand {
+            font-size: 22px;
+            font-weight: bold;
+            letter-spacing: 1px;
+        }
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+        .user-email {
+            font-size: 14px;
+            background-color: rgba(255,255,255,0.15);
+            padding: 5px 12px;
+            border-radius: 20px;
+        }
+        .btn-logout {
+            background-color: #ef4444;
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 14px;
+            transition: background 0.2s;
+        }
+        .btn-logout:hover {
+            background-color: #dc2626;
+        }
+
+        /* Main Content */
+        .main-container {
+            padding: 40px 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .welcome-card {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.02);
+            border: 1px solid #e2e8f0;
+            margin-bottom: 30px;
+        }
+        .welcome-card h1 {
+            margin: 0 0 10px 0;
+            color: #1e3a8a;
+            font-size: 28px;
+        }
+        .welcome-card p {
+            color: #64748b;
+            margin: 0;
+        }
+
+        /* Panel Info / Menu Dummy */
+        .grid-menu {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .menu-card {
+            background: white;
+            padding: 25px;
+            border-radius: 10px;
+            border: 1px solid #e2e8f0;
+            transition: transform 0.2s;
+        }
+        .menu-card:hover {
+            transform: translateY(-3px);
+        }
+        .menu-card h3 {
+            margin: 0 0 10px 0;
+            color: #1e293b;
+        }
+        .menu-card p {
+            color: #64748b;
+            font-size: 14px;
+            line-height: 1.5;
+            margin-bottom: 15px;
+        }
+        .btn-action {
+            color: #2563eb;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- SATPAM MIDDLEWARE (Wajib ditaruh paling atas agar langsung mencegat) -->
+    <script>
+        // Cek apakah ada data token login di memori browser
+        const sessionData = localStorage.getItem("teravia_session");
+        
+        if (!sessionData) {
+            // Jika TIDAK ADA token, langsung usir ke halaman login
+            alert("Akses ditolak! Anda harus masuk terlebih dahulu.");
+            window.location.href = "login.html";
+        }
+        
+        // Mengubah string token menjadi objek javascript siap pakai
+        const session = JSON.parse(sessionData);
+    </script>
+
+    <!-- NAVBAR DASHBOARD -->
+    <nav class="dash-nav">
+        <div class="dash-brand">TERAVIA PANEL</div>
+        <div class="user-info">
+            <!-- Tempat menampilkan email user yang sedang login -->
+            <span class="user-email" id="display-email">Memuat...</span>
+            <button class="btn-logout" id="btn-logout">Keluar</button>
+        </div>
+    </nav>
+
+    <!-- KONTEN UTAMA -->
+    <div class="main-container">
+        <div class="welcome-card">
+            <h1>Selamat Datang Kembali! 👋</h1>
+            <p>Anda berhasil masuk ke sistem manajemen properti TERAVIA. Kelola listing properti Anda dengan mudah di sini.</p>
+        </div>
+
+        <div class="grid-menu">
+            <div class="menu-card">
+                <h3>🏠 Iklan Properti Saya</h3>
+                <p>Lihat, tambah, atau perbarui listing rumah, apartemen, atau tanah yang sedang Anda pasarkan.</p>
+                <a href="#" class="btn-action">Buka Menu &rarr;</a>
+            </div>
+            <div class="menu-card">
+                <h3>💬 Pesan Masuk</h3>
+                <p>Pantau calon pembeli atau penyewa yang mencoba menghubungi Anda langsung lewat sistem.</p>
+                <a href="#" class="btn-action">Lihat Pesan &rarr;</a>
+            </div>
+            <div class="menu-card">
+                <h3>⚙️ Pengaturan Profil</h3>
+                <p>Ubah informasi akun, nomor WhatsApp agen, password, atau detail agen properti Anda.</p>
+                <a href="#" class="btn-action">Kelola Profil &rarr;</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- LOGIKA JAVASCRIPT DASHBOARD -->
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            // Pastikan data session ada (double check)
+            if (session && session.user) {
+                // Tampilkan email user asli yang sedang login ke navbar
+                document.getElementById("display-email").innerText = session.user.email;
+            }
+
+            // FITUR LOGOUT (KELUAR AKUN)
+            const btnLogout = document.getElementById("btn-logout");
+            if (btnLogout) {
+                btnLogout.addEventListener("click", () => {
+                    // Hapus token login dari memori browser
+                    localStorage.removeItem("teravia_session");
+                    
+                    // Lempar kembali ke halaman login setelah dibersihkan
+                    alert("Anda telah berhasil keluar akun.");
+                    window.location.href = "login.html";
+                });
+            }
+        });
+    </script>
+</body>
+  </html>
+
