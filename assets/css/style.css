@@ -1,1 +1,208 @@
+/* ==========================================================================
+   TERAVIA MASTER STYLESHEET - GLOBAL PAINTING
+   ========================================================================== */
+
+/* 1. RESET & BASE STYLES */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    background-color: #f8fafc;
+    color: #1e293b;
+    line-height: 1.6;
+}
+
+/* 2. REUSABLE COMPONENTS (NAVBAR & FOOTER) */
+.navbar {
+    background-color: #ffffff;
+    padding: 15px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.brand-logo {
+    font-size: 24px;
+    font-weight: bold;
+    color: #2563eb;
+    text-decoration: none;
+    letter-spacing: 0.5px;
+}
+
+.nav-links {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #4b5563;
+    font-weight: 500;
+    transition: color 0.2s;
+}
+
+.nav-links a:hover, .nav-links a.active {
+    color: #2563eb;
+    font-weight: 600;
+}
+
+.footer {
+    background-color: #0f172a;
+    color: #94a3b8;
+    padding: 40px 5%;
+    text-align: center;
+    font-size: 14px;
+    margin-top: 50px;
+}
+
+.footer a {
+    color: #ffffff;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.2s;
+}
+
+.footer a:hover {
+    color: #38bdf8;
+}
+
+/* 3. BUTTONS UTILITY */
+.btn {
+    text-decoration: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    display: inline-block;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+}
+
+.btn-primary {
+    background-color: #2563eb;
+    color: #ffffff;
+    box-shadow: 0 4px 6px rgba(37, 99, 235, 0.1);
+}
+
+.btn-primary:hover {
+    background-color: #1d4ed8;
+    transform: translateY(-1px);
+}
+
+.btn-outline {
+    color: #2563eb;
+    background-color: transparent;
+    border: 1px solid #2563eb;
+}
+
+.btn-outline:hover {
+    background-color: #eff6ff;
+}
+
+.btn-whatsapp {
+    background-color: #22c55e;
+    color: white;
+    box-shadow: 0 4px 12px rgba(34, 197, 94, 0.2);
+}
+
+.btn-whatsapp:hover {
+    background-color: #16a34a;
+}
+
+/* 4. UTILITY FORMS (LOGIN, REGISTRASI, PROFILE, PASANG IKLAN) */
+.form-box, .profile-box {
+    background: #ffffff;
+    padding: 30px;
+    border-radius: 12px;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #334155;
+}
+
+.form-group input, .form-group select, .form-group textarea {
+    width: 100%;
+    padding: 11px 14px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    box-sizing: border-box;
+    font-size: 14px;
+    color: #1e293b;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+    outline: none;
+    border-color: #2563eb;
+    box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+}
+
+/* 5. PROPERTY & BLOG CARD ARCHITECTURE */
+.property-grid, .blog-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 25px;
+}
+
+.property-card, .blog-card {
+    background: #ffffff;
+    border-radius: 12px;
+    overflow: hidden;
+    border: 1px solid #e2e8f0;
+    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.property-card:hover, .blog-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px -5px rgba(0, 0, 0, 0.05);
+}
+
+.property-thumb, .blog-thumb {
+    background-color: #e2e8f0;
+    height: 210px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #64748b;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.property-content, .blog-content {
+    padding: 20px;
+}
+
+/* 6. RESPONSIVE UTILITIES */
+@media (max-width: 768px) {
+    .navbar {
+        padding: 15px 4%;
+    }
+    .nav-links {
+        gap: 12px;
+    }
+    .nav-links a {
+        font-size: 14px;
+    }
+  }
 
