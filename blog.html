@@ -38,6 +38,36 @@
             </div>
         </div>
     </div>
+    <script>
+    document.addEventListener("DOMContentLoaded", () => {
+        // 1. Sedot file navbar.html secara otomatis
+        fetch('navbar.html')
+            .then(response => response.text())
+            .then(data => {
+                // 2. Masukkan ke dalam kotak kosong di atas
+                const navbarWrapper = document.getElementById('wrapper-navbar');
+                if (navbarWrapper) {
+                    navbarWrapper.innerHTML = data;
+                    
+                    // 3. MANTRA CERDAS: Otomatis mendeteksi halaman aktif & memberi warna biru!
+                    const currentFile = window.location.pathname.split("/").pop() || "index.html";
+                    const navLinks = navbarWrapper.querySelectorAll(".nav-links a");
+                    
+                    navLinks.forEach(link => {
+                        const linkFile = link.getAttribute("href");
+                        if (currentFile === linkFile) {
+                            link.classList.add("active");
+                            // Tambahan style instan biar teksnya menyala biru
+                            link.style.color = "#2563eb";
+                            link.style.fontWeight = "700";
+                        }
+                    });
+                }
+            })
+            .catch(err => console.error("Gagal memuat navbar:", err));
+    });
+</script>
+
 </body>
 </html>
 
