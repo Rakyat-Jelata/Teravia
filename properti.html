@@ -160,7 +160,15 @@
             </div>
         </div>
     </div>
-
+<script>
+    // Menyedot file navbar.html dan memasukkannya ke kotak kosong di atas
+    fetch('navbar.html')
+        .then(response => response.text())
+        .then(data => {
+            document.getElementById('wrapper-navbar').innerHTML = data;
+        });
+          </script>
+    
 </body>
 </html>
 
