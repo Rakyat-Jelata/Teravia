@@ -3,328 +3,140 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masuk ke Akun Anda - TERAVIA Premium</title>
-    
+    <title>Masuk - TERAVIA</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
     <style>
         :root {
-            --primary: #0F172A;       /* Deep Slate / Navy */
-            --primary-light: #1E293B;
-            --accent: #0EA5E9;        /* Premium Sky Blue */
-            --accent-glow: rgba(14, 165, 233, 0.08);
-            --bg-main: #FAFAFA;        /* Menjaga keselarasan dengan Index */
+            --primary: #0F172A;
+            --accent: #0EA5E9;
+            --accent-hover: #0284C7;
+            --bg-main: #FAFAFA;
             --bg-surface: #FFFFFF;
             --text-main: #0F172A;
             --text-muted: #64748B;
-            --border-glass: rgba(15, 23, 42, 0.06);
+            --border-color: #E2E8F0;
             --font-sans: 'Plus Jakarta Sans', sans-serif;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: var(--font-sans);
-            -webkit-font-smoothing: antialiased;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: var(--font-sans); }
+        body { background-color: #F8FAFC; color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; }
+        .container { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 24px; }
 
-        body {
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            overflow: hidden;
-            height: 100vh;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-        }
+        /* NAVBAR STYLING */
+        .navbar { background-color: var(--bg-surface); border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 1000; padding: 12px 0; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; position: relative; }
+        .logo-img { height: 40px; width: auto; display: block; }
+        .nav-links { display: flex; list-style: none; gap: 32px; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--accent); }
+        .nav-actions { display: flex; align-items: center; }
+        .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; z-index: 1001; }
+        .hamburger span { display: block; width: 25px; height: 3px; background-color: var(--primary); border-radius: 3px; }
 
-        /* LIGHT AMBIENT GLOW BACKDROP (Pendaran Cahaya Mewah Versi Terang) */
-        body::before {
-            content: '';
-            position: absolute;
-            width: 500px;
-            height: 500px;
-            background: radial-gradient(circle, rgba(14, 165, 233, 0.12) 0%, transparent 70%);
-            top: -100px;
-            left: -100px;
-            z-index: 0;
-        }
-        body::after {
-            content: '';
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(59, 130, 246, 0.08) 0%, transparent 70%);
-            bottom: -150px;
-            right: -150px;
-            z-index: 0;
-        }
+        .btn { padding: 10px 20px; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 14px; cursor: pointer; }
+        .btn-primary { background-color: var(--accent); color: white; border: none; }
+        .btn-outline { background-color: transparent; color: var(--primary); border: 1px solid var(--border-color); margin-right: 12px; }
 
-        /* MAIN KANVAS GLASSMORPHISM */
-        .auth-viewport {
-            position: relative;
-            z-index: 10;
-            width: 100%;
-            max-width: 1140px;
-            height: 82vh;
-            max-height: 760px;
-            background: rgba(255, 255, 255, 0.6);
-            backdrop-filter: blur(24px);
-            -webkit-backdrop-filter: blur(24px);
-            border: 1px solid rgba(255, 255, 255, 0.8);
-            border-radius: 24px;
-            display: grid;
-            grid-template-columns: 1fr 1.1fr;
-            overflow: hidden;
-            box-shadow: 0 20px 40px -15px rgba(15, 23, 42, 0.05), 0 1px 3px rgba(0, 0, 0, 0.02);
-        }
+        /* CONTENT WRAPPER */
+        .auth-wrapper { flex: 1; display: flex; justify-content: center; align-items: center; padding: 40px 16px; }
+        .auth-container { background: var(--bg-surface); border-radius: 24px; padding: 40px 32px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05); width: 100%; max-width: 480px; border: 1px solid var(--border-color); }
+        .auth-header h2 { font-size: 28px; font-weight: 800; margin-bottom: 8px; }
+        .auth-header p { font-size: 15px; color: var(--text-muted); margin-bottom: 32px; }
 
-        /* SISI KIRI: FORM GLASS INTERFACE */
-        .auth-form-container {
-            padding: 50px 60px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            background: rgba(255, 255, 255, 0.3);
-        }
+        .form-group { display: flex; flex-direction: column; margin-bottom: 20px; }
+        .form-group label { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px; }
+        .form-group input { padding: 12px 16px; border: 1px solid var(--border-color); border-radius: 10px; outline: none; background-color: #F8FAFC; width: 100%; }
+        
+        .password-field-wrapper { position: relative; display: flex; align-items: center; }
+        .password-field-wrapper input { padding-right: 48px; }
+        .toggle-password-btn { position: absolute; right: 16px; color: var(--text-muted); cursor: pointer; }
 
-        .back-link {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 13px;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            transition: color 0.3s;
-        }
-        .back-link:hover { color: var(--text-main); }
+        .form-options { display: flex; justify-content: space-between; align-items: center; margin-bottom: 24px; font-size: 14px; }
+        .form-options a { color: var(--accent); text-decoration: none; }
+        .btn-submit { background-color: var(--accent); color: white; border: none; padding: 14px; border-radius: 10px; font-weight: 700; width: 100%; cursor: pointer; }
 
-        .form-scaffold {
-            width: 100%;
-            max-width: 350px;
-            margin: auto 0;
-        }
+        .auth-redirect { text-align: center; font-size: 14px; color: var(--text-muted); margin-top: 24px; }
+        .auth-redirect a { color: var(--accent); text-decoration: none; font-weight: 600; }
 
-        .brand-identity {
-            height: 38px;
-            width: auto;
-            margin-bottom: 28px;
-        }
-
-        .welcome-title {
-            font-size: 28px;
-            font-weight: 800;
-            letter-spacing: -0.5px;
-            color: var(--primary);
-            margin-bottom: 6px;
-        }
-
-        .welcome-desc {
-            font-size: 14px;
-            color: var(--text-muted);
-            margin-bottom: 32px;
-        }
-
-        /* FLOATING INPUTS */
-        .field-box {
-            margin-bottom: 20px;
-        }
-        .field-box label {
-            display: block;
-            font-size: 11px;
-            font-weight: 700;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            margin-bottom: 8px;
-            letter-spacing: 0.8px;
-        }
-        .input-control {
-            width: 100%;
-            padding: 14px 16px;
-            background: #F8FAFC;
-            border: 1px solid var(--border-glass);
-            border-radius: 12px;
-            color: var(--text-main);
-            font-size: 14px;
-            outline: none;
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
-        .input-control:focus {
-            border-color: var(--accent);
-            background: #FFFFFF;
-            box-shadow: 0 0 15px var(--accent-glow);
-        }
-
-        .utility-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            font-size: 13px;
-            margin-bottom: 28px;
-        }
-        .check-container {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-muted);
-            cursor: pointer;
-        }
-        .check-container input {
-            accent-color: var(--accent);
-            cursor: pointer;
-        }
-        .lost-pass {
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 600;
-        }
-        .lost-pass:hover { text-decoration: underline; }
-
-        /* BUTTON PREMIUM WITH SOLID SKY GLOW */
-        .btn-submit-premium {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, var(--accent) 0%, #0284C7 100%);
-            border: none;
-            border-radius: 12px;
-            color: white;
-            font-size: 15px;
-            font-weight: 700;
-            cursor: pointer;
-            box-shadow: 0 4px 15px rgba(14, 165, 233, 0.25);
-            transition: all 0.3s;
-        }
-        .btn-submit-premium:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 20px rgba(14, 165, 233, 0.4);
-        }
-        .btn-submit-premium:active { transform: translateY(0); }
-
-        .footer-switch {
-            font-size: 13px;
-            color: var(--text-muted);
-            margin-top: 24px;
-        }
-        .footer-switch a {
-            color: var(--accent);
-            text-decoration: none;
-            font-weight: 700;
-        }
-
-        /* SISI KANAN: LIVE CINEMATIC WALLPAPER */
-        .auth-visual-scenery {
-            background: linear-gradient(to right, var(--bg-surface), transparent 20%), 
-                        linear-gradient(rgba(15, 23, 42, 0.5), rgba(30, 41, 59, 0.7)), 
-                        url('./assets/img/hero-bg.png');
-            background-size: cover;
-            background-position: center;
-            display: flex;
-            flex-direction: column;
-            justify-content: flex-end;
-            padding: 60px;
-            position: relative;
-        }
-
-        /* OVERLAY GRADIENT GLASS UNTUK KARTU MELAYANG */
-        .visual-glass-card {
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            padding: 32px;
-            border-radius: 16px;
-            max-width: 440px;
-            animation: floatingCard 6s ease-in-out infinite;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
-        }
-
-        .visual-glass-card h2 {
-            font-size: 26px;
-            font-weight: 800;
-            line-height: 1.3;
-            margin-bottom: 12px;
-            color: #FFFFFF;
-        }
-
-        .visual-glass-card p {
-            color: #E2E8F0;
-            font-size: 14px;
-            line-height: 1.6;
-        }
-
-        @keyframes floatingCard {
-            0% { transform: translateY(0px); }
-            50% { transform: translateY(-10px); }
-            100% { transform: translateY(0px); }
-        }
-
-        /* ==========================================
-           RESPONSIVE (MOBILE OPTIMIZED)
-           ========================================== */
-        @media (max-width: 968px) {
-            body { padding: 16px; overflow: auto; height: auto; }
-            .auth-viewport { grid-template-columns: 1fr; height: auto; max-height: none; border-radius: 20px; box-shadow: 0 10px 25px rgba(0,0,0,0.05); }
-            .auth-visual-scenery { display: none; }
-            .auth-form-container { padding: 40px 24px; background: #FFFFFF; }
-            .form-scaffold { max-width: 100%; margin: 40px 0; }
+        @media (max-width: 768px) {
+            .nav-links, .nav-actions { display: none; }
+            .hamburger { display: flex; }
+            .nav-links.active { display: flex !important; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg-surface); padding: 20px; border-bottom: 1px solid var(--border-color); gap: 16px; }
         }
     </style>
 </head>
 <body>
 
-    <div class="auth-viewport">
-        
-        <main class="auth-form-container">
-            <a href="index.html" class="back-link">← Beranda</a>
+    <nav class="navbar">
+        <div class="nav-container container">
+            <a href="index.html">
+                <img src="./assets/img/logo.png" alt="TERAVIA Logo" class="logo-img">
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="pages/jual.html">Jual</a></li>
+                <li><a href="pages/beli.html">Beli</a></li>
+                <li><a href="pages/sewa.html">Sewa</a></li>
+                <li><a href="pages/blog.html">Blog</a></li>
+                <li><a href="pages/tentang.html">Tentang Kami</a></li>
+            </ul>
+            <div class="hamburger" id="hamburgerMenu">
+                <span></span><span></span><span></span>
+            </div>
+            <div class="nav-actions">
+                <a href="register.html" class="btn btn-outline">DAFTAR</a>
+                <a href="login.html" class="btn btn-primary">MASUK</a>
+            </div>
+        </div>
+    </nav>
 
-            <div class="form-scaffold">
-                <img src="./assets/img/logo.png" alt="TERAVIA Premium" class="brand-identity">
-                
-                <h1 class="welcome-title">Selamat Datang</h1>
-                <p class="welcome-desc">Akses akun Anda untuk mengelola properti impian.</p>
-
-                <form id="premium-login-form" action="#" method="POST">
-                    <div class="field-box">
-                        <label for="email">Alamat Email</label>
-                        <input type="email" id="email" class="input-control" placeholder="nama@email.com" required>
-                    </div>
-
-                    <div class="field-box">
-                        <label for="password">Kata Sandi</label>
-                        <input type="password" id="password" class="input-control" placeholder="••••••••" required>
-                    </div>
-
-                    <div class="utility-row">
-                        <label class="check-container">
-                            <input type="checkbox"> Ingat Saya
-                        </label>
-                        <a href="#" class="lost-pass">Lupa Sandi?</a>
-                    </div>
-
-                    <button type="submit" class="btn-submit-premium">MASUK SEKARANG</button>
-                </form>
-
-                <div class="footer-switch">
-                    <p>Belum memiliki akun? <a href="register.html">Daftar Akun</a></p>
+    <div class="auth-wrapper">
+        <div class="auth-container">
+            <div class="auth-header">
+                <h2>Selamat Datang</h2>
+                <p>Akses akun Anda untuk mengelola properti impian.</p>
+            </div>
+            <form id="login-form">
+                <div class="form-group">
+                    <label>Alamat Email</label>
+                    <input type="email" placeholder="nama@email.com" required>
                 </div>
-            </div>
-
-            <span style="font-size: 11px; color: var(--text-muted); opacity: 0.6;">Keamanan Terproteksi TLS &bull; &copy; 2026</span>
-        </main>
-
-        <section class="auth-visual-scenery">
-            <div class="visual-glass-card">
-                <h2>Gerbang Transaksi Properti Modern Anda.</h2>
-                <p>Pantau fluktuasi pasar, kelola portofolio listing, dan hubungi jaringan agen terverifikasi langsung dari satu dasbor enkripsi.</p>
-            </div>
-        </section>
-
+                <div class="form-group">
+                    <label>Kata Sandi</label>
+                    <div class="password-field-wrapper">
+                        <input type="password" id="login-password" placeholder="••••••••" required>
+                        <i class="fa-solid fa-eye-slash toggle-password-btn" id="toggle-login-pass"></i>
+                    </div>
+                </div>
+                <div class="form-options">
+                    <label><input type="checkbox"> Ingat Saya</label>
+                    <a href="#">Lupa Sandi?</a>
+                </div>
+                <button type="submit" class="btn-submit">MASUK SEKARANG</button>
+            </form>
+            <p class="auth-redirect">Belum memiliki akun? <a href="register.html">Daftar Akun</a></p>
+        </div>
     </div>
 
+    <script>
+        const hamburger = document.getElementById('hamburgerMenu');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => { navLinks.classList.toggle('active'); });
+
+        const passField = document.getElementById('login-password');
+        const toggleIcon = document.getElementById('toggle-login-pass');
+        toggleIcon.addEventListener('click', () => {
+            if (passField.type === 'password') {
+                passField.type = 'text';
+                toggleIcon.classList.replace('fa-eye-slash', 'fa-eye');
+            } else {
+                passField.type = 'password';
+                toggleIcon.classList.replace('fa-eye', 'fa-eye-slash');
+            }
+        });
+    </script>
 </body>
 </html>
