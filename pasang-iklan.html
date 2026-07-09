@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -317,148 +317,163 @@
     </div>
 
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            
-            // --- 1. LOGIKA HAMBURGER MENU (MOBILE RESPONSIVE) ---
-            const btnHamburger = document.getElementById("btn-hamburger");
-            const mobileMenu = document.getElementById("mobile-menu");
+document.addEventListener("DOMContentLoaded", function () {
 
-            btnHamburger.addEventListener("click", () => {
-                mobileMenu.classList.toggle("hidden");
-            });
+    // ==========================================
+    // 1. LOGIKA HAMBURGER MENU (MOBILE NAVIGATION)
+    // ==========================================
+    const menuBtn = document.getElementById("menu-btn");
+    const mobileMenu = document.getElementById("mobile-menu");
 
-            // --- 2. LOGIKA DETAIL KONDISIONAL PROPERTI ---
-            const selectJenis = document.getElementById("select-jenis");
-            const formDetailIds = ["form-rumah", "form-tanah", "form-hotel", "form-perkantoran", "form-rs"];
-
-            selectJenis.addEventListener("change", (e) => {
-                const targetValue = e.target.value;
-                
-                // Sembunyikan semua detail terlebih dahulu
-                formDetailIds.forEach(id => {
-                    document.getElementById(id).classList.add("hidden");
-                });
-
-                // Tampilkan form yang sesuai pilihan
-                if (targetValue) {
-                    const selectedForm = document.getElementById(`form-${targetValue}`);
-                    if (selectedForm) selectedForm.classList.remove("hidden");
-                }
-            });
-
-            // Logika Checkbox Garasi Rumah
-            const checkGarasi = document.getElementById("check-garasi");
-            const inputGarasi = document.getElementById("input-garasi");
-            checkGarasi.addEventListener("change", (e) => {
-                if (e.target.checked) {
-                    inputGarasi.classList.remove("hidden");
-                } else {
-                    inputGarasi.classList.add("hidden");
-                }
-            });
-
-            // --- 3. LOGIKA KABEL API WILAYAH INDONESIA (MURNI, OTOMATIS & STABIL) ---
-// Kita alihkan ke jalur CDN JSDelivr yang super cepat dan anti-down
-const baseUrl = "https://cdn.jsdelivr.net/gh/fajarghifar/api-wilayah-indonesia@master/api";
-
-const selectProv = document.getElementById("provinsi");
-const selectKab = document.getElementById("kabupaten");
-const selectKec = document.getElementById("kecamatan");
-const selectKel = document.getElementById("kelurahan");
-
-// Ambil Data Provinsi Saat Halaman Pertama Kali Terbuka
-fetch(`${baseUrl}/provinces.json`)
-    .then(res => {
-        if (!res.ok) throw new Error("Gagal mengambil data provinsi");
-        return res.json();
-    })
-    .then(data => {
-        // Urutkan provinsi berdasarkan abjad agar rapi
-        data.sort((a, b) => a.name.localeCompare(b.name));
-        data.forEach(prov => {
-            let opt = document.createElement("option");
-            opt.value = prov.id;
-            opt.textContent = prov.name;
-            selectProv.appendChild(opt);
+    if (menuBtn && mobileMenu) {
+        menuBtn.addEventListener("click", function (e) {
+            e.stopPropagation(); // Mencegah klik tembus ke dokumen
+            mobileMenu.classList.toggle("hidden");
         });
-    })
-    .catch(err => {
-        console.error("Error Provinsi:", err);
-        alert("Gagal memuat data Provinsi. Pastikan Anda terhubung ke internet.");
-    });
 
-// Event saat Provinsi Berubah -> Ambil Kabupaten
-selectProv.addEventListener("change", (e) => {
-    const provId = e.target.value;
-    selectKab.innerHTML = '<option value="">-- Pilih Kabupaten/Kota --</option>';
-    selectKec.innerHTML = '<option value="">-- Pilih Kecamatan --</option>';
-    selectKel.innerHTML = '<option value="">-- Pilih Kelurahan/Desa --</option>';
-    selectKab.disabled = true; selectKec.disabled = true; selectKel.disabled = true;
+        // Menutup menu jika pengguna mengklik di luar area menu
+        document.addEventListener("click", function (e) {
+            if (!mobileMenu.classList.contains("hidden") && !mobileMenu.contains(e.target) && e.target !== menuBtn) {
+                mobileMenu.classList.add("hidden");
+            }
+        });
+    }
 
-    if (provId) {
-        fetch(`${baseUrl}/regencies/${provId}.json`)
-            .then(res => res.json())
+    // ==========================================
+    // 2. LOGIKA TAMPIL/SEMBUNYI DETAIL PROPERTI
+    // ==========================================
+    const kategoriSelect = document.getElementById("kategori");
+    const propertiDetail = document.getElementById("properti-detail");
+
+    function aturTampilanDetail() {
+        if (!kategoriSelect || !propertiDetail) return;
+        
+        const nilai = kategoriSelect.value;
+        // Pastikan detail properti muncul untuk kategori Properti (Dijual/Disewakan)
+        if (nilai === "properti-dijual" || nilai === "properti-disewakan") {
+            propertiDetail.style.display = "block"; // atau gunakan propertiDetail.classList.remove("hidden") jika memakai Tailwind
+        } else {
+            propertiDetail.style.display = "none";  // atau gunakan propertiDetail.classList.add("hidden") jika memakai Tailwind
+        }
+    }
+
+    if (kategoriSelect) {
+        kategoriSelect.addEventListener("change", aturTampilanDetail);
+        aturTampilanDetail(); // Jalankan sekali saat awal halaman dimuat
+    }
+
+    // ==========================================
+    // 3. LOGIKA API WILAYAH INDONESIA (JSDELIVR CDN)
+    // ==========================================
+    const baseUrl = "https://cdn.jsdelivr.net/gh/fajarghifar/api-wilayah-indonesia@master/api";
+
+    const selectProv = document.getElementById("provinsi");
+    const selectKab = document.getElementById("kabupaten");
+    const selectKec = document.getElementById("kecamatan");
+    const selectKel = document.getElementById("kelurahan");
+
+    if (selectProv) {
+        // Ambil Data Provinsi
+        fetch(`${baseUrl}/provinces.json`)
+            .then(res => {
+                if (!res.ok) throw new Error("Gagal memuat data provinsi");
+                return res.json();
+            })
             .then(data => {
                 data.sort((a, b) => a.name.localeCompare(b.name));
-                data.forEach(kab => {
+                data.forEach(prov => {
                     let opt = document.createElement("option");
-                    opt.value = kab.id;
-                    opt.textContent = kab.name;
-                    selectKab.appendChild(opt);
+                    opt.value = prov.id;
+                    opt.textContent = prov.name;
+                    selectProv.appendChild(opt);
                 });
-                selectKab.disabled = false;
             })
-            .catch(err => console.error("Error Kabupaten:", err));
+            .catch(err => {
+                console.error("Error Provinsi:", err);
+            });
+
+        // Event Provinsi -> Kabupaten
+        selectProv.addEventListener("change", (e) => {
+            const provId = e.target.value;
+            if (selectKab) selectKab.innerHTML = '<option value="">-- Pilih Kabupaten/Kota --</option>';
+            if (selectKec) selectKec.innerHTML = '<option value="">-- Pilih Kecamatan --</option>';
+            if (selectKel) selectKel.innerHTML = '<option value="">-- Pilih Kelurahan/Desa --</option>';
+            
+            if (selectKab) selectKab.disabled = true;
+            if (selectKec) selectKec.disabled = true;
+            if (selectKel) selectKel.disabled = true;
+
+            if (provId && selectKab) {
+                fetch(`${baseUrl}/regencies/${provId}.json`)
+                    .then(res => res.json())
+                    .then(data => {
+                        data.sort((a, b) => a.name.localeCompare(b.name));
+                        data.forEach(kab => {
+                            let opt = document.createElement("option");
+                            opt.value = kab.id;
+                            opt.textContent = kab.name;
+                            selectKab.appendChild(opt);
+                        });
+                        selectKab.disabled = false;
+                    })
+                    .catch(err => console.error("Error Kabupaten:", err));
+            }
+        });
+
+        // Event Kabupaten -> Kecamatan
+        if (selectKab) {
+            selectKab.addEventListener("change", (e) => {
+                const kabId = e.target.value;
+                if (selectKec) selectKec.innerHTML = '<option value="">-- Pilih Kecamatan --</option>';
+                if (selectKel) selectKel.innerHTML = '<option value="">-- Pilih Kelurahan/Desa --</option>';
+                if (selectKec) selectKec.disabled = true;
+                if (selectKel) selectKel.disabled = true;
+
+                if (kabId && selectKec) {
+                    fetch(`${baseUrl}/districts/${kabId}.json`)
+                        .then(res => res.json())
+                        .then(data => {
+                            data.sort((a, b) => a.name.localeCompare(b.name));
+                            data.forEach(kec => {
+                                let opt = document.createElement("option");
+                                opt.value = kec.id;
+                                opt.textContent = kec.name;
+                                selectKec.appendChild(opt);
+                            });
+                            selectKec.disabled = false;
+                        })
+                        .catch(err => console.error("Error Kecamatan:", err));
+                }
+            });
+        }
+
+        // Event Kecamatan -> Kelurahan
+        if (selectKec) {
+            selectKec.addEventListener("change", (e) => {
+                const kecId = e.target.value;
+                if (selectKel) selectKel.innerHTML = '<option value="">-- Pilih Kelurahan/Desa --</option>';
+                if (selectKel) selectKel.disabled = true;
+
+                if (kecId && selectKel) {
+                    fetch(`${baseUrl}/villages/${kecId}.json`)
+                        .then(res => res.json())
+                        .then(data => {
+                            data.sort((a, b) => a.name.localeCompare(b.name));
+                            data.forEach(kel => {
+                                let opt = document.createElement("option");
+                                opt.value = kel.id;
+                                opt.textContent = kel.name;
+                                selectKel.appendChild(opt);
+                            });
+                            selectKel.disabled = false;
+                        })
+                        .catch(err => console.error("Error Kelurahan:", err));
+                }
+            });
+        }
     }
 });
+</script>
 
-// Event saat Kabupaten Berubah -> Ambil Kecamatan
-selectKab.addEventListener("change", (e) => {
-    const kabId = e.target.value;
-    selectKec.innerHTML = '<option value="">-- Pilih Kecamatan --</option>';
-    selectKel.innerHTML = '<option value="">-- Pilih Kelurahan/Desa --</option>';
-    selectKec.disabled = true; selectKel.disabled = true;
-
-    if (kabId) {
-        fetch(`${baseUrl}/districts/${kabId}.json`)
-            .then(res => res.json())
-            .then(data => {
-                data.sort((a, b) => a.name.localeCompare(b.name));
-                data.forEach(kec => {
-                    let opt = document.createElement("option");
-                    opt.value = kec.id;
-                    opt.textContent = kec.name;
-                    selectKec.appendChild(opt);
-                });
-                selectKec.disabled = false;
-            })
-            .catch(err => console.error("Error Kecamatan:", err));
-    }
-});
-
-// Event saat Kecamatan Berubah -> Ambil Kelurahan
-selectKec.addEventListener("change", (e) => {
-    const kecId = e.target.value;
-    selectKel.innerHTML = '<option value="">-- Pilih Kelurahan/Desa --</option>';
-    selectKel.disabled = true;
-
-    if (kecId) {
-        fetch(`${baseUrl}/villages/${kecId}.json`)
-            .then(res => res.json())
-            .then(data => {
-                data.sort((a, b) => a.name.localeCompare(b.name));
-                data.forEach(kel => {
-                    let opt = document.createElement("option");
-                    opt.value = kel.id;
-                    opt.textContent = kel.name;
-                    selectKel.appendChild(opt);
-                });
-                selectKel.disabled = false;
-            })
-            .catch(err => console.error("Error Kelurahan:", err));
-    }
-});
-
-    </script>
 </body>
 </html>
