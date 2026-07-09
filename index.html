@@ -210,20 +210,30 @@
 </head>
 <body>
 
-    <!-- NAVBAR COMPONENT -->
+        <!-- NAVBAR COMPONENT -->
     <nav class="navbar">
         <div class="nav-container container">
             <a href="index.html">
                 <img src="./assets/img/logo.png" alt="TERAVIA Logo" class="logo-img">
             </a>
             
-            <ul class="nav-links">
+            <!-- Tombol Hamburger (Hanya muncul di Mobile) -->
+            <button class="menu-toggle" id="mobile-menu" aria-label="Toggle Menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <ul class="nav-links" id="nav-menu">
                 <li><a href="index.html" class="active">Beranda</a></li>
                 <li><a href="pages/jual.html">Jual</a></li>
                 <li><a href="pages/beli.html">Beli</a></li>
                 <li><a href="pages/sewa.html">Sewa</a></li>
                 <li><a href="pages/blog.html">Blog</a></li>
                 <li><a href="pages/tentang.html">Tentang Kami</a></li>
+                <!-- Menu Tambahan Khusus Mobile agar masuk ke dalam Hamburger -->
+                <li class="mobile-only"><a href="login.html">Masuk</a></li>
+                <li class="mobile-only"><a href="register.html" style="color: var(--accent);">Daftar</a></li>
             </ul>
 
             <div class="nav-actions">
@@ -232,6 +242,7 @@
             </div>
         </div>
     </nav>
+
 
     <!-- MAIN HERO CONTENT -->
     <main>
