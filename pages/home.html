@@ -1,1 +1,82 @@
+<link rel="stylesheet" href="./assets/css/main.css">
+<link rel="stylesheet" href="./assets/css/components.css">
+
+<!-- HERO SECTION -->
+<section class="hero-section">
+    <div class="hero-container">
+        <h1 class="hero-title">Temukan Properti Impian Anda</h1>
+        <p class="hero-subtitle">Jual • Beli • Sewa Properti Lebih Mudah</p>
+        
+        <!-- 3 Keunggulan Utama -->
+        <div class="hero-features">
+            <span class="feature-item"><i class="icon-check">✔</i> Aman dan Terpercaya</span>
+            <span class="feature-item"><i class="icon-check">✔</i> Listing Properti Terverifikasi</span>
+            <span class="feature-item"><i class="icon-check">✔</i> Lokasi Strategis</span>
+        </div>
+
+        <!-- SEARCH BOX COMPONENT -->
+        <div class="search-box-container">
+            <form id="main-search-form" class="search-form">
+                <!-- Field 1: Kategori -->
+                <div class="search-field">
+                    <label>Kategori</label>
+                    <select name="kategori" id="search-kategori">
+                        <option value="hunian">Hunian</option>
+                        <option value="komersial">Komersial</option>
+                        <option value="tanah">Tanah & Lahan</option>
+                        <option value="institusi">Institusi & Fasilitas</option>
+                    </select>
+                </div>
+
+                <!-- Field 2: Jenis Properti -->
+                <div class="search-field">
+                    <label>Jenis Properti</label>
+                    <select name="jenis_properti" id="search-jenis">
+                        <option value="">Pilih Jenis</option>
+                        <option value="rumah">Rumah</option>
+                        <option value="apartemen">Apartemen</option>
+                        <option value="villa">Villa</option>
+                        <option value="townhouse">Townhouse</option>
+                        <option value="ruko">Ruko</option>
+                        <option value="gudang">Gudang</option>
+                        <option value="tanah">Tanah</option>
+                    </select>
+                </div>
+
+                <!-- Field 3: Status Listing -->
+                <div class="search-field">
+                    <label>Status</label>
+                    <select name="status" id="search-status">
+                        <option value="dijual">Dijual</option>
+                        <option value="disewakan">Disewakan</option>
+                        <option value="oper_alih">Oper Alih</option>
+                    </select>
+                </div>
+
+                <!-- Field 4: Lokasi -->
+                <div class="search-field">
+                    <label>Lokasi</label>
+                    <input type="text" name="lokasi" placeholder="Cari kota atau area..." autocomplete="off">
+                </div>
+
+                <!-- Field 5: Rentang Harga -->
+                <div class="search-field">
+                    <label>Harga Maksimum</label>
+                    <select name="harga_max" id="search-harga">
+                        <option value="">Semua Harga</option>
+                        <option value="500000000">S/d Rp 500 Juta</option>
+                        <option value="1000000000">S/d Rp 1 Miliar</option>
+                        <option value="2000000000">S/d Rp 2 Miliar</option>
+                        <option value="5000000000">S/d Rp 5 Miliar</option>
+                    </select>
+                </div>
+
+                <!-- Button Submit -->
+                <div class="search-action">
+                    <button type="submit" class="btn-search">Cari Properti</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</section>
 
