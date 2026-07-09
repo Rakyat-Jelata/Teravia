@@ -81,14 +81,29 @@
             .nav-actions { display: none; }
             .hamburger { display: flex; }
             .nav-links.active { display: flex !important; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg-surface); padding: 20px; border-bottom: 1px solid var(--border-color); gap: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+            
             .hero-title { font-size: 32px; }
             .search-form { grid-template-columns: 1fr; gap: 12px; }
             .btn-search { width: 100%; margin-top: 8px; }
-            .hero-section { padding: 60px 0 210px 0; }
-            .search-box-container { bottom: -185px; }
-            .main-footer { margin-top: 225px; }
+
+            /* FIX KOTAK PENCARIAN MENABRAK TEKS (DIBUAT RELATIVE AGAR OTOMATIS DI BAWAH TEKS) */
+            .hero-section { 
+                padding: 60px 0 40px 0; 
+            }
+            .search-box-container { 
+                position: relative; 
+                bottom: auto; 
+                left: auto; 
+                right: auto; 
+                margin: 40px 16px -120px 16px; /* Menurunkan kotak dan memberi jarak aman */
+                z-index: 10;
+            }
+            .main-footer { 
+                margin-top: 180px; /* Memberikan ruang agar footer tidak bertubrukan */
+            }
             .footer-links-group { gap: 40px; justify-content: space-between; width: 100%; }
         }
+
     </style>
 </head>
 <body>
