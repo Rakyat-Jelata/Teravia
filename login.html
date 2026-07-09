@@ -1,1 +1,266 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Masuk ke Akun Anda - TERAVIA</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #0F172A;
+            --primary-light: #1E293B;
+            --accent: #0EA5E9;
+            --accent-hover: #0284C7;
+            --bg-main: #FAFAFA;
+            --bg-surface: #FFFFFF;
+            --text-main: #0F172A;
+            --text-muted: #64748B;
+            --border-color: #E2E8F0;
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-sans);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-surface);
+            color: var(--text-main);
+            overflow: hidden;
+            height: 100vh;
+        }
+
+        /* SPLIT LAYOUT CONTAINER */
+        .auth-container {
+            display: grid;
+            grid-template-columns: 1fr 1.1fr;
+            height: 100vh;
+            width: 100%;
+        }
+
+        /* KIRI: FORM SECTION */
+        .auth-form-side {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 60px 80px;
+            background-color: var(--bg-surface);
+            position: relative;
+        }
+        .back-to-home {
+            position: absolute;
+            top: 40px;
+            left: 80px;
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 14px;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+        .back-to-home:hover { color: var(--accent); }
+
+        .form-wrapper {
+            width: 100%;
+            max-width: 400px;
+            margin: 0 auto;
+        }
+        .auth-logo {
+            height: 44px;
+            width: auto;
+            margin-bottom: 40px;
+            display: block;
+        }
+        .auth-header h1 {
+            font-size: 32px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+        .auth-header p {
+            color: var(--text-muted);
+            font-size: 15px;
+            margin-bottom: 32px;
+        }
+
+        /* INPUT STYLING */
+        .input-group {
+            margin-bottom: 20px;
+            position: relative;
+        }
+        .input-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+        .input-group input {
+            width: 100%;
+            padding: 14px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 10px;
+            outline: none;
+            font-size: 14px;
+            background-color: #F8FAFC;
+            transition: all 0.3s;
+        }
+        .input-group input:focus {
+            border-color: var(--accent);
+            background-color: #FFFFFF;
+            box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.1);
+        }
+        
+        .form-options {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 14px;
+            margin-bottom: 32px;
+        }
+        .remember-me {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: var(--text-muted);
+            cursor: pointer;
+        }
+        .remember-me input { cursor: pointer; }
+        .forgot-pass {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .forgot-pass:hover { text-decoration: underline; }
+
+        .btn-auth {
+            width: 100%;
+            background-color: var(--accent);
+            color: white;
+            border: none;
+            padding: 14px;
+            border-radius: 10px;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s, transform 0.1s;
+        }
+        .btn-auth:hover { background-color: var(--accent-hover); }
+        .btn-auth:active { transform: scale(0.98); }
+
+        .auth-footer {
+            text-align: center;
+            margin-top: 32px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+        .auth-footer a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 700;
+        }
+        .auth-footer a:hover { text-decoration: underline; }
+
+        /* KANAN: VISUAL HERO SIDE */
+        .auth-visual-side {
+            background: linear-gradient(rgba(15, 23, 42, 0.6), rgba(30, 41, 59, 0.8)), url('./assets/img/hero-bg.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            padding: 80px;
+            color: white;
+        }
+        .visual-caption {
+            max-width: 500px;
+        }
+        .visual-caption h2 {
+            font-size: 36px;
+            font-weight: 800;
+            line-height: 1.2;
+            margin-bottom: 16px;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        .visual-caption p {
+            color: #E2E8F0;
+            font-size: 16px;
+            line-height: 1.5;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+        }
+
+        /* ==========================================
+           RESPONSIVE REWIRING (MOBILE OPTIMIZED)
+           ========================================== */
+        @media (max-width: 1024px) {
+            .auth-container { grid-template-columns: 1fr; }
+            .auth-visual-side { display: none; } /* Sembunyikan sisi gambar di HP agar fokus ke form */
+            .auth-form-side { padding: 40px 24px; }
+            .back-to-home { top: 24px; left: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="auth-container">
+        
+        <main class="auth-form-side">
+            <a href="index.html" class="back-to-home">← Kembali ke Beranda</a>
+
+            <div class="form-wrapper">
+                <img src="./assets/img/logo.png" alt="TERAVIA Logo" class="auth-logo">
+
+                <div class="auth-header">
+                    <h1>Selamat Datang</h1>
+                    <p>Masuk untuk mengelola dan mencari properti impian Anda.</p>
+                </div>
+
+                <form id="login-form" action="#" method="POST">
+                    <div class="input-group">
+                        <label for="email">Alamat Email</label>
+                        <input type="email" id="email" name="email" placeholder="nama@email.com" required autocomplete="email">
+                    </div>
+
+                    <div class="input-group">
+                        <label for="password">Kata Sandi</label>
+                        <input type="password" id="password" name="password" placeholder="••••••••" required>
+                    </div>
+
+                    <div class="form-options">
+                        <label class="remember-me">
+                            <input type="checkbox" name="remember"> Ingat Saya
+                        </label>
+                        <a href="#" class="forgot-pass">Lupa Sandi?</a>
+                    </div>
+
+                    <button type="submit" class="btn-auth">MASUK SEKARANG</button>
+                </form>
+
+                <div class="auth-footer">
+                    <p>Belum punya akun? <a href="register.html">Daftar Sekarang</a></p>
+                </div>
+            </div>
+        </main>
+
+        <section class="auth-visual-side">
+            <div class="visual-caption">
+                <h2>Langkah Awal Menuju Hunian Masa Depan.</h2>
+                <p>Bergabunglah bersama ribuan investor dan pemilik rumah yang telah mempercayakan transaksi properti mereka di platform TERAVIA.</p>
+            </div>
+        </section>
+
+    </div>
+
+</body>
+</html>
 
