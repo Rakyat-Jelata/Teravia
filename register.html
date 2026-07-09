@@ -1,4 +1,4 @@
-<!DOCTYPE html> 
+<!DOCTYPE html>
 <html lang="id">
 <head>
     <meta charset="UTF-8">
@@ -37,12 +37,74 @@
             color: var(--text-main);
             min-height: 100vh;
             display: flex;
-            justify-content: center;
-            align-items: center;
-            padding: 24px 16px;
+            flex-direction: column;
         }
 
-        /* CARD INTEGRATION STYLE COPIED FROM LOGIN */
+        .container {
+            width: 100%;
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ==================== NAVBAR ATAS ==================== */
+        .navbar {
+            background-color: var(--bg-surface);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 12px 0;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        /* LOGO DI NAVBAR (PROPORSIONAL, TIDAK GEPENG) */
+        .logo-img {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+        
+        .nav-links { display: flex; list-style: none; gap: 32px; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-weight: 500; font-size: 15px; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--accent); }
+        .nav-actions { display: flex; align-items: center; }
+
+        .btn { padding: 10px 20px; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 14px; cursor: pointer; transition: all 0.3s; }
+        .btn-primary { background-color: var(--accent); color: white; border: none; }
+        .btn-primary:hover { background-color: var(--accent-hover); }
+        .btn-outline { background-color: transparent; color: var(--primary); border: 1px solid var(--border-color); margin-right: 12px; }
+
+        /* FOKUS REVISI: MENAMBAHKAN STYLING TOMBOL HAMBURGER YANG HILANG */
+        .hamburger {
+            display: none;
+            cursor: pointer;
+            flex-direction: column;
+            gap: 5px;
+            z-index: 1001;
+        }
+        .hamburger span {
+            display: block;
+            width: 25px;
+            height: 3px;
+            background-color: var(--primary);
+            border-radius: 3px;
+            transition: all 0.3s ease;
+        }
+
+        /* ==================== REGISTER CONTENT CONTAINER ==================== */
+        .auth-wrapper {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 40px 16px;
+        }
+
         .auth-container {
             background: var(--bg-surface);
             border-radius: 24px;
@@ -51,28 +113,6 @@
             width: 100%;
             max-width: 480px;
             border: 1px solid var(--border-color);
-        }
-
-        .back-to-home {
-            display: inline-flex;
-            align-items: center;
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 14px;
-            font-weight: 500;
-            margin-bottom: 32px;
-            transition: color 0.3s;
-        }
-        .back-to-home:hover { color: var(--accent); }
-
-        /* FIX LOGO GEPLAK / GEPENG */
-        .logo-container {
-            margin-bottom: 32px;
-        }
-        .logo-img {
-            height: 40px;      /* Mengunci tinggi logo agar konsisten */
-            width: auto;       /* Membiarkan lebar menyesuaikan secara proporsional */
-            display: block;
         }
 
         .auth-header h2 {
@@ -87,7 +127,7 @@
             margin-bottom: 32px;
         }
 
-        /* FORM FIELD LAYOUT */
+        /* FORM GROUPS */
         .form-group {
             display: flex;
             flex-direction: column;
@@ -117,7 +157,7 @@
             background-color: #ffffff;
         }
 
-        /* PASSWORD CONTAINER WITH EYE ICON */
+        /* PASSWORD WRAPPER DENGAN IKON MATA */
         .password-field-wrapper {
             position: relative;
             display: flex;
@@ -135,11 +175,8 @@
             transition: color 0.3s;
             user-select: none;
         }
-        .toggle-password-btn:hover {
-            color: var(--text-main);
-        }
+        .toggle-password-btn:hover { color: var(--text-main); }
 
-        /* ACTION BUTTON */
         .btn-submit {
             background-color: var(--accent);
             color: white;
@@ -167,69 +204,121 @@
             font-weight: 600;
         }
         .auth-redirect a:hover { text-decoration: underline; }
+
+        /* FOKUS REVISI: MEDIA QUERY MOBILE UNTUK MEMUNCULKAN HAMBURGER */
+        @media (max-width: 768px) {
+            .nav-links { display: none; }
+            .nav-actions { display: none; } /* Menyembunyikan tombol DAFTAR/MASUK bawaan desktop di navbar */
+            .hamburger { display: flex; } /* MEMUNCULKAN KEMBALI HAMBURGER MENU */
+            
+            /* Menu navigasi drop-down saat hamburger di-klik */
+            .nav-links.active {
+                display: flex !important;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: var(--bg-surface);
+                padding: 20px;
+                border-bottom: 1px solid var(--border-color);
+                gap: 16px;
+                box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
+            }
+        }
     </style>
 </head>
 <body>
 
-    <div class="auth-container">
-        <a href="index.html" class="back-to-home">← Beranda</a>
-        
-        <div class="logo-container">
-            <img src="./assets/img/logo.png" alt="TERAVIA Logo" class="logo-img">
+    <nav class="navbar">
+        <div class="nav-container container">
+            <a href="index.html">
+                <img src="./assets/img/logo.png" alt="TERAVIA Logo" class="logo-img">
+            </a>
+            
+            <ul class="nav-links" id="navLinks">
+                <li><a href="index.html">Beranda</a></li>
+                <li><a href="pages/jual.html">Jual</a></li>
+                <li><a href="pages/beli.html">Beli</a></li>
+                <li><a href="pages/sewa.html">Sewa</a></li>
+                <li><a href="pages/blog.html">Blog</a></li>
+                <li><a href="pages/tentang.html">Tentang Kami</a></li>
+            </ul>
+
+            <div class="hamburger" id="hamburgerMenu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+
+            <div class="nav-actions">
+                <a href="register.html" class="btn btn-outline">DAFTAR</a>
+                <a href="login.html" class="btn btn-primary">MASUK</a>
+            </div>
         </div>
+    </nav>
 
-        <div class="auth-header">
-            <h2>Selamat Datang</h2>
-            <p>Daftarkan akun Anda untuk mulai mengelola properti impian.</p>
-        </div>
-
-        <form id="register-form">
-            <div class="form-group">
-                <label>Nama Lengkap</label>
-                <input type="text" id="reg-name" placeholder="Masukkan nama lengkap" required>
+    <div class="auth-wrapper">
+        <div class="auth-container">
+            <div class="auth-header">
+                <h2>Selamat Datang</h2>
+                <p>Daftarkan akun Anda untuk mulai mengelola properti impian.</p>
             </div>
 
-            <div class="form-group">
-                <label>Alamat Email</label>
-                <input type="email" id="reg-email" placeholder="nama@email.com" required>
-            </div>
-
-            <div class="form-group">
-                <label>Nomor WhatsApp</label>
-                <input type="tel" id="reg-whatsapp" placeholder="Contoh: 081234567xxx" required>
-            </div>
-
-            <div class="form-group">
-                <label>Kata Sandi</label>
-                <div class="password-field-wrapper">
-                    <input type="password" id="reg-password" placeholder="Minimal 8 karakter" required>
-                    <i class="fa-solid fa-eye-slash toggle-password-btn" id="toggle-password-icon"></i>
+            <form id="register-form">
+                <div class="form-group">
+                    <label>Nama Lengkap</label>
+                    <input type="text" id="reg-name" placeholder="Masukkan nama lengkap" required>
                 </div>
-            </div>
 
-            <button type="submit" class="btn-submit">Daftar Sekarang</button>
-        </form>
+                <div class="form-group">
+                    <label>Alamat Email</label>
+                    <input type="email" id="reg-email" placeholder="nama@email.com" required>
+                </div>
 
-        <p class="auth-redirect">Sudah memiliki akun? <a href="login.html">Masuk</a></p>
+                <div class="form-group">
+                    <label>Nomor WhatsApp</label>
+                    <input type="tel" id="reg-whatsapp" placeholder="Contoh: 081234567xxx" required>
+                </div>
+
+                <div class="form-group">
+                    <label>Kata Sandi</label>
+                    <div class="password-field-wrapper">
+                        <input type="password" id="reg-password" placeholder="Minimal 8 karakter" required>
+                        <i class="fa-solid fa-eye-slash toggle-password-btn" id="toggle-password-icon"></i>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit">Daftar Sekarang</button>
+            </form>
+
+            <p class="auth-redirect">Sudah memiliki akun? <a href="login.html">Masuk</a></p>
+        </div>
     </div>
 
     <script>
+        // Logika Mata Hide/Unhide Password (TETAP AMAN)
         const passwordField = document.getElementById('reg-password');
         const togglePasswordIcon = document.getElementById('toggle-password-icon');
 
         togglePasswordIcon.addEventListener('click', function() {
-            // Jalankan fungsi switch tipe data atribut input
             if (passwordField.type === 'password') {
                 passwordField.type = 'text';
-                // Ganti kelas ikon mata dari dicoret ke mata terbuka
                 togglePasswordIcon.classList.remove('fa-eye-slash');
                 togglePasswordIcon.classList.add('fa-eye');
             } else {
                 passwordField.type = 'password';
-                // Kembalikan ke kelas ikon mata dicoret
                 togglePasswordIcon.classList.remove('fa-eye');
                 togglePasswordIcon.classList.add('fa-eye-slash');
             }
+        });
+
+        // REVISI UTAMA: JAVASCRIPT UNTUK KLIK HAMBURGER MENU MOBILE
+        const hamburger = document.getElementById('hamburgerMenu');
+        const navLinks = document.getElementById('navLinks');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
         });
     </script>
 
