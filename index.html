@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
     
     <!-- Core UI Stylesheet Direct Inject -->
-    <style>
+        <style>
         :root {
             --primary: #0F172A;       /* Deep Slate / Navy */
             --primary-light: #1E293B;
@@ -47,7 +47,9 @@
             padding: 0 24px;
         }
 
-        /* NAVBAR STYLING */
+        /* ==========================================
+           NAVBAR DEFAULT (DESKTOP VIEW)
+           ========================================== */
         .navbar {
             background-color: var(--bg-surface);
             border-bottom: 1px solid var(--border-color);
@@ -66,10 +68,25 @@
             width: auto;
             display: block;
         }
-        .nav-links { display: flex; list-style: none; gap: 32px; }
-        .nav-links a { text-decoration: none; color: var(--text-muted); font-weight: 500; font-size: 15px; transition: color 0.3s; }
-        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
-        .nav-actions { display: flex; align-items: center; }
+        .nav-links { 
+            display: flex; 
+            list-style: none; 
+            gap: 32px; 
+        }
+        .nav-links a { 
+            text-decoration: none; 
+            color: var(--text-muted); 
+            font-weight: 500; 
+            font-size: 15px; 
+            transition: color 0.3s; 
+        }
+        .nav-links a:hover, .nav-links a.active { 
+            color: var(--accent); 
+        }
+        .nav-actions { 
+            display: flex; 
+            align-items: center; 
+        }
 
         /* BUTTONS */
         .btn { padding: 10px 20px; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 14px; cursor: pointer; transition: all 0.3s; }
@@ -78,7 +95,32 @@
         .btn-outline { background-color: transparent; color: var(--primary); border: 1px solid var(--border-color); margin-right: 12px; }
         .btn-outline:hover { background-color: #f8fafc; }
 
-        /* HERO SECTION WITH BG IMAGE OVERLAY */
+        /* HAMBURGER BUTTON DEFAULT (SEMBUNYI DI DESKTOP) */
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            z-index: 1001;
+        }
+        .menu-toggle span {
+            display: block;
+            width: 26px;
+            height: 3px;
+            background-color: var(--primary);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        .mobile-only { 
+            display: none; 
+        }
+
+        /* ==========================================
+           HERO & SEARCH BOX DEFAULT
+           ========================================== */
         .hero-section {
             background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(30, 41, 59, 0.75)), url('./assets/img/hero-bg.png');
             background-size: cover;
@@ -95,7 +137,6 @@
         .feature-item { font-size: 13px; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); padding: 8px 18px; border-radius: 50px; border: 1px solid rgba(255, 255, 255, 0.1); }
         .feature-item span { color: var(--success); margin-right: 6px; font-weight: bold; }
 
-        /* SEARCH BOX CONTAINER */
         .search-box-container {
             background: var(--bg-surface);
             border-radius: 16px;
@@ -117,7 +158,7 @@
         .btn-search { background-color: var(--accent); color: white; border: none; padding: 14px 28px; border-radius: 8px; font-weight: 700; cursor: pointer; white-space: nowrap; transition: background 0.3s; margin-top: 19px; font-size: 14px; }
         .btn-search:hover { background-color: var(--accent-hover); }
 
-        /* FOOTER STYLING */
+        /* FOOTER DEFAULT */
         .main-footer { background-color: #0F172A; color: #94A3B8; padding: 80px 0 40px 0; margin-top: 180px; border-top: 1px solid #1E293B; }
         .footer-container { display: flex; justify-content: space-between; gap: 48px; flex-wrap: wrap; }
         .footer-brand { max-width: 400px; }
@@ -130,44 +171,27 @@
         .footer-col ul li a:hover { color: white; }
         .footer-bottom { border-top: 1px solid #1E293B; margin-top: 60px; padding-top: 24px; text-align: center; font-size: 13px; }
 
-                /* Tombol Hamburger Default (Sembunyi di Desktop) */
-        .menu-toggle {
-            display: none;
-            flex-direction: column;
-            gap: 6px;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 4px;
-            z-index: 1001;
-        }
-        .menu-toggle span {
-            display: block;
-            width: 26px;
-            height: 3px;
-            background-color: var(--primary);
-            border-radius: 2px;
-            transition: all 0.3s ease;
-        }
-        .mobile-only { display: none; }
-        
-                            /* Perubahan Navigasi Mobile menjadi Hamburger Laci */
+        /* ==========================================
+           RESPONSIVE BREAKPOINT KHUSUS MOBILE
+           ========================================== */
+        @media (max-width: 768px) {
             .menu-toggle { 
-                display: flex; /* Munculkan tombol di HP */
+                display: flex; /* Aktifkan hamburger di mobile */
             }
             .nav-actions { 
-                display: none; /* Sembunyikan tombol Masuk/Daftar bawaan desktop di HP */
+                display: none; /* Sembunyikan tombol kanan di mobile */
             }
             .mobile-only { 
                 display: block; 
             }
             
+            /* Ubah menu atas jadi laci samping di mobile */
             .nav-links {
                 display: flex;
                 flex-direction: column;
                 position: fixed;
-                top: 65px; /* Tepat di bawah navbar */
-                right: -100%; /* Sembunyi di luar layar kanan */
+                top: 65px;
+                right: -100%; /* Sembunyi ke kanan */
                 width: 75%;
                 height: calc(100vh - 65px);
                 background-color: var(--bg-surface);
@@ -179,66 +203,41 @@
                 border-left: 1px solid var(--border-color);
             }
             
-            /* Class Aktif saat Hamburger diklik */
+            /* Muncul saat hamburger aktif */
             .nav-links.active {
-                right: 0; /* Laci menu bergeser masuk */
+                right: 0;
             }
 
-            /* Animasi Tombol Hamburger menjadi Silang (X) saat Aktif */
-            .menu-toggle.active span:nth-child(1) {
-                transform: translateY(9px) rotate(45deg);
-            }
-            .menu-toggle.active span:nth-child(2) {
-                opacity: 0;
-            }
-            .menu-toggle.active span:nth-child(3) {
-                transform: translateY(-9px) rotate(-45deg);
-            }
+            /* Efek animasi X pada hamburger */
+            .menu-toggle.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+            .menu-toggle.active span:nth-child(2) { opacity: 0; }
+            .menu-toggle.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
 
+            /* Penyesuaian Hero & Search Box di mobile */
+            .logo-img { height: 32px; }
+            .hero-section { padding: 60px 0 420px 0; }
+            .hero-title { font-size: 26px; line-height: 1.3; padding: 0 8px; }
+            .hero-subtitle { font-size: 14px; margin-bottom: 24px; }
+            .hero-features { gap: 10px; margin-bottom: 32px; }
+            .feature-item { font-size: 11px; padding: 6px 12px; }
             
-            /* Form Pencarian Vertikal di HP */
             .search-box-container { 
-                bottom: -380px; /* Geser posisi box ke bawah agar pas dengan tinggi baru */
+                bottom: -380px; 
                 padding: 18px;
                 margin: 0 16px;
                 left: 0;
                 right: 0;
             }
-            .search-form { 
-                grid-template-columns: 1fr; /* Paksa semua field menjadi 1 kolom penuh */
-                gap: 14px; 
-            }
-            .search-field label {
-                margin-bottom: 6px;
-            }
-            .search-field select, .search-field input {
-                padding: 10px 12px; /* Input lebih nyaman di-tap jari */
-                font-size: 14px;
-            }
-            .btn-search { 
-                width: 100%; 
-                margin-top: 6px; 
-                padding: 12px; 
-                font-size: 15px;
-            }
+            .search-form { grid-template-columns: 1fr; gap: 14px; }
+            .search-field select, .search-field input { padding: 10px 12px; }
+            .btn-search { width: 100%; margin-top: 6px; padding: 12px; font-size: 15px; }
 
-            /* Footer Mobile Layout */
-            .main-footer { 
-                margin-top: 420px; /* Dorong footer agar tidak tertimpa kotak pencarian */
-                padding: 40px 0;
-            }
-            .footer-container {
-                flex-direction: column;
-                gap: 32px;
-            }
-            .footer-links-group { 
-                grid-template-columns: 1fr;
-                gap: 24px; 
-                width: 100%; 
-            }
+            .main-footer { margin-top: 420px; padding: 40px 0; }
+            .footer-container { flex-direction: column; gap: 32px; }
+            .footer-links-group { grid-template-columns: 1fr; gap: 24px; width: 100%; }
         }
+                </style>
 
-    </style>
 </head>
 <body>
 
@@ -376,20 +375,30 @@
             <p>&copy; 2026 TERAVIA. All Rights Reserved.</p>
         </div>
     </footer>
-    <script>
+        <script>
         document.addEventListener("DOMContentLoaded", () => {
             const menuToggle = document.getElementById("mobile-menu");
             const navMenu = document.getElementById("nav-menu");
 
             if (menuToggle && navMenu) {
                 menuToggle.addEventListener("click", () => {
-                    // Berikan atau hapus class 'active' saat tombol di-tap
+                    // Toggle class active untuk animasi tombol dan laci menu
                     menuToggle.classList.toggle("active");
                     navMenu.classList.toggle("active");
                 });
+
+                // Opsional: Tutup menu laci kembali jika link menunya di-klik
+                const navLinks = navMenu.querySelectorAll("a");
+                navLinks.forEach(link => {
+                    link.addEventListener("click", () => {
+                        menuToggle.classList.remove("active");
+                        navMenu.classList.remove("active");
+                    });
+                });
             }
         });
-    </script>
+        </script>
+    
     
 </body>
 </html>
