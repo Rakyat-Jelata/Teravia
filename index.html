@@ -3,21 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TERAVIA - Jual • Beli • Sewa Properti Seluruh Indonesia</title>
-    
-    <!-- Google Fonts Premium & Modern -->
+    <title>TERAVIA - Temukan Properti Impian Anda</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    
-    <!-- Core UI Stylesheet Direct Inject -->
     <style>
         :root {
-            --primary: #0F172A;       /* Deep Slate / Navy */
-            --primary-light: #1E293B;
-            --accent: #0EA5E9;        /* Premium Sky Blue */
+            --primary: #0F172A;
+            --accent: #0EA5E9;
             --accent-hover: #0284C7;
-            --success: #10B981;       /* Emerald Green */
+            --success: #10B981;
             --bg-main: #FAFAFA;
             --bg-surface: #FFFFFF;
             --text-main: #0F172A;
@@ -26,50 +21,22 @@
             --font-sans: 'Plus Jakarta Sans', sans-serif;
         }
 
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: var(--font-sans);
-            -webkit-font-smoothing: antialiased;
-        }
-
-        body {
-            background-color: var(--bg-main);
-            color: var(--text-main);
-            overflow-x: hidden;
-        }
-
-        .container {
-            width: 100%;
-            max-width: 1440px;
-            margin: 0 auto;
-            padding: 0 24px;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+        body { background-color: var(--bg-main); color: var(--text-main); overflow-x: hidden; }
+        .container { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 24px; }
 
         /* NAVBAR STYLING */
-        .navbar {
-            background-color: var(--bg-surface);
-            border-bottom: 1px solid var(--border-color);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            padding: 12px 0;
-        }
-        .nav-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .logo-img {
-            height: 40px;
-            width: auto;
-            display: block;
-        }
+        .navbar { background-color: var(--bg-surface); border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 1000; padding: 12px 0; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; position: relative; }
+        .logo-img { height: 40px; width: auto; display: block; }
         .nav-links { display: flex; list-style: none; gap: 32px; }
         .nav-links a { text-decoration: none; color: var(--text-muted); font-weight: 500; font-size: 15px; transition: color 0.3s; }
         .nav-links a:hover, .nav-links a.active { color: var(--accent); }
         .nav-actions { display: flex; align-items: center; }
+
+        /* HAMBURGER STYLING */
+        .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; z-index: 1001; }
+        .hamburger span { display: block; width: 25px; height: 3px; background-color: var(--primary); border-radius: 3px; transition: all 0.3s ease; }
 
         /* BUTTONS */
         .btn { padding: 10px 20px; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 14px; cursor: pointer; transition: all 0.3s; }
@@ -78,85 +45,60 @@
         .btn-outline { background-color: transparent; color: var(--primary); border: 1px solid var(--border-color); margin-right: 12px; }
         .btn-outline:hover { background-color: #f8fafc; }
 
-        /* HERO SECTION WITH BG IMAGE OVERLAY */
-        .hero-section {
-            background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(30, 41, 59, 0.75)), url('./assets/img/hero-bg.png');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
-            color: white;
-            padding: 120px 0 180px 0;
-            text-align: center;
-            position: relative;
-        }
+        /* HERO SECTION */
+        .hero-section { background: linear-gradient(rgba(15, 23, 42, 0.75), rgba(30, 41, 59, 0.75)), url('./assets/img/hero-bg.png'); background-size: cover; background-position: center; padding: 120px 0 180px 0; text-align: center; position: relative; }
         .hero-title { font-size: 44px; font-weight: 800; margin-bottom: 16px; letter-spacing: -1px; text-shadow: 0 2px 4px rgba(0,0,0,0.3); }
         .hero-subtitle { font-size: 18px; color: #CBD5E1; margin-bottom: 32px; text-shadow: 0 1px 2px rgba(0,0,0,0.3); }
-        .hero-features { display: flex; justify-content: center; gap: 24px; margin-bottom: 48px; flex-wrap: wrap; }
+        .hero-features { display: flex; justify-content: center; gap: 24px; margin-bottom: 20px; flex-wrap: wrap; }
         .feature-item { font-size: 13px; background: rgba(255, 255, 255, 0.15); backdrop-filter: blur(4px); -webkit-backdrop-filter: blur(4px); padding: 8px 18px; border-radius: 50px; border: 1px solid rgba(255, 255, 255, 0.1); }
         .feature-item span { color: var(--success); margin-right: 6px; font-weight: bold; }
 
-        /* SEARCH BOX CONTAINER */
-        .search-box-container {
-            background: var(--bg-surface);
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
-            max-width: 1100px;
-            margin: 0 auto;
-            position: absolute;
-            bottom: -60px;
-            left: 24px;
-            right: 24px;
-            border: 1px solid var(--border-color);
-        }
+        /* SEARCH BOX */
+        .search-box-container { background: var(--bg-surface); border-radius: 16px; padding: 24px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1); max-width: 1100px; margin: 0 auto; position: absolute; bottom: -60px; left: 24px; right: 24px; border: 1px solid var(--border-color); }
         .search-form { display: grid; grid-template-columns: repeat(5, 1fr) auto; gap: 16px; align-items: center; text-align: left; }
         .search-field { display: flex; flex-direction: column; }
-        .search-field label { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
-        .search-field select, .search-field input { padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; outline: none; font-size: 14px; color: var(--text-main); background-color: #F8FAFC; width: 100%; }
-        .search-field select:focus, .search-field input:focus { border-color: var(--accent); background-color: #fff; }
-        .btn-search { background-color: var(--accent); color: white; border: none; padding: 14px 28px; border-radius: 8px; font-weight: 700; cursor: pointer; white-space: nowrap; transition: background 0.3s; margin-top: 19px; font-size: 14px; }
-        .btn-search:hover { background-color: var(--accent-hover); }
+        .search-field label { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px; }
+        .search-field select, .search-field input { padding: 12px; border: 1px solid var(--border-color); border-radius: 8px; outline: none; font-size: 14px; background-color: #F8FAFC; width: 100%; }
+        .btn-search { background-color: var(--accent); color: white; border: none; padding: 14px 28px; border-radius: 8px; font-weight: 700; cursor: pointer; margin-top: 19px; font-size: 14px; }
 
-        /* FOOTER STYLING */
+        /* FOOTER */
         .main-footer { background-color: #0F172A; color: #94A3B8; padding: 80px 0 40px 0; margin-top: 180px; border-top: 1px solid #1E293B; }
         .footer-container { display: flex; justify-content: space-between; gap: 48px; flex-wrap: wrap; }
         .footer-brand { max-width: 400px; }
-        .footer-brand p { font-size: 14px; line-height: 1.6; margin-top: 16px; }
         .footer-links-group { display: flex; gap: 80px; }
-        .footer-col h3 { color: white; font-size: 15px; margin-bottom: 20px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
+        .footer-col h3 { color: white; font-size: 15px; margin-bottom: 20px; }
         .footer-col ul { list-style: none; }
         .footer-col ul li { margin-bottom: 12px; }
-        .footer-col ul li a { color: #94A3B8; text-decoration: none; transition: color 0.3s; font-size: 14px; }
-        .footer-col ul li a:hover { color: white; }
+        .footer-col ul li a { color: #94A3B8; text-decoration: none; font-size: 14px; }
         .footer-bottom { border-top: 1px solid #1E293B; margin-top: 60px; padding-top: 24px; text-align: center; font-size: 13px; }
 
-        /* RESPONSIVE BREAKPOINTS */
         @media (max-width: 1024px) {
             .search-form { grid-template-columns: repeat(3, 1fr); }
             .btn-search { margin-top: 0; }
         }
         @media (max-width: 768px) {
             .nav-links { display: none; }
-            .hero-title { font-size: 32px; padding: 0 16px; }
+            .nav-actions { display: none; }
+            .hamburger { display: flex; }
+            .nav-links.active { display: flex !important; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg-surface); padding: 20px; border-bottom: 1px solid var(--border-color); gap: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+            .hero-title { font-size: 32px; }
             .search-form { grid-template-columns: 1fr; gap: 12px; }
-            .btn-search { width: 100%; margin-top: 8px; padding: 12px; }
-            .hero-section { padding: 60px 0 320px 0; }
-            .search-box-container { bottom: -280px; }
-            .main-footer { margin-top: 320px; }
+            .btn-search { width: 100%; margin-top: 8px; }
+            .hero-section { padding: 60px 0 210px 0; }
+            .search-box-container { bottom: -185px; }
+            .main-footer { margin-top: 225px; }
             .footer-links-group { gap: 40px; justify-content: space-between; width: 100%; }
         }
     </style>
 </head>
 <body>
 
-    <!-- NAVBAR COMPONENT -->
     <nav class="navbar">
         <div class="nav-container container">
             <a href="index.html">
                 <img src="./assets/img/logo.png" alt="TERAVIA Logo" class="logo-img">
             </a>
-            
-            <ul class="nav-links">
+            <ul class="nav-links" id="navLinks">
                 <li><a href="index.html" class="active">Beranda</a></li>
                 <li><a href="pages/jual.html">Jual</a></li>
                 <li><a href="pages/beli.html">Beli</a></li>
@@ -164,7 +106,9 @@
                 <li><a href="pages/blog.html">Blog</a></li>
                 <li><a href="pages/tentang.html">Tentang Kami</a></li>
             </ul>
-
+            <div class="hamburger" id="hamburgerMenu">
+                <span></span><span></span><span></span>
+            </div>
             <div class="nav-actions">
                 <a href="register.html" class="btn btn-outline">DAFTAR</a>
                 <a href="login.html" class="btn btn-primary">MASUK</a>
@@ -172,81 +116,48 @@
         </div>
     </nav>
 
-    <!-- MAIN HERO CONTENT -->
-    <main>
-        <section class="hero-section">
-            <div class="hero-container container">
-                <h1 class="hero-title">Temukan Properti Impian Anda</h1>
-                <p class="hero-subtitle">Jual • Beli • Sewa Properti Lebih Mudah</p>
-                
-                <div class="hero-features">
-                    <span class="feature-item"><span>✔</span> Aman dan Terpercaya</span>
-                    <span class="feature-item"><span>✔</span> Listing Properti Terverifikasi</span>
-                    <span class="feature-item"><span>✔</span> Lokasi Strategis</span>
-                </div>
-
-                <!-- INTEGRATED SEARCH BOX -->
-                <div class="search-box-container">
-                    <form id="main-search-form" class="search-form" action="pages/beli.html" method="GET">
-                        <div class="search-field">
-                            <label>Kategori</label>
-                            <select name="kategori">
-                                <option value="hunian">Hunian</option>
-                                <option value="komersial">Komersial</option>
-                                <option value="tanah">Tanah & Lahan</option>
-                                <option value="institusi">Institusi & Fasilitas</option>
-                            </select>
-                        </div>
-
-                        <div class="search-field">
-                            <label>Jenis Properti</label>
-                            <select name="jenis_properti">
-                                <option value="">Pilih Jenis</option>
-                                <option value="rumah">Rumah</option>
-                                <option value="apartemen">Apartemen</option>
-                                <option value="ruko">Ruko</option>
-                                <option value="tanah">Tanah</option>
-                            </select>
-                        </div>
-
-                        <div class="search-field">
-                            <label>Status</label>
-                            <select name="status">
-                                <option value="dijual">Dijual</option>
-                                <option value="disewakan">Disewakan</option>
-                            </select>
-                        </div>
-
-                        <div class="search-field">
-                            <label>Lokasi</label>
-                            <input type="text" name="lokasi" placeholder="Cari kota atau area...">
-                        </div>
-
-                        <div class="search-field">
-                            <label>Harga Maksimum</label>
-                            <select name="harga_max">
-                                <option value="">Semua Harga</option>
-                                <option value="500000000">S/d Rp 500 Jt</option>
-                                <option value="1000000000">S/d Rp 1 Miliar</option>
-                                <option value="2000000000">S/d Rp 2 Miliar</option>
-                            </select>
-                        </div>
-
-                        <div class="search-action">
-                            <button type="submit" class="btn-search">Cari Properti</button>
-                        </div>
-                    </form>
-                </div>
+    <section class="hero-section">
+        <div class="container">
+            <h1 class="hero-title">Temukan Properti<br>Impian Anda</h1>
+            <p class="hero-subtitle">Jual • Beli • Sewa Properti Lebih Mudah</p>
+            <div class="hero-features">
+                <div class="feature-item"><span>✓</span> Aman dan Terpercaya</div>
+                <div class="feature-item"><span>✓</span> Listing Properti Terverifikasi</div>
+                <div class="feature-item"><span>✓</span> Lokasi Strategis</div>
             </div>
-        </section>
-    </main>
+            <div class="search-box-container">
+                <form class="search-form">
+                    <div class="search-field">
+                        <label>Kategori</label>
+                        <select><option>Hunian</option></select>
+                    </div>
+                    <div class="search-field">
+                        <label>Jenis Properti</label>
+                        <select><option>Pilih Jenis</option></select>
+                    </div>
+                    <div class="search-field">
+                        <label>Lokasi Kota</label>
+                        <input type="text" placeholder="Cari Kota/Wilayah">
+                    </div>
+                    <div class="search-field">
+                        <label>Kamar Tidur</label>
+                        <select><option>Pilih</option></select>
+                    </div>
+                    <div class="search-field">
+                        <label>Harga Maksimal</label>
+                        <input type="text" placeholder="Rp.">
+                    </div>
+                    <button type="submit" class="btn-search">CARI PROPERTI</button>
+                </form>
+            </div>
+        </div>
+    </section>
 
-    <!-- FOOTER COMPONENT -->
     <footer class="main-footer">
         <div class="footer-container container">
             <div class="footer-brand">
-                <img src="./assets/img/logo.png" alt="TERAVIA Logo" class="logo-img">
-                <p>Platform marketplace properti terbesar dan terpercaya di Indonesia. Menghubungkan pembeli, penjual, dan agen secara profesional.</p>
+                <img src="./assets/img/logo.png" alt="TERAVIA Logo" class="logo-img" style="filter: brightness(0) invert(1);">
+                <p>Platform terpercaya penyedia jual, beli, dan sewa properti terbaik di seluruh Indonesia.</p>
             </div>
             <div class="footer-links-group">
                 <div class="footer-col">
@@ -254,24 +165,17 @@
                     <ul>
                         <li><a href="#">Rumah Dijual</a></li>
                         <li><a href="#">Apartemen Disewa</a></li>
-                        <li><a href="#">Ruko Komersial</a></li>
-                        <li><a href="#">Tanah Kavling</a></li>
-                    </ul>
-                </div>
-                <div class="footer-col">
-                    <h3>Perusahaan</h3>
-                    <ul>
-                        <li><a href="pages/tentang.html">Tentang Kami</a></li>
-                        <li><a href="pages/blog.html">Blog & Berita</a></li>
-                        <li><a href="#">Kontak Agen</a></li>
                     </ul>
                 </div>
             </div>
         </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 TERAVIA. All Rights Reserved.</p>
-        </div>
+        <div class="footer-bottom">Keamanan Terproteksi TLS • © 2026 TERAVIA</div>
     </footer>
 
+    <script>
+        const hamburger = document.getElementById('hamburgerMenu');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => { navLinks.classList.toggle('active'); });
+    </script>
 </body>
 </html>
