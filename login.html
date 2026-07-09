@@ -3,201 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masuk Akun - TERAVIA</title>
-    <link rel="stylesheet" href="assets/css/style.css">
+    <title>Masuk - TERAVIA</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <link rel="stylesheet" href="assets/css/main.css">
+    <link rel="stylesheet" href="assets/css/components.css">
+    <link rel="stylesheet" href="assets/css/responsive.css">
+    
     <style>
-        /* Style tambahan opsional agar layout form login rapi dan estetik */
-        body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background-color: #f4f6f9;
+        /* Custom Internal Style Khusus Auth Page agar Terpusat Nyaman */
+        .auth-wrapper {
+            min-height: 100vh;
             display: flex;
-            justify-content: center;
             align-items: center;
-            height: 100vh;
-            margin: 0;
+            justify-content: center;
+            padding: 24px;
+            background: linear-gradient(135deg, #F8FAFC 0%, #E2E8F0 100%);
         }
-        .login-container {
-            background: #ffffff;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        .auth-card {
+            background: var(--bg-surface);
+            padding: 40px;
+            border-radius: 16px;
             width: 100%;
-            max-width: 400px;
-            box-sizing: border-box;
+            max-width: 440px;
+            box-shadow: 0 10px 25px -5px rgba(15, 23, 42, 0.08);
+            border: 1px solid var(--border-color);
         }
-        .brand-title {
+        .auth-header {
             text-align: center;
-            font-size: 24px;
-            font-weight: bold;
-            color: #1e3a8a;
-            margin-bottom: 5px;
+            margin-bottom: 32px;
         }
-        .brand-subtitle {
-            text-align: center;
+        .auth-header .logo {
+            font-size: 28px;
+            display: inline-block;
+            margin-bottom: 12px;
+        }
+        .auth-header h1 {
+            font-size: 20px;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        .auth-header p {
             font-size: 14px;
-            color: #6b7280;
-            margin-bottom: 25px;
+            color: var(--text-muted);
+            margin-top: 4px;
         }
         .form-group {
-            margin-bottom: 15px;
+            margin-bottom: 20px;
+            position: relative;
         }
         .form-group label {
             display: block;
-            font-size: 14px;
-            margin-bottom: 5px;
-            color: #374151;
-            font-weight: 500;
+            font-size: 13px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary);
         }
-        .form-group input {
+        .form-control {
             width: 100%;
-            padding: 10px;
-            border: 1px solid #d1d5db;
-            border-radius: 6px;
-            box-sizing: border-box;
+            padding: 12px 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
             font-size: 14px;
+            outline: none;
+            background-color: #FAFAFA;
+            transition: all 0.3s;
         }
-        .btn-login {
-            width: 100%;
-            padding: 12px;
-            background-color: #2563eb;
-            color: white;
+        .form-control:focus {
+            border-color: var(--accent);
+            background-color: #FFFFFF;
+            box-shadow: 0 0 0 3px rgba(14, 165, 233, 0.15);
+        }
+        /* Password Toggle Styling */
+        .password-container {
+            position: relative;
+        }
+        .toggle-password {
+            position: absolute;
+            right: 14px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: none;
             border: none;
-            border-radius: 6px;
-            font-size: 16px;
-            font-weight: bold;
+            font-size: 12px;
+            font-weight: 600;
+            color: var(--accent);
             cursor: pointer;
-            margin-top: 10px;
         }
-        .btn-login:disabled {
-            background-color: #93c5fd;
+        .auth-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 13px;
+            margin-bottom: 24px;
         }
-        .alert {
-            padding: 10px;
-            border-radius: 6px;
-            margin-bottom: 15px;
-            font-size: 14px;
-            display: none;
-        }
-        .alert-error {
-            background-color: #fee2e2;
-            color: #991b1b;
-            border: 1px solid #fca5a5;
-        }
-        .alert-success {
-            background-color: #dcfce7;
-            color: #166534;
-            border: 1px solid #86efac;
-        }
-        .switch-link {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 14px;
-            color: #4b5563;
-        }
-        .switch-link a {
-            color: #2563eb;
+        .auth-meta a {
+            color: var(--accent);
             text-decoration: none;
             font-weight: 500;
+        }
+        .auth-meta a:hover {
+            text-decoration: underline;
+        }
+        .btn-auth {
+            width: 100%;
+            padding: 14px;
+            border-radius: 8px;
+            border: none;
+            background-color: var(--accent);
+            color: white;
+            font-size: 15px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .btn-auth:hover {
+            background-color: var(--accent-hover);
+        }
+        .auth-footer {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 14px;
+            color: var(--text-muted);
+        }
+        .auth-footer a {
+            color: var(--accent);
+            text-decoration: none;
+            font-weight: 600;
         }
     </style>
 </head>
 <body>
 
-    <div class="login-container">
-        <div class="brand-title">TERAVIA</div>
-        <div class="brand-subtitle">Silakan masuk untuk mengelola properti Anda</div>
-
-        <div id="alert-msg" class="alert"></div>
-
-        <form id="login-form" onsubmit="return false;">
-            <div class="form-group">
-                <label for="login-email">Alamat Email</label>
-                <input type="email" id="login-email" placeholder="nama@email.com" required>
+    <div class="auth-wrapper">
+        <div class="auth-card">
+            <div class="auth-header">
+                <a href="index.html" class="logo">TERA<span>VIA</span></a>
+                <h1>Selamat Datang Kembali</h1>
+                <p>Masuk untuk mengelola properti Anda</p>
             </div>
-
-            <div class="form-group">
-                <label for="login-password">Password</label>
-                <input type="password" id="login-password" placeholder="Masukkan password" required>
+            
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="identity">Email atau Nomor WhatsApp</label>
+                    <input type="text" id="identity" class="form-control" placeholder="contoh@email.com / 081234..." required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <div class="password-container">
+                        <input type="password" id="password" class="form-control" placeholder="Masukkan password" required>
+                        <button type="button" id="toggle-password" class="toggle-password">LIHAT</button>
+                    </div>
+                </div>
+                
+                <div class="auth-meta">
+                    <label style="display: flex; align-items: center; gap: 6px; cursor: pointer;">
+                        <input type="checkbox" id="remember-me"> Ingat Saya
+                    </label>
+                    <a href="#">Lupa Password?</a>
+                </div>
+                
+                <button type="submit" class="btn-auth">Masuk Sekarang</button>
+            </form>
+            
+            <div class="auth-footer">
+                Belum punya akun? <a href="register.html">Daftar Akun</a>
             </div>
-
-            <button type="button" id="btn-submit-login" class="btn-login">Masuk Sekarang</button>
-        </form>
-
-        <div class="switch-link">
-            Belum punya akun? <a href="index.html">Daftar di sini</a>
         </div>
     </div>
 
+    <script src="assets/js/supabase-config.js" type="module"></script>
+    <script src="assets/js/auth.js" type="module"></script>
+    
     <script>
-        document.addEventListener("DOMContentLoaded", () => {
-            // URL & KEY yang sudah terbukti sukses kemarin
-            const SUPABASE_URL = "https://jqlcuilrzfvtdlrbitbn.supabase.co";
-            const SUPABASE_ANON_KEY = "EyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImpxbGN1aWxyemZ2dGRscmJpdGJuIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODM0NzU1MzgsImV4cCI6MjA5OTA1MTUzOH0.FYPFhXvaHupd5O1_JuEJYBmS7zDuzcTq4G2MvYjdqjQ";
-
-            const btnLogin = document.getElementById("btn-submit-login");
-            const alertMsg = document.getElementById("alert-msg");
-
-            const showAlert = (message, type = "error") => {
-                alertMsg.innerText = message;
-                alertMsg.className = `alert alert-${type}`;
-                alertMsg.style.display = "block";
-            };
-
-            if (btnLogin) {
-                btnLogin.addEventListener("click", async () => {
-                    const email = document.getElementById("login-email").value.trim();
-                    const password = document.getElementById("login-password").value.trim();
-
-                    // Validasi input kosong
-                    if (!email || !password) {
-                        showAlert("Email dan Password wajib diisi!", "error");
-                        return;
-                    }
-
-                    btnLogin.innerText = "Memverifikasi...";
-                    btnLogin.disabled = true;
-                    alertMsg.style.display = "none";
-
-                    try {
-                        // Tembak API Login Supabase (SignIn dengan Email & Password)
-                        const response = await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`, {
-                            method: "POST",
-                            headers: {
-                                "Content-Type": "application/json",
-                                "apikey": SUPABASE_ANON_KEY,
-                                "Authorization": `Bearer ${SUPABASE_ANON_KEY}`
-                            },
-                            body: JSON.stringify({ email, password })
-                        });
-
-                        const data = await response.json();
-
-                        if (!response.ok) {
-                            // Jika email/password salah, Supabase melemparkan error di sini
-                            throw new Error(data.error_description || data.message || "Email atau password salah!");
-                        }
-
-                        // JIKA LOGIN SUKSES:
-                        if (data && data.access_token) {
-                            showAlert("Login Berhasil! Mengalihkan...", "success");
-                            
-                            // Simpan token login ke memori browser (agar user tetap login saat pindah halaman)
-                            localStorage.setItem("teravia_session", JSON.stringify(data));
-
-                            // Alihkan ke halaman dashboard utama setelah 1.5 detik
-                            setTimeout(() => {
-                                window.location.href = "dashboard.html";
-                            }, 1500);
-                        }
-
-                    } catch (error) {
-                        console.error(error);
-                        showAlert("Gagal Masuk: " + error.message, "error");
-                    } finally {
-                        btnLogin.innerText = "Masuk Sekarang";
-                        btnLogin.disabled = false;
-                    }
-                });
+        // Logika Interaktif Hide/Show Password langsung di halaman
+        document.getElementById('toggle-password').addEventListener('click', function() {
+            const passwordInput = document.getElementById('password');
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                this.textContent = 'SEMBUNYIKAN';
+            } else {
+                passwordInput.type = 'password';
+                this.textContent = 'LIHAT';
             }
         });
     </script>
