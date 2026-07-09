@@ -1,1 +1,232 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cari Properti Disewakan - TERAVIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #0F172A;
+            --accent: #0EA5E9;
+            --accent-hover: #0284C7;
+            --success: #10B981;
+            --bg-main: #FAFAFA;
+            --bg-surface: #FFFFFF;
+            --text-main: #0F172A;
+            --text-muted: #64748B;
+            --border-color: #E2E8F0;
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+        body { background-color: var(--bg-main); color: var(--text-main); overflow-x: hidden; }
+        .container { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 24px; }
+
+        /* NAVBAR STYLING */
+        .navbar { background-color: var(--bg-surface); border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 1000; padding: 12px 0; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; position: relative; }
+        .logo-img { height: 40px; width: auto; display: block; }
+        .nav-links { display: flex; list-style: none; gap: 32px; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-weight: 500; font-size: 15px; transition: color 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+        .nav-actions { display: flex; align-items: center; }
+        .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; z-index: 1001; }
+        .hamburger span { display: block; width: 25px; height: 3px; background-color: var(--primary); border-radius: 3px; }
+
+        .btn { padding: 10px 20px; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 14px; cursor: pointer; transition: all 0.3s; }
+        .btn-primary { background-color: var(--accent); color: white; border: none; }
+        .btn-primary:hover { background-color: var(--accent-hover); }
+        .btn-outline { background-color: transparent; color: var(--primary); border: 1px solid var(--border-color); margin-right: 12px; }
+
+        /* KATALOG LAYOUT */
+        .catalog-section { padding: 40px 0; }
+        .catalog-grid { display: grid; grid-template-columns: 300px 1fr; gap: 32px; align-items: start; }
+
+        /* SIDEBAR FILTER */
+        .filter-sidebar { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 16px; padding: 24px; position: sticky; top: 90px; }
+        .filter-title { font-size: 18px; font-weight: 700; margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+        .filter-group { margin-bottom: 20px; }
+        .filter-group label { display: block; font-size: 12px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px; }
+        .filter-group select, .filter-group input { width: 100%; padding: 10px 12px; border: 1px solid var(--border-color); border-radius: 8px; outline: none; background-color: #F8FAFC; font-size: 14px; }
+        .btn-filter { width: 100%; background: var(--primary); color: white; border: none; padding: 12px; border-radius: 8px; font-weight: 700; cursor: pointer; transition: background 0.3s; }
+        .btn-filter:hover { background: #1E293B; }
+
+        /* LISTING CONTENT */
+        .listing-container { display: flex; flex-direction: column; gap: 24px; }
+        .listing-header { display: flex; justify-content: space-between; align-items: center; }
+        .listing-header h2 { font-size: 22px; font-weight: 800; }
+        
+        .property-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 24px; }
+        
+        /* PROPERTY CARD */
+        .property-card { background: var(--bg-surface); border: 1px solid var(--border-color); border-radius: 16px; overflow: hidden; transition: transform 0.3s, box-shadow 0.3s; cursor: pointer; }
+        .property-card:hover { transform: translateY(-4px); box-shadow: 0 12px 20px -5px rgba(0,0,0,0.05); }
+        .card-image-wrapper { position: relative; width: 100%; height: 200px; background: #E2E8F0; }
+        .card-image-wrapper img { width: 100%; height: 100%; object-fit: cover; }
+        .tag-status { position: absolute; top: 12px; left: 12px; background: var(--success); color: white; font-size: 11px; font-weight: 700; padding: 4px 10px; border-radius: 50px; text-transform: uppercase; }
+        
+        .card-content { padding: 20px; }
+        .prop-price { font-size: 20px; font-weight: 800; color: var(--accent); margin-bottom: 6px; }
+        .prop-title { font-size: 16px; font-weight: 700; margin-bottom: 8px; color: var(--primary); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+        .prop-location { font-size: 13px; color: var(--text-muted); margin-bottom: 16px; display: flex; align-items: center; gap: 6px; }
+        
+        .prop-features { display: flex; gap: 16px; border-top: 1px solid var(--border-color); padding-top: 14px; font-size: 13px; color: var(--text-muted); }
+        .prop-features span { display: flex; align-items: center; gap: 6px; }
+
+        /* FOOTER */
+        .main-footer { background-color: #0F172A; color: #94A3B8; padding: 60px 0 30px 0; border-top: 1px solid #1E293B; margin-top: 80px; }
+        .footer-container { display: flex; justify-content: space-between; gap: 48px; flex-wrap: wrap; }
+        .footer-brand { max-width: 400px; }
+        .footer-brand p { font-size: 14px; line-height: 1.6; margin-top: 16px; }
+        .footer-bottom { border-top: 1px solid #1E293B; margin-top: 40px; padding-top: 24px; text-align: center; font-size: 13px; }
+
+        /* RESPONSIVE */
+        @media (max-width: 992px) {
+            .catalog-grid { grid-template-columns: 1fr; }
+            .filter-sidebar { position: relative; top: 0; }
+        }
+        @media (max-width: 768px) {
+            .nav-links, .nav-actions { display: none; }
+            .hamburger { display: flex; }
+            .nav-links.active { display: flex !important; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg-surface); padding: 20px; border-bottom: 1px solid var(--border-color); gap: 16px; box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05); }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container container">
+            <a href="../index.html">
+                <img src="../assets/img/logo.png" alt="TERAVIA Logo" class="logo-img">
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html">Beranda</a></li>
+                <li><a href="jual.html">Jual</a></li>
+                <li><a href="beli.html">Beli</a></li>
+                <li><a href="sewa.html" class="active">Sewa</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="tentang.html">Tentang Kami</a></li>
+            </ul>
+            <div class="hamburger" id="hamburgerMenu">
+                <span></span><span></span><span></span>
+            </div>
+            <div class="nav-actions">
+                <a href="../register.html" class="btn btn-outline">DAFTAR</a>
+                <a href="../login.html" class="btn btn-primary">MASUK</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="container catalog-section">
+        <div class="catalog-grid">
+            
+            <aside class="filter-sidebar">
+                <div class="filter-title">
+                    <i class="fa-solid fa-sliders"></i> Filter Sewa
+                </div>
+                <form>
+                    <div class="filter-group">
+                        <label>Jenis Properti</label>
+                        <select>
+                            <option>Semua Jenis</option>
+                            <option>Apartemen</option>
+                            <option>Rumah</option>
+                            <option>Kos / Kontrakan</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Kota / Lokasi</label>
+                        <input type="text" placeholder="Contoh: Jakarta Barat">
+                    </div>
+                    <div class="filter-group">
+                        <label>Harga Per Tahun (Min)</label>
+                        <input type="text" placeholder="Rp 0">
+                    </div>
+                    <div class="filter-group">
+                        <label>Harga Per Tahun (Max)</label>
+                        <input type="text" placeholder="Rp Maksimal">
+                    </div>
+                    <div class="filter-group">
+                        <label>Kamar Tidur</label>
+                        <select>
+                            <option>Semua</option>
+                            <option>1+</option>
+                            <option>2+</option>
+                            <option>3+</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-filter">Cari Sewaan</button>
+                </form>
+            </aside>
+
+            <section class="listing-container">
+                <div class="listing-header">
+                    <h2>Rekomendasi Properti Disewakan</h2>
+                </div>
+
+                <div class="property-grid">
+                    
+                    <div class="property-card">
+                        <div class="card-image-wrapper">
+                            <span class="tag-status" style="background: var(--accent);">Sewa</span>
+                            <img src="https://images.unsplash.com/photo-1502672260266-1c1ef2d93688?auto=format&fit=crop&w=800&q=80" alt="Studio Apartemen">
+                        </div>
+                        <div class="card-content">
+                            <div class="prop-price">Rp 45 Juta <span style="font-size: 13px; font-weight: 400; color: var(--text-muted);">/ tahun</span></div>
+                            <div class="prop-title">Minimalist Studio Apartment Full Furnished</div>
+                            <div class="prop-location"><i class="fa-solid fa-location-dot"></i> Grogol, Jakarta Barat</div>
+                            <div class="prop-features">
+                                <span><i class="fa-solid fa-bed"></i> 1 KT</span>
+                                <span><i class="fa-solid fa-bath"></i> 1 KM</span>
+                                <span><i class="fa-solid fa-ruler-combined"></i> 32m²</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="property-card">
+                        <div class="card-image-wrapper">
+                            <span class="tag-status" style="background: var(--accent);">Sewa</span>
+                            <img src="https://images.unsplash.com/photo-1564013799919-ab600027ffc6?auto=format&fit=crop&w=800&q=80" alt="Rumah Sewa">
+                        </div>
+                        <div class="card-content">
+                            <div class="prop-price">Rp 120 Juta <span style="font-size: 13px; font-weight: 400; color: var(--text-muted);">/ tahun</span></div>
+                            <div class="prop-title">Rumah 2 Lantai Siap Huni Lingkungan Aman</div>
+                            <div class="prop-location"><i class="fa-solid fa-location-dot"></i> Menteng, Jakarta Pusat</div>
+                            <div class="prop-features">
+                                <span><i class="fa-solid fa-bed"></i> 3 KT</span>
+                                <span><i class="fa-solid fa-bath"></i> 2 KM</span>
+                                <span><i class="fa-solid fa-ruler-combined"></i> 150m²</span>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-container container">
+            <div class="footer-brand">
+                <img src="../assets/img/logo.png" alt="TERAVIA Logo" class="logo-img" style="filter: brightness(0) invert(1);">
+                <p>Platform terpercaya penyedia jual, beli, dan sewa properti terbaik di seluruh Indonesia.</p>
+            </div>
+        </div>
+        <div class="footer-bottom">© 2026 TERAVIA. Hak Cipta Dilindungi.</div>
+    </footer>
+
+    <script>
+        // Logika Hamburger Menu Mobile
+        const hamburger = document.getElementById('hamburgerMenu');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => { navLinks.classList.toggle('active'); });
+    </script>
+</body>
+  </html>
 
