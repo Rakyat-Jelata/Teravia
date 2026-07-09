@@ -6,60 +6,28 @@
     <title>Pasang Iklan Properti - TERAVIA</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        .hidden { display: none !important; }
-    </style>
 </head>
 <body class="bg-slate-50 text-slate-800 font-sans">
 
-    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <a href="index.html" class="text-2xl font-bold text-blue-600 tracking-wide">TERAVIA</a>
-                </div>
-                <div class="hidden md:flex items-center space-x-6">
-                    <a href="index.html" class="text-slate-600 hover:text-blue-600 font-medium">Beranda</a>
-                    <a href="properti.html" class="text-slate-600 hover:text-blue-600 font-medium">Properti</a>
-                    <a href="blog.html" class="text-slate-600 hover:text-blue-600 font-medium">Blog</a>
-                    <a href="tentang.html" class="text-slate-600 hover:text-blue-600 font-medium">Tentang</a>
-                    <a href="pasang-iklan.html" class="border border-blue-600 text-blue-600 px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-50">Pasang Iklan</a>
-                    <a href="login.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700">Masuk</a>
-                </div>
-                <div class="flex items-center md:hidden">
-                    <button id="btn-hamburger" class="text-slate-600 hover:text-slate-900 focus:outline-none">
-                        <i class="fa-solid fa-bars text-2xl"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-200 px-4 pt-2 pb-4 space-y-2 shadow-lg">
-            <a href="index.html" class="block text-slate-600 hover:text-blue-600 py-2 font-medium">Beranda</a>
-            <a href="properti.html" class="block text-slate-600 hover:text-blue-600 py-2 font-medium">Properti</a>
-            <a href="blog.html" class="block text-slate-600 hover:text-blue-600 py-2 font-medium">Blog</a>
-            <a href="tentang.html" class="block text-slate-600 hover:text-blue-600 py-2 font-medium">Tentang</a>
-            <a href="pasang-iklan.html" class="block border border-blue-600 text-blue-600 text-center py-2 rounded-lg font-medium bg-blue-50">Pasang Iklan</a>
-            <a href="login.html" class="block bg-blue-600 text-white text-center py-2 rounded-lg font-medium hover:bg-blue-700">Masuk</a>
-        </div>
-    </nav>
+    <div id="wrapper-navbar"></div>
 
     <div class="max-w-3xl mx-auto px-4 py-10">
         <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
             <div>
                 <h2 class="text-2xl font-bold text-slate-900">Formulir Pasang Iklan</h2>
-                <p class="text-sm text-slate-500">Lengkapi data properti Anda dengan benar untuk menarik minat calon pembeli.</p>
+                <p class="text-sm text-slate-500">Lengkapi data properti Anda dengan benar.</p>
             </div>
 
             <form id="form-pasang-iklan" class="space-y-5" onsubmit="return false;">
                 
                 <div>
                     <label class="block text-xs font-bold text-slate-600 uppercase mb-2">Judul Iklan</label>
-                    <input type="text" id="input-judul" placeholder="Contoh: Rumah Minimalis Modern Dekat Stasiun KRL" class="w-full p-3 border border-slate-200 rounded-lg text-sm bg-white focus:outline-none focus:border-blue-500" required>
+                    <input type="text" placeholder="Contoh: Rumah Minimalis Modern Dekat Stasiun KRL" class="w-full p-3 border border-slate-200 rounded-lg text-sm bg-white focus:outline-none focus:border-blue-500" required>
                 </div>
 
                 <div>
                     <label class="block text-xs font-bold text-slate-600 uppercase mb-2">Status Listing</label>
-                    <select id="select-status" class="w-full p-3 border border-slate-200 rounded-lg text-sm bg-white focus:outline-none focus:border-blue-500">
+                    <select class="w-full p-3 border border-slate-200 rounded-lg text-sm bg-white focus:outline-none focus:border-blue-500">
                         <option value="Dijual">Dijual</option>
                         <option value="Disewakan">Disewakan</option>
                     </select>
@@ -98,7 +66,7 @@
                             </select>
                         </div>
                         <div>
-                            <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Kamar VIP (Unit)</label>
+                            <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Kamar VIP</label>
                             <input type="number" placeholder="0" class="w-full p-2.5 border border-slate-200 rounded-lg text-sm bg-white">
                         </div>
                         <div>
@@ -121,18 +89,6 @@
                             <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Jumlah Toilet</label>
                             <input type="number" placeholder="0" class="w-full p-2.5 border border-slate-200 rounded-lg text-sm bg-white">
                         </div>
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Jumlah Lift</label>
-                            <input type="number" placeholder="0" class="w-full p-2.5 border border-slate-200 rounded-lg text-sm bg-white">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Kapasitas Pasien</label>
-                            <input type="number" placeholder="Bed" class="w-full p-2.5 border border-slate-200 rounded-lg text-sm bg-white">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Parkir Mobil (Unit)</label>
-                            <input type="number" placeholder="Kapasitas" class="w-full p-2.5 border border-slate-200 rounded-lg text-sm bg-white">
-                        </div>
                     </div>
                 </div>
 
@@ -148,30 +104,12 @@
                             <input type="number" placeholder="0" class="w-full p-2.5 border border-slate-200 rounded-lg text-sm bg-white">
                         </div>
                         <div>
-                            <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Bintang Hotel</label>
+                            <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Bintang</label>
                             <select class="w-full p-2.5 border border-slate-200 rounded-lg text-sm bg-white">
-                                <option value="Non Bintang">Non Bintang / Losmen</option>
-                                <option value="Bintang 1">Bintang 1</option>
-                                <option value="Bintang 2">Bintang 2</option>
+                                <option value="Non Bintang">Non Bintang</option>
                                 <option value="Bintang 3">Bintang 3</option>
-                                <option value="Bintang 4">Bintang 4</option>
                                 <option value="Bintang 5">Bintang 5</option>
                             </select>
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Tipe Kamar yang Tersedia</label>
-                        <input type="text" placeholder="Contoh: Standard, Deluxe, Suite, Presidential" class="w-full p-2.5 border border-slate-200 rounded-lg text-sm bg-white">
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-bold text-slate-600 uppercase mb-2">Fasilitas Hotel</label>
-                        <div class="grid grid-cols-2 gap-2 text-xs text-slate-700">
-                            <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Swimming Pool</span></label>
-                            <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Pusat Kebugaran / Gym</span></label>
-                            <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Kids Playground</span></label>
-                            <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Restaurant / Cafe</span></label>
-                            <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Ballroom / Meeting Room</span></label>
-                            <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Spa & Wellness</span></label>
                         </div>
                     </div>
                 </div>
@@ -184,23 +122,8 @@
                             <input type="number" placeholder="0" class="w-full p-2.5 border border-slate-200 rounded-lg text-sm bg-white">
                         </div>
                         <div>
-                            <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Jumlah Lift (Unit)</label>
+                            <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Jumlah Lift</label>
                             <input type="number" placeholder="0" class="w-full p-2.5 border border-slate-200 rounded-lg text-sm bg-white">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Kapasitas Parkir</label>
-                            <input type="number" placeholder="Mobil" class="w-full p-2.5 border border-slate-200 rounded-lg text-sm bg-white">
-                        </div>
-                    </div>
-                    <div>
-                        <label class="block text-[10px] font-bold text-slate-600 uppercase mb-2">Fasilitas Gedung & Keamanan</label>
-                        <div class="grid grid-cols-2 gap-2 text-xs text-slate-700">
-                            <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Sistem Keamanan 24 Jam</span></label>
-                            <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Fire Fighting System</span></label>
-                            <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Fiber Optic Ready</span></label>
-                            <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Helipad</span></label>
-                            <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Kantin / Food Court</span></label>
-                            <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Generator Cadangan (Genset)</span></label>
                         </div>
                     </div>
                 </div>
@@ -231,40 +154,8 @@
                             <input type="number" class="w-full p-2.5 border border-slate-200 rounded-lg text-sm bg-white">
                         </div>
                         <div>
-                            <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Jumlah Lantai</label>
-                            <input type="number" class="w-full p-2.5 border border-slate-200 rounded-lg text-sm bg-white">
-                        </div>
-                        <div>
                             <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Kamar Tidur</label>
                             <input type="number" class="w-full p-2.5 border border-slate-200 rounded-lg text-sm bg-white">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Kamar Mandi</label>
-                            <input type="number" class="w-full p-2.5 border border-slate-200 rounded-lg text-sm bg-white">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Kapasitas Listrik</label>
-                            <select class="w-full p-2.5 border border-slate-200 rounded-lg text-sm bg-white">
-                                <option value="450VA">450VA</option>
-                                <option value="900VA">900VA</option>
-                                <option value="1300VA">1300VA</option>
-                                <option value="2200VA">2200VA</option>
-                                <option value="3500VA">3500VA</option>
-                                <option value="4400VA">4400VA</option>
-                                <option value="5500VA">5500VA</option>
-                                <option value="11000VA">11000VA</option>
-                                <option value="Lebih dari 11000VA">Lebih dari 11000VA</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="border-t border-slate-200 pt-3">
-                        <label class="flex items-center space-x-2 cursor-pointer">
-                            <input type="checkbox" id="check-garasi" class="rounded text-emerald-600 focus:ring-emerald-500 w-4 h-4">
-                            <span class="text-xs font-bold text-slate-700 uppercase">Apakah ada garasi mobil?</span>
-                        </label>
-                        <div id="input-garasi" class="hidden mt-2 max-w-[200px]">
-                            <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Kapasitas Mobil (Unit)</label>
-                            <input type="number" placeholder="0" class="w-full p-2 border border-slate-200 rounded-lg text-sm bg-white">
                         </div>
                     </div>
                 </div>
@@ -275,7 +166,6 @@
 
                 <div class="bg-blue-50/50 p-5 rounded-2xl border border-blue-100 space-y-4">
                     <h4 class="text-xs font-bold text-blue-800 uppercase tracking-wider"><i class="fa-solid fa-map-location-dot mr-1"></i> Penentuan Lokasi Properti</h4>
-                    
                     <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
                         <div>
                             <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Provinsi</label>
@@ -305,131 +195,121 @@
 
                     <div class="max-w-[200px]">
                         <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Kode Pos</label>
-                        <input type="number" id="kodepos" placeholder="Contoh: 15310" class="w-full p-2.5 border border-slate-200 rounded-lg text-sm bg-white focus:outline-none focus:border-blue-500">
+                        <input type="number" placeholder="Contoh: 15310" class="w-full p-2.5 border border-slate-200 rounded-lg text-sm bg-white focus:outline-none focus:border-blue-500">
                     </div>
                 </div>
 
-                <button type="submit" class="w-full bg-blue-600 text-white p-4 rounded-xl font-bold text-sm shadow-md hover:bg-blue-700 transition duration-200">
-                    <i class="fa-solid fa-cloud-arrow-up mr-2"></i> Tayangkan Iklan Sekarang
+                <button type="submit" class="w-full bg-blue-600 text-white p-4 rounded-xl font-bold text-sm shadow-md hover:bg-blue-700">
+                    Tayangkan Iklan
                 </button>
             </form>
         </div>
     </div>
 
     <script>
-document.addEventListener("DOMContentLoaded", function () {
+        document.addEventListener("DOMContentLoaded", () => {
+            
+            // ========================================================
+            // A. KODE SAKTI: AMBIL NAVBAR & AKTIFKAN HAMBURGER (ANTI-GAGAL)
+            // ========================================================
+            fetch('navbar.html')
+                .then(response => response.text())
+                .then(html => {
+                    document.getElementById('wrapper-navbar').innerHTML = html;
+                    
+                    // Kunci Sukses: Pasang event klik SETELAH navbar selesai disedot!
+                    const btnHamburger = document.getElementById("btn-hamburger");
+                    const mobileMenu = document.getElementById("mobile-menu");
 
-    // ==========================================
-    // 1. LOGIKA HAMBURGER MENU (MOBILE NAVIGATION)
-    // ==========================================
-    const menuBtn = document.getElementById("menu-btn");
-    const mobileMenu = document.getElementById("mobile-menu");
+                    if (btnHamburger && mobileMenu) {
+                        btnHamburger.addEventListener("click", (e) => {
+                            e.stopPropagation();
+                            mobileMenu.classList.toggle("hidden");
+                        });
 
-    if (menuBtn && mobileMenu) {
-        menuBtn.addEventListener("click", function (e) {
-            e.stopPropagation(); // Mencegah klik tembus ke dokumen
-            mobileMenu.classList.toggle("hidden");
-        });
+                        document.addEventListener("click", (e) => {
+                            if (!mobileMenu.classList.contains("hidden") && !mobileMenu.contains(e.target) && e.target !== btnHamburger) {
+                                mobileMenu.classList.add("hidden");
+                            }
+                        });
+                    }
+                })
+                .catch(err => console.error("Gagal menyedot navbar:", err));
 
-        // Menutup menu jika pengguna mengklik di luar area menu
-        document.addEventListener("click", function (e) {
-            if (!mobileMenu.classList.contains("hidden") && !mobileMenu.contains(e.target) && e.target !== menuBtn) {
-                mobileMenu.classList.add("hidden");
-            }
-        });
-    }
 
-    // ==========================================
-    // 2. LOGIKA TAMPIL/SEMBUNYI DETAIL PROPERTI
-    // ==========================================
-    const kategoriSelect = document.getElementById("kategori");
-    const propertiDetail = document.getElementById("properti-detail");
+            // ========================================================
+            // B. LOGIKA DETAIL PROPERTI KONDISIONAL (MUNCUL KEMBALI)
+            // ========================================================
+            const selectJenis = document.getElementById("select-jenis");
+            const formDetailIds = ["form-rumah", "form-tanah", "form-hotel", "form-perkantoran", "form-rs"];
 
-    function aturTampilanDetail() {
-        if (!kategoriSelect || !propertiDetail) return;
-        
-        const nilai = kategoriSelect.value;
-        // Pastikan detail properti muncul untuk kategori Properti (Dijual/Disewakan)
-        if (nilai === "properti-dijual" || nilai === "properti-disewakan") {
-            propertiDetail.style.display = "block"; // atau gunakan propertiDetail.classList.remove("hidden") jika memakai Tailwind
-        } else {
-            propertiDetail.style.display = "none";  // atau gunakan propertiDetail.classList.add("hidden") jika memakai Tailwind
-        }
-    }
-
-    if (kategoriSelect) {
-        kategoriSelect.addEventListener("change", aturTampilanDetail);
-        aturTampilanDetail(); // Jalankan sekali saat awal halaman dimuat
-    }
-
-    // ==========================================
-    // 3. LOGIKA API WILAYAH INDONESIA (JSDELIVR CDN)
-    // ==========================================
-    const baseUrl = "https://cdn.jsdelivr.net/gh/fajarghifar/api-wilayah-indonesia@master/api";
-
-    const selectProv = document.getElementById("provinsi");
-    const selectKab = document.getElementById("kabupaten");
-    const selectKec = document.getElementById("kecamatan");
-    const selectKel = document.getElementById("kelurahan");
-
-    if (selectProv) {
-        // Ambil Data Provinsi
-        fetch(`${baseUrl}/provinces.json`)
-            .then(res => {
-                if (!res.ok) throw new Error("Gagal memuat data provinsi");
-                return res.json();
-            })
-            .then(data => {
-                data.sort((a, b) => a.name.localeCompare(b.name));
-                data.forEach(prov => {
-                    let opt = document.createElement("option");
-                    opt.value = prov.id;
-                    opt.textContent = prov.name;
-                    selectProv.appendChild(opt);
+            selectJenis.addEventListener("change", (e) => {
+                const targetValue = e.target.value;
+                formDetailIds.forEach(id => {
+                    document.getElementById(id).classList.add("hidden");
                 });
-            })
-            .catch(err => {
-                console.error("Error Provinsi:", err);
+                if (targetValue) {
+                    const selectedForm = document.getElementById(`form-${targetValue}`);
+                    if (selectedForm) selectedForm.classList.remove("hidden");
+                }
             });
 
-        // Event Provinsi -> Kabupaten
-        selectProv.addEventListener("change", (e) => {
-            const provId = e.target.value;
-            if (selectKab) selectKab.innerHTML = '<option value="">-- Pilih Kabupaten/Kota --</option>';
-            if (selectKec) selectKec.innerHTML = '<option value="">-- Pilih Kecamatan --</option>';
-            if (selectKel) selectKel.innerHTML = '<option value="">-- Pilih Kelurahan/Desa --</option>';
+
+            // ========================================================
+            // C. LOGIKA API WILAYAH CDN GLOBAL (STABIL & DIJAMIN MUNCUL)
+            // ========================================================
+            const baseUrl = "https://cdn.jsdelivr.net/gh/fajarghifar/api-wilayah-indonesia@master/api";
             
-            if (selectKab) selectKab.disabled = true;
-            if (selectKec) selectKec.disabled = true;
-            if (selectKel) selectKel.disabled = true;
+            const selectProv = document.getElementById("provinsi");
+            const selectKab = document.getElementById("kabupaten");
+            const selectKec = document.getElementById("kecamatan");
+            const selectKel = document.getElementById("kelurahan");
 
-            if (provId && selectKab) {
-                fetch(`${baseUrl}/regencies/${provId}.json`)
-                    .then(res => res.json())
-                    .then(data => {
-                        data.sort((a, b) => a.name.localeCompare(b.name));
-                        data.forEach(kab => {
-                            let opt = document.createElement("option");
-                            opt.value = kab.id;
-                            opt.textContent = kab.name;
-                            selectKab.appendChild(opt);
+            // Load Provinsi
+            fetch(`${baseUrl}/provinces.json`)
+                .then(res => res.json())
+                .then(data => {
+                    data.sort((a, b) => a.name.localeCompare(b.name));
+                    data.forEach(prov => {
+                        let opt = document.createElement("option");
+                        opt.value = prov.id;
+                        opt.textContent = prov.name;
+                        selectProv.appendChild(opt);
+                    });
+                }).catch(err => console.error("API Prov Error:", err));
+
+            // Prov -> Kab
+            selectProv.addEventListener("change", (e) => {
+                const provId = e.target.value;
+                selectKab.innerHTML = '<option value="">-- Pilih Kabupaten/Kota --</option>';
+                selectKec.innerHTML = '<option value="">-- Pilih Kecamatan --</option>';
+                selectKel.innerHTML = '<option value="">-- Pilih Kelurahan/Desa --</option>';
+                selectKab.disabled = true; selectKec.disabled = true; selectKel.disabled = true;
+
+                if (provId) {
+                    fetch(`${baseUrl}/regencies/${provId}.json`)
+                        .then(res => res.json())
+                        .then(data => {
+                            data.sort((a, b) => a.name.localeCompare(b.name));
+                            data.forEach(kab => {
+                                let opt = document.createElement("option");
+                                opt.value = kab.id;
+                                opt.textContent = kab.name;
+                                selectKab.appendChild(opt);
+                            });
+                            selectKab.disabled = false;
                         });
-                        selectKab.disabled = false;
-                    })
-                    .catch(err => console.error("Error Kabupaten:", err));
-            }
-        });
+                }
+            });
 
-        // Event Kabupaten -> Kecamatan
-        if (selectKab) {
+            // Kab -> Kec
             selectKab.addEventListener("change", (e) => {
                 const kabId = e.target.value;
-                if (selectKec) selectKec.innerHTML = '<option value="">-- Pilih Kecamatan --</option>';
-                if (selectKel) selectKel.innerHTML = '<option value="">-- Pilih Kelurahan/Desa --</option>';
-                if (selectKec) selectKec.disabled = true;
-                if (selectKel) selectKel.disabled = true;
+                selectKec.innerHTML = '<option value="">-- Pilih Kecamatan --</option>';
+                selectKel.innerHTML = '<option value="">-- Pilih Kelurahan/Desa --</option>';
+                selectKec.disabled = true; selectKel.disabled = true;
 
-                if (kabId && selectKec) {
+                if (kabId) {
                     fetch(`${baseUrl}/districts/${kabId}.json`)
                         .then(res => res.json())
                         .then(data => {
@@ -441,20 +321,17 @@ document.addEventListener("DOMContentLoaded", function () {
                                 selectKec.appendChild(opt);
                             });
                             selectKec.disabled = false;
-                        })
-                        .catch(err => console.error("Error Kecamatan:", err));
+                        });
                 }
             });
-        }
 
-        // Event Kecamatan -> Kelurahan
-        if (selectKec) {
+            // Kec -> Kel
             selectKec.addEventListener("change", (e) => {
                 const kecId = e.target.value;
-                if (selectKel) selectKel.innerHTML = '<option value="">-- Pilih Kelurahan/Desa --</option>';
-                if (selectKel) selectKel.disabled = true;
+                selectKel.innerHTML = '<option value="">-- Pilih Kelurahan/Desa --</option>';
+                selectKel.disabled = true;
 
-                if (kecId && selectKel) {
+                if (kecId) {
                     fetch(`${baseUrl}/villages/${kecId}.json`)
                         .then(res => res.json())
                         .then(data => {
@@ -466,14 +343,10 @@ document.addEventListener("DOMContentLoaded", function () {
                                 selectKel.appendChild(opt);
                             });
                             selectKel.disabled = false;
-                        })
-                        .catch(err => console.error("Error Kelurahan:", err));
+                        });
                 }
             });
-        }
-    }
-});
-</script>
-
+        });
+    </script>
 </body>
 </html>
