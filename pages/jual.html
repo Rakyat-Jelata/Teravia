@@ -1,1 +1,222 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Titip Jual/Sewa Properti - TERAVIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        :root {
+            --primary: #0F172A;
+            --accent: #0EA5E9;
+            --accent-hover: #0284C7;
+            --bg-main: #FAFAFA;
+            --bg-surface: #FFFFFF;
+            --text-main: #0F172A;
+            --text-muted: #64748B;
+            --border-color: #E2E8F0;
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+        body { background-color: #F8FAFC; color: var(--text-main); min-height: 100vh; display: flex; flex-direction: column; }
+        .container { width: 100%; max-width: 1440px; margin: 0 auto; padding: 0 24px; }
+
+        /* NAVBAR STYLING */
+        .navbar { background-color: var(--bg-surface); border-bottom: 1px solid var(--border-color); position: sticky; top: 0; z-index: 1000; padding: 12px 0; }
+        .nav-container { display: flex; justify-content: space-between; align-items: center; position: relative; }
+        .logo-img { height: 40px; width: auto; display: block; }
+        .nav-links { display: flex; list-style: none; gap: 32px; }
+        .nav-links a { text-decoration: none; color: var(--text-muted); font-weight: 500; font-size: 15px; transition: color 0.3s; }
+        .nav-links a:hover, .nav-links a.active { color: var(--accent); }
+        .nav-actions { display: flex; align-items: center; }
+        .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; z-index: 1001; }
+        .hamburger span { display: block; width: 25px; height: 3px; background-color: var(--primary); border-radius: 3px; }
+
+        .btn { padding: 10px 20px; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 14px; cursor: pointer; transition: all 0.3s; }
+        .btn-primary { background-color: var(--accent); color: white; border: none; }
+        .btn-primary:hover { background-color: var(--accent-hover); }
+        .btn-outline { background-color: transparent; color: var(--primary); border: 1px solid var(--border-color); margin-right: 12px; }
+
+        /* JUAL FORM LAYOUT */
+        .jual-wrapper { flex: 1; padding: 40px 16px; display: flex; justify-content: center; align-items: center; }
+        .jual-container { background: var(--bg-surface); border-radius: 24px; padding: 40px; box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.05); width: 100%; max-width: 800px; border: 1px solid var(--border-color); }
+        
+        .jual-header { margin-bottom: 32px; text-align: center; }
+        .jual-header h2 { font-size: 28px; font-weight: 800; margin-bottom: 8px; letter-spacing: -0.5px; }
+        .jual-header p { font-size: 15px; color: var(--text-muted); }
+
+        /* FORM STRUCTURE */
+        .form-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-bottom: 24px; }
+        .form-group { display: flex; flex-direction: column; }
+        .form-group.full-width { grid-column: span 2; }
+        
+        .form-group label { font-size: 11px; font-weight: 700; color: var(--text-muted); text-transform: uppercase; margin-bottom: 8px; letter-spacing: 0.5px; }
+        .form-group input, .form-group select, .form-group textarea { padding: 12px 16px; border: 1px solid var(--border-color); border-radius: 10px; outline: none; font-size: 14px; color: var(--text-main); background-color: #F8FAFC; width: 100%; transition: all 0.3s; }
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus { border-color: var(--accent); background-color: #ffffff; }
+        .form-group textarea { resize: vertical; min-height: 120px; }
+
+        /* UPLOAD ZONE */
+        .upload-zone { border: 2px dashed var(--border-color); padding: 32px; border-radius: 12px; text-align: center; background: #F8FAFC; cursor: pointer; transition: border 0.3s; }
+        .upload-zone:hover { border-color: var(--accent); }
+        .upload-zone i { font-size: 32px; color: var(--text-muted); margin-bottom: 12px; }
+        .upload-zone p { font-size: 14px; color: var(--text-muted); }
+        .upload-zone span { color: var(--accent); font-weight: 600; }
+
+        .btn-submit-properti { background-color: var(--accent); color: white; border: none; padding: 16px; border-radius: 10px; font-weight: 700; font-size: 16px; cursor: pointer; width: 100%; transition: background 0.3s; margin-top: 12px; }
+        .btn-submit-properti:hover { background-color: var(--accent-hover); }
+
+        /* FOOTER */
+        .main-footer { background-color: #0F172A; color: #94A3B8; padding: 40px 0; border-top: 1px solid #1E293B; text-align: center; font-size: 13px; }
+
+        @media (max-width: 768px) {
+            .nav-links, .nav-actions { display: none; }
+            .hamburger { display: flex; }
+            .nav-links.active { display: flex !important; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg-surface); padding: 20px; border-bottom: 1px solid var(--border-color); gap: 16px; }
+            .form-grid { grid-template-columns: 1fr; }
+            .form-group.full-width { grid-column: span 1; }
+            .jual-container { padding: 24px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- NAVBAR ATAS -->
+    <nav class="navbar">
+        <div class="nav-container container">
+            <a href="../index.html">
+                <img src="../assets/img/logo.png" alt="TERAVIA Logo" class="logo-img">
+            </a>
+            <ul class="nav-links" id="navLinks">
+                <li><a href="../index.html">Beranda</a></li>
+                <li><a href="jual.html" class="active">Jual</a></li>
+                <li><a href="beli.html">Beli</a></li>
+                <li><a href="sewa.html">Sewa</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="tentang.html">Tentang Kami</a></li>
+            </ul>
+            <div class="hamburger" id="hamburgerMenu">
+                <span></span><span></span><span></span>
+            </div>
+            <div class="nav-actions">
+                <a href="../register.html" class="btn btn-outline">DAFTAR</a>
+                <a href="../login.html" class="btn btn-primary">MASUK</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- CONTENT FORM JUAL -->
+    <div class="jual-wrapper">
+        <div class="jual-container">
+            <div class="jual-header">
+                <h2>Pasarkan Properti Anda</h2>
+                <p>Isi data di bawah ini dengan lengkap agar properti Anda cepat terjual atau tersewa.</p>
+            </div>
+
+            <form id="jual-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label>Judul Iklan</label>
+                        <input type="text" placeholder="Contoh: Rumah Minimalis 2 Lantai Mewah" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Tipe Aksi</label>
+                        <select required>
+                            <option value="jual">Dijual</option>
+                            <option value="sewa">Disewakan</option>
+                        </select>
+                    </div>
+
+                    <div class="form-grid" style="grid-column: span 2; margin-bottom: 0; padding: 0;">
+                        <div class="form-group">
+                            <label>Jenis Properti</label>
+                            <select required>
+                                <option value="rumah">Rumah</option>
+                                <option value="apartemen">Apartemen</option>
+                                <option value="ruko">Ruko / Rukan</option>
+                                <option value="tanah">Tanah</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Harga (Rupiah)</label>
+                            <input type="number" placeholder="Contoh: 1500000000" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Kota / Wilayah</label>
+                        <input type="text" placeholder="Contoh: Jakarta Selatan" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Alamat Lengkap</label>
+                        <input type="text" placeholder="Nama jalan, nomor rumah, cluster" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Kamar Tidur</label>
+                        <input type="number" placeholder="Jumlah" min="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Kamar Mandi</label>
+                        <input type="number" placeholder="Jumlah" min="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Luas Tanah (m²)</label>
+                        <input type="number" placeholder="Contoh: 120" min="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Luas Bangunan (m²)</label>
+                        <input type="number" placeholder="Contoh: 90" min="0">
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label>Deskripsi Properti</label>
+                        <textarea placeholder="Jelaskan kelebihan properti Anda, fasilitas terdekat, bonus furnitur, dll." required></textarea>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label>Foto Properti</label>
+                        <div class="upload-zone" onclick="document.getElementById('file-input').click()">
+                            <i class="fa-solid fa-cloud-arrow-up"></i>
+                            <p>Tarik foto ke sini atau <span>Pilih File</span></p>
+                            <input type="file" id="file-input" style="display: none;" multiple accept="image/*">
+                        </div>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit-properti">Pasang Iklan Sekarang</button>
+            </form>
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer class="main-footer">
+        <div class="container">
+            © 2026 TERAVIA. Hak Cipta Dilindungi.
+        </div>
+    </footer>
+
+    <script>
+        // Logika Hamburger Menu Mobile
+        const hamburger = document.getElementById('hamburgerMenu');
+        const navLinks = document.getElementById('navLinks');
+        hamburger.addEventListener('click', () => { navLinks.classList.toggle('active'); });
+
+        // Event handler sederhana saat submit form
+        document.getElementById('jual-form').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Terima kasih! Data properti Anda berhasil dikirim dan akan segera divalidasi oleh tim TERAVIA.');
+        });
+    </script>
+</body>
+</html>
 
