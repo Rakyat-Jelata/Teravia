@@ -1,1 +1,637 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasang Iklan Properti - TERAVIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        /* CSS UTAMA UNTUK MENERJEMAHKAN TAILWIND CLASS DI STRUKTUR USER */
+        :root {
+            --emerald-50: #ecfdf5;
+            --emerald-100: #d1fae5;
+            --emerald-500: #10b981;
+            --emerald-600: #059669;
+            --emerald-700: #047857;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --rose-600: #dc2626;
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+        body { background-color: #f8fafc; color: var(--gray-900); padding-bottom: 60px; }
+        
+        /* Utility Classes Simulator Tailwind */
+        .max-w-3xl { max-width: 48rem; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .px-4 { padding-left: 1rem; padding-right: 1rem; }
+        .py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+        .bg-white { background-color: #ffffff; }
+        .p-4 { padding: 1rem; }
+        .p-5 { padding: 1.25rem; }
+        .p-6 { padding: 1.5rem; }
+        .rounded-xl { border-radius: 0.75rem; }
+        .rounded-2xl { border-radius: 1rem; }
+        .shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); }
+        .shadow-lg { box-shadow: 0 10px 15px -3px rgba(4, 120, 87, 0.2); }
+        .border { border: 1px solid var(--gray-200); }
+        .border-gray-100 { border-color: var(--gray-100); }
+        .border-gray-200 { border-color: var(--gray-200); }
+        .text-2xl { font-size: 1.5rem; line-height: 2rem; }
+        .text-sm { font-size: 0.875rem; }
+        .text-xs { font-size: 0.75rem; }
+        .text-\[10px\] { font-size: 10px; }
+        .font-bold { font-weight: 700; }
+        .font-semibold { font-weight: 600; }
+        .text-gray-500 { color: var(--gray-500); }
+        .text-gray-600 { color: var(--gray-600); }
+        .text-gray-700 { color: var(--gray-700); }
+        .text-gray-900 { color: var(--gray-900); }
+        .text-emerald-700 { color: var(--emerald-700); }
+        .text-rose-600 { color: var(--rose-600); }
+        .uppercase { text-transform: uppercase; }
+        .tracking-wider { letter-spacing: 0.05em; }
+        .mb-1 { margin-bottom: 0.25rem; }
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .mt-1 { margin-top: 0.25rem; }
+        .mr-1 { margin-right: 0.25rem; }
+        .w-full { width: 100%; }
+        .space-y-4 > * + * { margin-top: 1rem; }
+        .space-y-6 > * + * { margin-top: 1.5rem; }
+        .space-x-2 > * + * { margin-left: 0.5rem; }
+        
+        /* Grid Layout */
+        .grid { display: grid; }
+        .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+        .gap-2 { gap: 0.5rem; }
+        .gap-3 { gap: 0.75rem; }
+        .gap-4 { gap: 1rem; }
+
+        /* Form Control Core Customization */
+        input[type="text"], input[type="number"], select, textarea {
+            width: 100%; transition: all 0.2s ease-in-out;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--emerald-600) !important;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+        }
+        .file\:mr-4::-webkit-file-upload-button { margin-right: 1rem; padding: 0.625rem 1rem; border-radius: 0.75rem; border: 0; font-size: 0.75rem; font-weight: 700; background-color: var(--emerald-50); color: var(--emerald-700); cursor: pointer; transition: background 0.2s; }
+        .file\:mr-4:hover::-webkit-file-upload-button { background-color: var(--emerald-100); }
+        
+        /* Relative Price Container */
+        .relative { position: relative; }
+        .absolute { position: absolute; }
+        .left-4 { left: 1rem; }
+        .pl-12 { padding-left: 3rem; }
+
+        /* Logic display classes */
+        .hidden { display: none !important; }
+        .opacity-50 { opacity: 0.5; }
+        .pointer-events-none { pointer-events: none; }
+        .flex { display: flex; }
+        .items-center { align-items: center; }
+
+        @media (min-width: 640px) {
+            .sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .sm\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        }
+        @media (min-width: 768px) {
+            .md\:p-8 { padding: 2rem; }
+            .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ========================================== -->
+    <!-- 3. HALAMAN 2: PASANG IKLAN                 -->
+    <!-- ========================================== -->
+    <div id="page-pasang-iklan" class="page">
+        <section class="max-w-3xl mx-auto px-4 py-12">
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-md border border-gray-100">
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">Pasang Iklan Properti</h2>
+                <p class="text-sm text-gray-500 mb-6">Isi detail properti Anda dengan lengkap dan benar.</p>
+                
+                <form id="property-form" class="space-y-6" onsubmit="event.preventDefault();">
+                    <!-- Judul Properti -->
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Judul / Nama Properti *</label>
+                        <input type="text" placeholder="Contoh: Gedung RS Medika Penjaringan Siap Operasi" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-emerald-600 text-sm" required>
+                    </div>
+
+                    <!-- Upload Gambar -->
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Pilih Gambar Properti (Maks 10 Gambar, Maks 1MB/gambar) *</label>
+                        <input type="file" id="image-upload" multiple accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer" required>
+                        <p id="upload-error" class="text-xs text-rose-600 mt-1 hidden">Ukuran file atau jumlah file melebihi batas ketentuan!</p>
+                    </div>
+
+                    <!-- Grid Jenis Properti & Status -->
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Jenis Properti *</label>
+                            <select id="jenis-properti" class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-emerald-600 text-sm bg-white" required>
+                                <option value="">-- Pilih Jenis Properti --</option>
+                                <option value="Tanah">Tanah</option>
+                                <option value="Rumah">Rumah</option>
+                                <option value="Kebun">Kebun</option>
+                                <option value="Sawah">Sawah</option>
+                                <option value="Villa">Villa</option>
+                                <option value="Hotel">Hotel</option>
+                                <option value="Gedung Perkantoran">Gedung Perkantoran</option>
+                                <option value="Rumah Sakit">Rumah Sakit</option>
+                                <option value="Sekolah">Sekolah</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Status Iklan *</label>
+                            <select class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-emerald-600 text-sm bg-white" required>
+                                <option value="Dijual">Dijual</option>
+                                <option value="Disewa">Disewa</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <!-- DETAIL KONDISIONAL -->
+                    <!-- 1. Detail Rumah Sakit -->
+                    <div id="form-rs" class="hidden bg-gray-50 p-5 rounded-2xl border border-gray-200 space-y-4">
+                        <h4 class="text-xs font-bold text-emerald-700 uppercase tracking-wider"><i class="fa-solid fa-hospital mr-1"></i> Detail Spesifikasi Rumah Sakit</h4>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Luas Tanah (m²)</label>
+                                <input type="number" placeholder="m²" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Luas Gedung (m²)</label>
+                                <input type="number" placeholder="m²" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Tipe RS</label>
+                                <select class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
+                                    <option value="Type A">Type A</option>
+                                    <option value="Type B">Type B</option>
+                                    <option value="Type C">Type C</option>
+                                    <option value="Type D">Type D</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Kamar VIP (Unit)</label>
+                                <input type="number" placeholder="0" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Kamar Kelas 1</label>
+                                <input type="number" placeholder="0" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Kamar Kelas 2</label>
+                                <input type="number" placeholder="0" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Kamar Kelas 3</label>
+                                <input type="number" placeholder="0" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Jumlah Ruangan</label>
+                                <input type="number" placeholder="Total" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Jumlah Toilet</label>
+                                <input type="number" placeholder="0" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Jumlah Lift</label>
+                                <input type="number" placeholder="0" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Kapasitas Pasien</label>
+                                <input type="number" placeholder="Bed" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Parkir Mobil (Unit)</label>
+                                <input type="number" placeholder="Kapasitas" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 2. Detail Hotel -->
+                    <div id="form-hotel" class="hidden bg-gray-50 p-5 rounded-2xl border border-gray-200 space-y-4">
+                        <h4 class="text-xs font-bold text-emerald-700 uppercase tracking-wider"><i class="fa-solid fa-hotel mr-1"></i> Detail Spesifikasi Hotel</h4>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Jumlah Lantai</label>
+                                <input type="number" placeholder="0" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Total Kamar</label>
+                                <input type="number" placeholder="0" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Bintang Hotel</label>
+                                <select class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
+                                    <option value="Non Bintang">Non Bintang / Losmen</option>
+                                    <option value="Bintang 1">Bintang 1</option>
+                                    <option value="Bintang 2">Bintang 2</option>
+                                    <option value="Bintang 3">Bintang 3</option>
+                                    <option value="Bintang 4">Bintang 4</option>
+                                    <option value="Bintang 5">Bintang 5</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Tipe Kamar yang Tersedia</label>
+                            <input type="text" placeholder="Contoh: Standard, Deluxe, Suite, Presidential" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-600 uppercase mb-2">Fasilitas Hotel</label>
+                            <div class="grid grid-cols-2 gap-2 text-xs text-gray-700">
+                                <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Swimming Pool</span></label>
+                                <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Pusat Kebugaran / Gym</span></label>
+                                <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Kids Playground</span></label>
+                                <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Restaurant / Cafe</span></label>
+                                <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Ballroom / Meeting Room</span></label>
+                                <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Spa & Wellness</span></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 3. Detail Gedung Perkantoran -->
+                    <div id="form-perkantoran" class="hidden bg-gray-50 p-5 rounded-2xl border border-gray-200 space-y-4">
+                        <h4 class="text-xs font-bold text-emerald-700 uppercase tracking-wider"><i class="fa-solid fa-building mr-1"></i> Detail Gedung Perkantoran</h4>
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Jumlah Lantai</label>
+                                <input type="number" placeholder="0" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Jumlah Lift (Unit)</label>
+                                <input type="number" placeholder="0" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Kapasitas Parkir</label>
+                                <input type="number" placeholder="Mobil" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-600 uppercase mb-2">Fasilitas Gedung & Keamanan</label>
+                            <div class="grid grid-cols-2 gap-2 text-xs text-gray-700">
+                                <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Sistem Keamanan 24 Jam</span></label>
+                                <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Fire Fighting System</span></label>
+                                <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Fiber Optic Ready</span></label>
+                                <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Helipad</span></label>
+                                <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Kantin / Food Court</span></label>
+                                <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Generator Cadangan (Genset)</span></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- 4. Detail Tanah / Sawah / Kebun -->
+                    <div id="form-tanah" class="hidden bg-gray-50 p-4 rounded-xl border border-gray-100 grid grid-cols-3 gap-3">
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Luas Tanah (m²)</label>
+                            <input type="number" placeholder="m²" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Panjang (m)</label>
+                            <input type="number" placeholder="m" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Lebar (m)</label>
+                            <input type="number" placeholder="m" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
+                        </div>
+                    </div>
+
+                    <!-- 5. Detail Rumah / Villa / Sekolah -->
+                    <div id="form-rumah" class="hidden bg-gray-50 p-4 rounded-xl border border-gray-100 space-y-4">
+                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Luas Tanah (m²)</label>
+                                <input type="number" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Luas Bangunan (m²)</label>
+                                <input type="number" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Jumlah Lantai</label>
+                                <input type="number" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Kamar Tidur</label>
+                                <input type="number" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Kamar Mandi</label>
+                                <input type="number" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Kapasitas Listrik</label>
+                                <select class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
+                                    <option value="450VA">450VA</option>
+                                    <option value="900VA">900VA</option>
+                                    <option value="1300VA">1300VA</option>
+                                    <option value="2200VA">2200VA</option>
+                                    <option value="3500VA">3500VA</option>
+                                    <option value="4400VA">4400VA</option>
+                                    <option value="5500VA">5500VA</option>
+                                    <option value="11000VA">11000VA</option>
+                                    <option value="Lebih dari 11000VA">Lebih dari 11000VA</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="border-t border-gray-200 pt-3">
+                            <label class="flex items-center space-x-2 cursor-pointer">
+                                <input type="checkbox" id="check-garasi" class="rounded text-emerald-600 focus:ring-emerald-500 w-4 h-4">
+                                <span class="text-xs font-bold text-gray-700 uppercase">Apakah ada garasi mobil?</span>
+                            </label>
+                            <div id="input-garasi" class="hidden mt-2 max-w-[200px]">
+                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Kapasitas Mobil (Unit)</label>
+                                <input type="number" placeholder="0" class="w-full p-2 border border-gray-200 rounded-lg text-sm bg-white">
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- LEGALITAS & SISTEM PENDUKUNG -->
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Legalitas Properti *</label>
+                            <select class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-emerald-600 text-sm bg-white" required>
+                                <option value="SHM">SHM (Sertifikat Hak Milik)</option>
+                                <option value="SHGB">SHGB (Sertifikat Hak Guna Bangunan)</option>
+                                <option value="AJB">AJB (Akta Jual Beli)</option>
+                                <option value="GIRIK">GIRIK</option>
+                                <option value="VERPONDING">VERPONDING</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Sistem AC</label>
+                            <select class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-white text-sm">
+                                <option value="Central">Central / Sentral</option>
+                                <option value="Split">Split Wall</option>
+                                <option value="Chiller">Chiller / VRV</option>
+                                <option value="Tidak Ada">Tidak Ada</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Sertifikat Kelayakan (SLF)</label>
+                            <select class="w-full px-4 py-3 border border-gray-200 rounded-xl bg-white text-sm">
+                                <option value="Ada">Ada (Sudah Terbit)</option>
+                                <option value="Tidak Ada">Tidak Ada / Proses</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Bisa KPR / Pembiayaan Bank? *</label>
+                        <select class="w-full px-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-emerald-600 text-sm bg-white" required>
+                            <option value="IYA">IYA</option>
+                            <option value="TIDAK">TIDAK</option>
+                        </select>
+                    </div>
+
+                    <!-- WILAYAH -->
+                    <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200 space-y-4">
+                        <h3 class="text-xs font-bold text-gray-800 uppercase tracking-wider"><i class="fa-solid fa-map-location-dot mr-1"></i> Penempatan Wilayah Properti</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-500 mb-1">Provinsi</label>
+                                <select id="provinsi" class="w-full p-3 border border-gray-200 rounded-xl text-sm bg-white focus:border-emerald-600 cursor-pointer" required>
+                                    <option value="">-- PILIH PROVINSI --</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-500 mb-1">Kabupaten / Kota</label>
+                                <select id="kabupaten" class="w-full p-3 border border-gray-200 rounded-xl text-sm bg-white focus:border-emerald-600 opacity-50 pointer-events-none" required>
+                                    <option value="">-- PILIH KABUPATEN / KOTA --</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-500 mb-1">Kecamatan</label>
+                                <select id="kecamatan" class="w-full p-3 border border-gray-200 rounded-xl text-sm bg-white focus:border-emerald-600 opacity-50 pointer-events-none" required>
+                                    <option value="">-- PILIH KECAMATAN --</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-500 mb-1">Kelurahan / Desa</label>
+                                <select id="kelurahan" class="w-full p-3 border border-gray-200 rounded-xl text-sm bg-white focus:border-emerald-600 opacity-50 pointer-events-none" required>
+                                    <option value="">-- PILIH KELURAHAN --</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Masukkan Detail Alamat</label>
+                            <textarea rows="2" placeholder="Nama Jalan, Nomor Rumah, RT/RW, Kompleks..." class="w-full p-3 border border-gray-200 rounded-xl text-sm bg-white focus:outline-none focus:border-emerald-600" required></textarea>
+                        </div>
+                    </div>
+
+                    <!-- Harga & Deskripsi -->
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Harga Properti *</label>
+                        <div class="relative flex items-center">
+                            <span class="absolute left-4 font-bold text-sm text-gray-500">Rp</span>
+                            <input type="text" id="input-harga" placeholder="0" class="w-full pl-12 pr-4 py-3 border border-gray-200 rounded-xl focus:outline-none focus:border-emerald-600 text-sm font-semibold" required>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Deskripsi Properti *</label>
+                        <textarea rows="4" placeholder="Jelaskan kelebihan strategis, akses jalan tol, kondisi bangunan, izin operasional dsb..." class="w-full p-4 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-emerald-600" required></textarea>
+                    </div>
+
+                    <button type="submit" class="w-full bg-emerald-600 text-white font-bold py-3.5 rounded-xl hover:bg-emerald-700 transition shadow-lg uppercase tracking-wider text-sm cursor-pointer">
+                        Publikasikan Properti
+                    </button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <!-- LOGIKA JAVASCRIPT & INTEGRASI API WILAYAH -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            // 1. KONDISIONAL FORM SESUAI JENIS PROPERTI
+            const jenisPropertiSelect = document.getElementById('jenis-properti');
+            const formRs = document.getElementById('form-rs');
+            const formHotel = document.getElementById('form-hotel');
+            const formPerkantoran = document.getElementById('form-perkantoran');
+            const formTanah = document.getElementById('form-tanah');
+            const formRumah = document.getElementById('form-rumah');
+
+            function hideAllConditionalForms() {
+                formRs.classList.add('hidden');
+                formHotel.classList.add('hidden');
+                formPerkantoran.classList.add('hidden');
+                formTanah.classList.add('hidden');
+                formRumah.classList.add('hidden');
+            }
+
+            jenisPropertiSelect.addEventListener('change', function () {
+                hideAllConditionalForms();
+                const val = this.value;
+                if (val === 'Rumah Sakit') formRs.classList.remove('hidden');
+                else if (val === 'Hotel') formHotel.classList.remove('hidden');
+                else if (val === 'Gedung Perkantoran') formPerkantoran.classList.remove('hidden');
+                else if (val === 'Tanah' || val === 'Kebun' || val === 'Sawah') formTanah.classList.remove('hidden');
+                else if (val === 'Rumah' || val === 'Villa' || val === 'Sekolah') formRumah.classList.remove('hidden');
+            });
+
+            // 2. CHECKBOX GARASI CONTROLLER
+            const checkGarasi = document.getElementById('check-garasi');
+            const inputGarasi = document.getElementById('input-garasi');
+            checkGarasi.addEventListener('change', function() {
+                if(this.checked) inputGarasi.classList.remove('hidden');
+                else inputGarasi.classList.add('hidden');
+            });
+
+            // 3. VALIDASI INPUT FILE GAMBAR (Maks 10 files & 1MB/file)
+            const imageUpload = document.getElementById('image-upload');
+            const uploadError = document.getElementById('upload-error');
+
+            imageUpload.addEventListener('change', function () {
+                uploadError.classList.add('hidden');
+                const files = this.files;
+                if (files.length > 10) {
+                    uploadError.textContent = "Maksimal hanya boleh mengunggah 10 gambar!";
+                    uploadError.classList.remove('hidden');
+                    this.value = ""; 
+                    return;
+                }
+                for (let i = 0; i < files.length; i++) {
+                    if (files[i].size > 1024 * 1024) { // 1MB
+                        uploadError.textContent = `File "${files[i].name}" melebihi ukuran 1MB!`;
+                        uploadError.classList.remove('hidden');
+                        this.value = "";
+                        return;
+                    }
+                }
+            });
+
+            // 4. AUTO FORMAT RUPIAH SEPARATOR TITIK
+            const inputHarga = document.getElementById('input-harga');
+            inputHarga.addEventListener('input', function () {
+                let value = this.value.replace(/[^,\d]/g, '').toString();
+                let split = value.split(',');
+                let sisa = split[0].length % 3;
+                let rupiah = split[0].substr(0, sisa);
+                let ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+                if (ribuan) {
+                    let separator = sisa ? '.' : '';
+                    rupiah += separator + ribuan.join('.');
+                }
+                rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+                this.value = rupiah;
+            });
+
+            // 5. INTEGRASI API WILAYAH INDONESIA
+            const provSelect = document.getElementById('provinsi');
+            const kabSelect = document.getElementById('kabupaten');
+            const kecSelect = document.getElementById('kecamatan');
+            const kelSelect = document.getElementById('kelurahan');
+
+            const baseUrl = 'https://regions-api.gofir.co/api';
+
+            // Fetch Semua Provinsi saat halaman load
+            fetch(`${baseUrl}/provinces`)
+                .then(res => res.json())
+                .then(response => {
+                    provSelect.innerHTML = '<option value="">-- PILIH PROVINSI --</option>';
+                    // API mengembalikan data dalam response.data atau langsung array
+                    const provinces = response.data || response;
+                    provinces.forEach(p => {
+                        provSelect.innerHTML += `<option value="${p.id}">${p.name}</option>`;
+                    });
+                }).catch(err => console.error("Gagal load data provinsi:", err));
+
+            function toggleSelectState(element, dataExists) {
+                if (dataExists) {
+                    element.classList.remove('opacity-50', 'pointer-events-none');
+                } else {
+                    element.classList.add('opacity-50', 'pointer-events-none');
+                }
+            }
+
+            // On Change Provinsi -> Load Kabupaten
+            provSelect.addEventListener('change', function () {
+                const provId = this.value;
+                kabSelect.innerHTML = '<option value="">-- PILIH KABUPATEN / KOTA --</option>';
+                kecSelect.innerHTML = '<option value="">-- PILIH KECAMATAN --</option>';
+                kelSelect.innerHTML = '<option value="">-- PILIH KELURAHAN --</option>';
+                toggleSelectState(kabSelect, false);
+                toggleSelectState(kecSelect, false);
+                toggleSelectState(kelSelect, false);
+
+                if (!provId) return;
+
+                fetch(`${baseUrl}/regencies?province_id=${provId}`)
+                    .then(res => res.json())
+                    .then(response => {
+                        const regencies = response.data || response;
+                        regencies.forEach(k => {
+                            kabSelect.innerHTML += `<option value="${k.id}">${k.name}</option>`;
+                        });
+                        toggleSelectState(kabSelect, true);
+                    }).catch(err => console.error("Gagal load kabupaten:", err));
+            });
+
+            // On Change Kabupaten -> Load Kecamatan
+            kabSelect.addEventListener('change', function () {
+                const regencyId = this.value;
+                kecSelect.innerHTML = '<option value="">-- PILIH KECAMATAN --</option>';
+                kelSelect.innerHTML = '<option value="">-- PILIH KELURAHAN --</option>';
+                toggleSelectState(kecSelect, false);
+                toggleSelectState(kelSelect, false);
+
+                if (!regencyId) return;
+
+                fetch(`${baseUrl}/districts?regency_id=${regencyId}`)
+                    .then(res => res.json())
+                    .then(response => {
+                        const districts = response.data || response;
+                        districts.forEach(k => {
+                            kecSelect.innerHTML += `<option value="${k.id}">${k.name}</option>`;
+                        });
+                        toggleSelectState(kecSelect, true);
+                    }).catch(err => console.error("Gagal load kecamatan:", err));
+            });
+
+            // On Change Kecamatan -> Load Kelurahan
+            kecSelect.addEventListener('change', function () {
+                const districtId = this.value;
+                kelSelect.innerHTML = '<option value="">-- PILIH KELURAHAN --</option>';
+                toggleSelectState(kelSelect, false);
+
+                if (!districtId) return;
+
+                fetch(`${baseUrl}/villages?district_id=${districtId}`)
+                    .then(res => res.json())
+                    .then(response => {
+                        const villages = response.data || response;
+                        villages.forEach(k => {
+                            kelSelect.innerHTML += `<option value="${k.id}">${k.name}</option>`;
+                        });
+                        toggleSelectState(kelSelect, true);
+                    }).catch(err => console.error("Gagal load kelurahan:", err));
+            });
+
+            // 6. EVENT FORM SUBMIT
+            document.getElementById('property-form').addEventListener('submit', function(e) {
+                alert("Iklan Properti Anda sukses masuk ke antrean validasi TERAVIA!");
+            });
+        });
+    </script>
+</body>
+</html>
 
