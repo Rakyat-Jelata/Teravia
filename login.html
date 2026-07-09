@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Masuk ke Akun Anda - TERAVIA</title>
+    <title>Masuk ke Akun Anda - TERAVIA Premium</title>
     
+    <!-- Google Fonts Premium & Font Awesome Icon Pack -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
@@ -14,12 +15,10 @@
             --primary: #0F172A;
             --primary-light: #1E293B;
             --accent: #0EA5E9;
-            --accent-hover: #0284C7;
-            --bg-main: #FAFAFA;
-            --bg-surface: #FFFFFF;
-            --text-main: #0F172A;
-            --text-muted: #64748B;
-            --border-color: #E2E8F0;
+            --accent-glow: rgba(14, 165, 233, 0.15);
+            --bg-dark: #090D16;
+            --text-muted: #94A3B8;
+            --border-glass: rgba(255, 255, 255, 0.08);
             --font-sans: 'Plus Jakarta Sans', sans-serif;
         }
 
@@ -32,230 +31,304 @@
         }
 
         body {
-            background-color: var(--bg-surface);
-            color: var(--text-main);
+            background-color: var(--bg-dark);
+            color: #F8FAFC;
             overflow: hidden;
             height: 100vh;
-        }
-
-        /* SPLIT LAYOUT CONTAINER */
-        .auth-container {
-            display: grid;
-            grid-template-columns: 1fr 1.1fr;
-            height: 100vh;
-            width: 100%;
-        }
-
-        /* KIRI: FORM SECTION */
-        .auth-form-side {
             display: flex;
-            flex-direction: column;
+            align-items: center;
             justify-content: center;
-            padding: 60px 80px;
-            background-color: var(--bg-surface);
             position: relative;
         }
-        .back-to-home {
+
+        /* AMBIENT GLOW BACKDROP (Bikin Efek Cahaya di Belakang Layar) */
+        body::before {
+            content: '';
             position: absolute;
-            top: 40px;
-            left: 80px;
+            width: 450px;
+            height: 450px;
+            background: radial-gradient(circle, var(--accent) 0%, transparent 70%);
+            top: -150px;
+            left: -150px;
+            opacity: 0.3;
+            z-index: 0;
+        }
+        body::after {
+            content: '';
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, #3B82F6 0%, transparent 70%);
+            bottom: -200px;
+            right: -200px;
+            opacity: 0.25;
+            z-index: 0;
+        }
+
+        /* MAIN WRAPPER: KANVAS SINEMATIK */
+        .auth-viewport {
+            position: relative;
+            z-index: 10;
+            width: 100%;
+            max-width: 1200px;
+            height: 85vh;
+            max-height: 800px;
+            background: rgba(15, 23, 42, 0.4);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+            border: 1px solid var(--border-glass);
+            border-radius: 24px;
+            display: grid;
+            grid-template-columns: 1fr 1.2fr;
+            overflow: hidden;
+            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.5);
+        }
+
+        /* SISI KIRI: FORM GLASSMORPHISM */
+        .auth-form-container {
+            padding: 50px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .back-link {
             color: var(--text-muted);
             text-decoration: none;
-            font-size: 14px;
+            font-size: 13px;
             font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 6px;
             transition: color 0.3s;
         }
-        .back-to-home:hover { color: var(--accent); }
+        .back-link:hover { color: #FFF; }
 
-        .form-wrapper {
+        .form-scaffold {
             width: 100%;
-            max-width: 400px;
-            margin: 0 auto;
+            max-width: 360px;
+            margin: auto 0;
         }
-        .auth-logo {
-            height: 44px;
+
+        .brand-identity {
+            height: 38px;
             width: auto;
-            margin-bottom: 40px;
-            display: block;
+            margin-bottom: 24px;
         }
-        .auth-header h1 {
-            font-size: 32px;
+
+        .welcome-title {
+            font-size: 28px;
             font-weight: 800;
             letter-spacing: -0.5px;
-            margin-bottom: 8px;
-            color: var(--primary);
+            color: #FFF;
+            margin-bottom: 6px;
         }
-        .auth-header p {
+
+        .welcome-desc {
+            font-size: 14px;
             color: var(--text-muted);
-            font-size: 15px;
             margin-bottom: 32px;
         }
 
-        /* INPUT STYLING */
-        .input-group {
+        /* FLOATING FIELDS (Modern Input) */
+        .field-box {
             margin-bottom: 20px;
-            position: relative;
         }
-        .input-group label {
+        .field-box label {
             display: block;
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 700;
-            color: var(--primary);
+            color: var(--text-muted);
             text-transform: uppercase;
             margin-bottom: 8px;
-            letter-spacing: 0.5px;
+            letter-spacing: 0.8px;
         }
-        .input-group input {
+        .input-control {
             width: 100%;
             padding: 14px 16px;
-            border: 1px solid var(--border-color);
-            border-radius: 10px;
-            outline: none;
+            background: rgba(30, 41, 59, 0.5);
+            border: 1px solid var(--border-glass);
+            border-radius: 12px;
+            color: #FFF;
             font-size: 14px;
-            background-color: #F8FAFC;
-            transition: all 0.3s;
+            outline: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
         }
-        .input-group input:focus {
+        .input-control:focus {
             border-color: var(--accent);
-            background-color: #FFFFFF;
-            box-shadow: 0 0 0 4px rgba(14, 165, 233, 0.1);
+            background: rgba(30, 41, 59, 0.8);
+            box-shadow: 0 0 15px var(--accent-glow);
         }
-        
-        .form-options {
+
+        .utility-row {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            font-size: 14px;
-            margin-bottom: 32px;
+            font-size: 13px;
+            margin-bottom: 28px;
         }
-        .remember-me {
+        .check-container {
             display: flex;
             align-items: center;
             gap: 8px;
             color: var(--text-muted);
             cursor: pointer;
         }
-        .remember-me input { cursor: pointer; }
-        .forgot-pass {
+        .check-container input {
+            accent-color: var(--accent);
+            cursor: pointer;
+        }
+        .lost-pass {
             color: var(--accent);
             text-decoration: none;
             font-weight: 600;
         }
-        .forgot-pass:hover { text-decoration: underline; }
+        .lost-pass:hover { text-decoration: underline; }
 
-        .btn-auth {
+        /* PREMIUM BUTTON WITH GLOW EFFECT */
+        .btn-submit-premium {
             width: 100%;
-            background-color: var(--accent);
-            color: white;
-            border: none;
             padding: 14px;
-            border-radius: 10px;
+            background: linear-gradient(135deg, var(--accent) 0%, #0284C7 100%);
+            border: none;
+            border-radius: 12px;
+            color: white;
             font-size: 15px;
             font-weight: 700;
             cursor: pointer;
-            transition: background 0.3s, transform 0.1s;
+            box-shadow: 0 4px 20px rgba(14, 165, 233, 0.3);
+            transition: all 0.3s;
         }
-        .btn-auth:hover { background-color: var(--accent-hover); }
-        .btn-auth:active { transform: scale(0.98); }
+        .btn-submit-premium:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(14, 165, 233, 0.5);
+        }
+        .btn-submit-premium:active { transform: translateY(0); }
 
-        .auth-footer {
-            text-align: center;
-            margin-top: 32px;
-            font-size: 14px;
+        .footer-switch {
+            font-size: 13px;
             color: var(--text-muted);
+            margin-top: 24px;
         }
-        .auth-footer a {
+        .footer-switch a {
             color: var(--accent);
             text-decoration: none;
             font-weight: 700;
         }
-        .auth-footer a:hover { text-decoration: underline; }
 
-        /* KANAN: VISUAL HERO SIDE */
-        .auth-visual-side {
-            background: linear-gradient(rgba(15, 23, 42, 0.6), rgba(30, 41, 59, 0.8)), url('./assets/img/hero-bg.png');
+        /* SISI KANAN: LIVE CINEMATIC WALLPAPER */
+        .auth-visual-scenery {
+            background: linear-gradient(to right, var(--bg-dark), transparent 30%), 
+                        linear-gradient(rgba(9, 13, 22, 0.2), rgba(9, 13, 22, 0.7)), 
+                        url('./assets/img/hero-bg.png');
             background-size: cover;
             background-position: center;
             display: flex;
             flex-direction: column;
             justify-content: flex-end;
-            padding: 80px;
-            color: white;
+            padding: 60px;
+            position: relative;
         }
-        .visual-caption {
-            max-width: 500px;
+
+        /* OVERLAY GRADIENT MODERN */
+        .visual-glass-card {
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            padding: 32px;
+            border-radius: 16px;
+            max-width: 460px;
+            transform: translateY(0);
+            animation: floatingCard 6s ease-in-out infinite;
         }
-        .visual-caption h2 {
-            font-size: 36px;
+
+        .visual-glass-card h2 {
+            font-size: 26px;
             font-weight: 800;
-            line-height: 1.2;
-            margin-bottom: 16px;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+            line-height: 1.3;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #FFF 0%, #94A3B8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
         }
-        .visual-caption p {
-            color: #E2E8F0;
-            font-size: 16px;
-            line-height: 1.5;
-            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+
+        .visual-glass-card p {
+            color: #CBD5E1;
+            font-size: 14px;
+            line-height: 1.6;
+        }
+
+        /* ANIMATION KEYFRAMES */
+        @keyframes floatingCard {
+            0% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+            100% { transform: translateY(0px); }
         }
 
         /* ==========================================
-           RESPONSIVE REWIRING (MOBILE OPTIMIZED)
+           RESPONSIVE REWIRING (MOBILE)
            ========================================== */
-        @media (max-width: 1024px) {
-            .auth-container { grid-template-columns: 1fr; }
-            .auth-visual-side { display: none; } /* Sembunyikan sisi gambar di HP agar fokus ke form */
-            .auth-form-side { padding: 40px 24px; }
-            .back-to-home { top: 24px; left: 24px; }
+        @media (max-width: 968px) {
+            body { padding: 16px; overflow: auto; height: auto; }
+            .auth-viewport { grid-template-columns: 1fr; height: auto; max-height: none; border-radius: 20px; }
+            .auth-visual-scenery { display: none; }
+            .auth-form-container { padding: 40px 24px; }
+            .form-scaffold { max-width: 100%; margin: 40px 0; }
         }
     </style>
 </head>
 <body>
 
-    <div class="auth-container">
+    <!-- KANVAS UTAMA -->
+    <div class="auth-viewport">
         
-        <main class="auth-form-side">
-            <a href="index.html" class="back-to-home">← Kembali ke Beranda</a>
+        <!-- SEKTOR KIRI: INTERFAK LOGIN -->
+        <main class="auth-form-container">
+            <a href="index.html" class="back-link">← Beranda</a>
 
-            <div class="form-wrapper">
-                <img src="./assets/img/logo.png" alt="TERAVIA Logo" class="auth-logo">
+            <div class="form-scaffold">
+                <img src="./assets/img/logo.png" alt="TERAVIA Premium" class="brand-identity">
+                
+                <h1 class="welcome-title">Masuk Akun</h1>
+                <p class="welcome-desc">Akses ekosistem properti terenkripsi teraman.</p>
 
-                <div class="auth-header">
-                    <h1>Selamat Datang</h1>
-                    <p>Masuk untuk mengelola dan mencari properti impian Anda.</p>
-                </div>
-
-                <form id="login-form" action="#" method="POST">
-                    <div class="input-group">
-                        <label for="email">Alamat Email</label>
-                        <input type="email" id="email" name="email" placeholder="nama@email.com" required autocomplete="email">
+                <form id="premium-login-form" action="#" method="POST">
+                    <div class="field-box">
+                        <label for="email">Email Komersial</label>
+                        <input type="email" id="email" class="input-control" placeholder="nama@perusahaan.com" required>
                     </div>
 
-                    <div class="input-group">
+                    <div class="field-box">
                         <label for="password">Kata Sandi</label>
-                        <input type="password" id="password" name="password" placeholder="••••••••" required>
+                        <input type="password" id="password" class="input-control" placeholder="••••••••" required>
                     </div>
 
-                    <div class="form-options">
-                        <label class="remember-me">
-                            <input type="checkbox" name="remember"> Ingat Saya
+                    <div class="utility-row">
+                        <label class="check-container">
+                            <input type="checkbox"> Sesi Tetap Aktif
                         </label>
-                        <a href="#" class="forgot-pass">Lupa Sandi?</a>
+                        <a href="#" class="lost-pass">Lupa Sandi?</a>
                     </div>
 
-                    <button type="submit" class="btn-auth">MASUK SEKARANG</button>
+                    <button type="submit" class="btn-submit-premium">AKSES AKUN SAYA</button>
                 </form>
 
-                <div class="auth-footer">
-                    <p>Belum punya akun? <a href="register.html">Daftar Sekarang</a></p>
+                <div class="footer-switch">
+                    <p>Baru di platform kami? <a href="register.html">Mulai Berinvestasi</a></p>
                 </div>
             </div>
+
+            <!-- Teks kecil bawah form untuk penambah aura premium -->
+            <span style="font-size: 11px; color: rgba(148, 163, 184, 0.4);">Keamanan Terproteksi TLS &bull; &copy; 2026</span>
         </main>
 
-        <section class="auth-visual-side">
-            <div class="visual-caption">
-                <h2>Langkah Awal Menuju Hunian Masa Depan.</h2>
-                <p>Bergabunglah bersama ribuan investor dan pemilik rumah yang telah mempercayakan transaksi properti mereka di platform TERAVIA.</p>
+        <!-- SEKTOR KANAN: SINEMATIK BACKDROP DENGAN KARTU MELAYANG -->
+        <section class="auth-visual-scenery">
+            <div class="visual-glass-card">
+                <h2>Gerbang Efisiensi Transaksi Properti Anda.</h2>
+                <p>Pantau fluktuasi pasar, kelola portofolio listing, dan hubungi jaringan agen terverifikasi langsung dari satu dasbor enkripsi.</p>
             </div>
         </section>
 
@@ -263,4 +336,3 @@
 
 </body>
 </html>
-
