@@ -1,184 +1,220 @@
-<!DOCTYPE html>
-<html lang="id">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pasang Iklan Properti - TERAVIA</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-</head>
-<body class="bg-slate-50 text-slate-800 font-sans">
-
-    <nav class="bg-white border-b border-slate-200 sticky top-0 z-50">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex justify-between h-16">
-                <div class="flex items-center">
-                    <a href="index.html" class="text-2xl font-bold text-blue-600 tracking-wide">TERAVIA</a>
-                </div>
-                <div class="hidden md:flex items-center space-x-6">
-                    <a href="index.html" class="text-slate-600 hover:text-blue-600 font-medium">Beranda</a>
-                    <a href="properti.html" class="text-slate-600 hover:text-blue-600 font-medium">Properti</a>
-                    <a href="blog.html" class="text-slate-600 hover:text-blue-600 font-medium">Blog</a>
-                    <a href="tentang.html" class="text-slate-600 hover:text-blue-600 font-medium">Tentang</a>
-                    <a href="pasang-iklan.html" class="border border-blue-600 text-blue-600 px-4 py-2 rounded-lg text-sm font-semibold bg-blue-50">Pasang Iklan</a>
-                    <a href="login.html" class="bg-blue-600 text-white px-4 py-2 rounded-lg text-sm font-semibold hover:bg-blue-700">Masuk</a>
-                </div>
-                <div class="flex items-center md:hidden">
-                    <button id="btn-hamburger" class="text-slate-600 hover:text-slate-900 focus:outline-none p-2">
-                        <i class="fa-solid fa-bars text-2xl"></i>
-                    </button>
-                </div>
-            </div>
-        </div>
-        <div id="mobile-menu" class="hidden md:hidden bg-white border-t border-slate-200 px-4 pt-2 pb-4 space-y-2 shadow-lg">
-            <a href="index.html" class="block text-slate-600 hover:text-blue-600 py-2 font-medium">Beranda</a>
-            <a href="properti.html" class="block text-slate-600 hover:text-blue-600 py-2 font-medium">Properti</a>
-            <a href="blog.html" class="block text-slate-600 hover:text-blue-600 py-2 font-medium">Blog</a>
-            <a href="tentang.html" class="block text-slate-600 hover:text-blue-600 py-2 font-medium">Tentang</a>
-            <a href="pasang-iklan.html" class="block border border-blue-600 text-blue-600 text-center py-2 rounded-lg font-medium bg-blue-50">Pasang Iklan</a>
-            <a href="login.html" class="block bg-blue-600 text-white text-center py-2 rounded-lg font-medium hover:bg-blue-700">Masuk</a>
-        </div>
-    </nav>
-
-    <div class="max-w-3xl mx-auto px-4 py-10">
-        <div class="bg-white p-6 sm:p-8 rounded-2xl border border-slate-200 shadow-sm space-y-6">
-            <div>
-                <h2 class="text-2xl font-bold text-slate-900">Formulir Pasang Iklan</h2>
-                <p class="text-sm text-slate-500">Lengkapi data properti Anda dengan benar.</p>
-            </div>
-
-            <form id="form-pasang-iklan" class="space-y-5" onsubmit="return false;">
-                
-                <div>
-                    <label class="block text-xs font-bold text-slate-600 uppercase mb-2">Judul Iklan</label>
-                    <input type="text" placeholder="Contoh: Rumah Minimalis Modern Dekat Stasiun KRL" class="w-full p-3 border border-slate-200 rounded-lg text-sm bg-white focus:outline-none focus:border-blue-500" required>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-bold text-slate-600 uppercase mb-2">Status Listing</label>
-                    <select class="w-full p-3 border border-slate-200 rounded-lg text-sm bg-white focus:outline-none focus:border-blue-500">
-                        <option value="Dijual">Dijual</option>
-                        <option value="Disewakan">Disewakan</option>
-                    </select>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-bold text-slate-600 uppercase mb-2">Jenis Properti</label>
-                    <select id="select-jenis" class="w-full p-3 border border-slate-200 rounded-lg text-sm bg-white focus:outline-none focus:border-blue-500">
-                        <option value="">-- Pilih Jenis Properti --</option>
-                        <option value="rumah">Rumah / Villa</option>
-                        <option value="tanah">Tanah / Sawah / Kebun</option>
-                        <option value="hotel">Hotel</option>
-                        <option value="perkantoran">Gedung Perkantoran</option>
-                        <option value="rs">Rumah Sakit</option>
-                    </select>
-                </div>
-
-                <div id="form-rs" class="hidden bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-4">
-                    <h4 class="text-xs font-bold text-emerald-700 uppercase tracking-wider"><i class="fa-solid fa-hospital mr-1"></i> Detail Spesifikasi Rumah Sakit</h4>
-                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Luas Tanah (m²)</label>
-                            <input type="number" placeholder="m²" class="w-full p-2.5 border border-slate-200 rounded-lg text-sm bg-white">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Luas Gedung (m²)</label>
-                            <input type="number" placeholder="m²" class="w-full p-2.5 border border-slate-200 rounded-lg text-sm bg-white">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Tipe RS</label>
-                            <select class="w-full p-2.5 border border-slate-200 rounded-lg text-sm bg-white">
-                                <option value="Type A">Type A</option>
-                                <option value="Type B">Type B</option>
-                                <option value="Type C">Type C</option>
-                                <option value="Type D">Type D</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <div id="form-hotel" class="hidden bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-4">
-                    <h4 class="text-xs font-bold text-emerald-700 uppercase tracking-wider"><i class="fa-solid fa-hotel mr-1"></i> Detail Spesifikasi Hotel</h4>
-                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Jumlah Lantai</label>
-                            <input type="number" placeholder="0" class="w-full p-2.5 border border-slate-200 rounded-lg text-sm bg-white">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Total Kamar</label>
-                            <input type="number" placeholder="0" class="w-full p-2.5 border border-slate-200 rounded-lg text-sm bg-white">
-                        </div>
-                    </div>
-                </div>
-
-                <div id="form-perkantoran" class="hidden bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-4">
-                    <h4 class="text-xs font-bold text-emerald-700 uppercase tracking-wider"><i class="fa-solid fa-building mr-1"></i> Detail Gedung Perkantoran</h4>
-                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Jumlah Lantai</label>
-                            <input type="number" placeholder="0" class="w-full p-2.5 border border-slate-200 rounded-lg text-sm bg-white">
-                        </div>
-                    </div>
-                </div>
-
-                <div id="form-tanah" class="hidden bg-slate-50 p-5 rounded-2xl border border-slate-200 grid grid-cols-3 gap-3">
-                    <div>
-                        <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Luas Tanah (m²)</label>
-                        <input type="number" placeholder="m²" class="w-full p-2.5 border border-slate-200 rounded-lg text-sm bg-white">
-                    </div>
-                </div>
-
-                <div id="form-rumah" class="hidden bg-slate-50 p-5 rounded-2xl border border-slate-200 space-y-4">
-                    <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Luas Tanah (m²)</label>
-                            <input type="number" class="w-full p-2.5 border border-slate-200 rounded-lg text-sm bg-white">
-                        </div>
-                    </div>
-                </div>
-
-                <div>
-                    <label class="block text-xs font-bold text-slate-600 uppercase mb-2">Harga (Rp)</label>
-                    <input type="number" placeholder="Contoh: 500000000" class="w-full p-3 border border-slate-200 rounded-lg text-sm bg-white focus:outline-none focus:border-blue-500" required>
-                </div>
-
-                <div class="bg-blue-50/50 p-5 rounded-2xl border border-blue-100 space-y-4">
-                    <h4 class="text-xs font-bold text-blue-800 uppercase tracking-wider"><i class="fa-solid fa-map-location-dot mr-1"></i> Penentuan Lokasi Properti</h4>
-                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Provinsi</label>
-                            <select id="provinsi" class="w-full p-2.5 border border-slate-200 rounded-lg text-sm bg-white focus:outline-none focus:border-blue-500" required>
-                                <option value="">-- Pilih Provinsi --</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Kabupaten / Kota</label>
-                            <select id="kabupaten" class="w-full p-2.5 border border-slate-200 rounded-lg text-sm bg-white focus:outline-none focus:border-blue-500" disabled required>
-                                <option value="">-- Pilih Kabupaten/Kota --</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Kecamatan</label>
-                            <select id="kecamatan" class="w-full p-2.5 border border-slate-200 rounded-lg text-sm bg-white focus:outline-none focus:border-blue-500" disabled required>
-                                <option value="">-- Pilih Kecamatan --</option>
-                            </select>
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-bold text-slate-600 uppercase mb-1">Kelurahan / Desa</label>
-                            <select id="kelurahan" class="w-full p-2.5 border border-slate-200 rounded-lg text-sm bg-white focus:outline-none focus:border-blue-500" disabled required>
-                                <option value="">-- Pilih Kelurahan/Desa --</option>
-                            </select>
-                        </div>
-                    </div>
-                </div>
-
-                <button type="submit" class="w-full bg-blue-600 text-white p-4 rounded-xl font-bold text-sm shadow-md hover:bg-blue-700">
-                    Tayangkan Iklan
-                </button>
-            </form>
-        </div>
+<div class="pasang-iklan-wrapper container">
+    <div class="page-header">
+        <h1>Pasang Iklan Properti</h1>
+        <p>Isi data properti Anda dengan lengkap untuk menarik minat calon pembeli dan penyewa.</p>
     </div>
 
-    <script src="pasang-iklan.js"></script>
-</body>
-</html>
+    <form id="form-pasang-iklan" class="form-iklan-grid">
+        
+        <section class="form-section card">
+            <h2 class="section-title">1. Informasi Listing</h2>
+            
+            <div class="form-group-row">
+                <div class="form-item">
+                    <label>Status Listing <span class="required">*</span></label>
+                    <select name="status_listing" id="status-listing" required>
+                        <option value="">Pilih Status</option>
+                        <option value="dijual">Dijual</option>
+                        <option value="disewakan">Disewakan</option>
+                        <option value="dijual_disewakan">Dijual & Disewakan</option>
+                        <option value="oper_alih">Oper Alih</option>
+                        <option value="lelang">Lelang</option>
+                    </select>
+                </div>
+                
+                <div class="form-item">
+                    <label>Kategori Properti <span class="required">*</span></label>
+                    <select name="kategori_properti" id="kategori-properti" required>
+                        <option value="">Pilih Kategori</option>
+                        <option value="hunian">Hunian</option>
+                        <option value="komersial">Komersial</option>
+                        <option value="tanah_lahan">Tanah & Lahan</option>
+                        <option value="institusi_fasilitas">Institusi & Fasilitas</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-item id-jenis-wrapper">
+                <label>Jenis Properti <span class="required">*</span></label>
+                <select name="jenis_properti" id="jenis-properti" required disabled>
+                    <option value="">Pilih Kategori Terlebih Dahulu</option>
+                </select>
+            </div>
+
+            <div class="form-item hidden" id="jenis-lainnya-wrapper">
+                <label>Sebutkan Jenis Properti <span class="required">*</span></label>
+                <input type="text" name="jenis_properti_lainnya" id="jenis-properti-lainnya" placeholder="Misal: Sarang Burung Walet, Kuburan Komersial">
+            </div>
+        </section>
+
+        <section class="form-section card">
+            <h2 class="section-title">2. Informasi Properti</h2>
+            <div class="form-item">
+                <label>Judul Iklan <span class="required">*</span></label>
+                <input type="text" name="judul_iklan" placeholder="Contoh: Rumah Minimalis Modern 2 Lantai Dekat Stasiun" maxlength="100" required>
+                <small class="input-tip">Tulis judul yang menarik, singkat, dan jelas (Maks. 100 karakter).</small>
+            </div>
+            <div class="form-item">
+                <label>Deskripsi Properti <span class="required">*</span></label>
+                <textarea name="deskripsi_properti" rows="6" placeholder="Ceritakan keunggulan properti Anda, akses jalan, fasilitas terdekat, kondisi bangunan, dll." required></textarea>
+            </div>
+        </section>
+
+        <section class="form-section card">
+            <h2 class="section-title">3. Harga</h2>
+            <div class="form-group-row">
+                <div class="form-item">
+                    <label>Harga Jual (Rp)</label>
+                    <input type="text" id="harga-jual" name="harga_jual" placeholder="Contoh: 1.000.000.000" class="input-rupiah">
+                </div>
+                <div class="form-item">
+                    <label>Harga Sewa (Rp / Tahun)</label>
+                    <input type="text" id="harga-sewa" name="harga_sewa" placeholder="Contoh: 50.000.000" class="input-rupiah">
+                </div>
+            </div>
+            <div class="form-checkbox-group">
+                <label class="checkbox-label"><input type="checkbox" name="bisa_nego"> Bisa Nego</label>
+                <label class="checkbox-label"><input type="checkbox" name="bisa_kpr"> Bisa KPR</label>
+                <label class="checkbox-label"><input type="checkbox" name="cicilan_developer"> Cicilan Developer</label>
+            </div>
+        </section>
+
+        <section class="form-section card">
+            <h2 class="section-title">4. Legalitas</h2>
+            <div class="form-group-row">
+                <div class="form-item">
+                    <label>Sertifikat <span class="required">*</span></label>
+                    <select name="sertifikat" required>
+                        <option value="">Pilih Jenis Sertifikat</option>
+                        <option value="SHM">SHM (Sertifikat Hak Milik)</option>
+                        <option value="SHGB">SHGB (Sertifikat Hak Guna Bangunan)</option>
+                        <option value="AJB">AJB (Akta Jual Beli)</option>
+                        <option value="Girik">Girik</option>
+                        <option value="LetterC">Letter C</option>
+                        <option value="HGU">HGU (Hak Guna Usaha)</option>
+                        <option value="HakPakai">Hak Pakai</option>
+                        <option value="Lainnya">Lainnya</option>
+                    </select>
+                </div>
+                <div class="form-item">
+                    <label>IMB / PBG</label>
+                    <select name="imb_pbg">
+                        <option value="ada">Ada</option>
+                        <option value="tidak_ada">Tidak Ada</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group-row">
+                <div class="form-item">
+                    <label>Status Pajak (PBB)</label>
+                    <select name="status_pbb">
+                        <option value="lunas">Lunas (Taat Pajak)</option>
+                        <option value="tunggakan">Ada Tunggakan</option>
+                    </select>
+                </div>
+                <div class="form-item">
+                    <label>Upload Dokumen Pendukung</label>
+                    <input type="file" name="dokumen_legalitas" accept=".pdf,.jpg,.jpeg,.png">
+                    <small class="input-tip">Opsional: Upload SHM/AJB untuk proses verifikasi prioritas.</small>
+                </div>
+            </div>
+        </section>
+
+        <section class="form-section card">
+            <h2 class="section-title">5. Lokasi</h2>
+            <div class="form-grid-3">
+                <div class="form-item">
+                    <label>Provinsi <span class="required">*</span></label>
+                    <select name="provinsi" id="loc-provinsi" required>
+                        <option value="">Pilih Provinsi</option>
+                    </select>
+                </div>
+                <div class="form-item">
+                    <label>Kabupaten / Kota <span class="required">*</span></label>
+                    <select name="kabupaten" id="loc-kabupaten" required disabled>
+                        <option value="">Pilih Kota/Kab</option>
+                    </select>
+                </div>
+                <div class="form-item">
+                    <label>Kecamatan <span class="required">*</span></label>
+                    <select name="kecamatan" id="loc-kecamatan" required disabled>
+                        <option value="">Pilih Kecamatan</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group-row">
+                <div class="form-item" style="flex: 2;">
+                    <label>Alamat Lengkap <span class="required">*</span></label>
+                    <input type="text" name="alamat_lengkap" placeholder="Nama jalan, RT/RW, nomor rumah..." required>
+                </div>
+                <div class="form-item" style="flex: 1;">
+                    <label>Kode Pos <span class="required">*</span></label>
+                    <input type="number" name="kode_pos" placeholder="Contoh: 12345" required>
+                </div>
+            </div>
+            
+            <div class="form-item">
+                <label>Google Maps Picker</label>
+                <div class="maps-mock-container">
+                    <div class="maps-indicator">📌 Mode Peta Terintegrasi - Koordinat Siap Ditangkap</div>
+                </div>
+            </div>
+        </section>
+
+        <section class="form-section card">
+            <h2 class="section-title">6. Detail Spesifikasi Properti</h2>
+            <div id="dynamic-spec-container">
+                <p class="spec-notice">Silakan tentukan Kategori dan Jenis Properti terlebih dahulu untuk memuat formulir spesifikasi spesifik secara otomatis.</p>
+            </div>
+        </section>
+
+        <section class="form-section card">
+            <h2 class="section-title">7. Media</h2>
+            <div class="form-item">
+                <label>Foto Properti <span class="required">*</span></label>
+                <div class="upload-drag-zone" id="drop-zone">
+                    <p>Geser & Lepaskan Foto ke Sini atau <span class="highlight">Pilih File</span></p>
+                    <small>Minimal 5 foto, maksimal 20 foto. Format JPG/PNG. Foto pertama otomatis jadi Thumbnail.</small>
+                    <input type="file" id="media-photos-input" multiple accept="image/*" class="hidden">
+                </div>
+                <div class="photo-preview-grid" id="preview-grid"></div>
+            </div>
+            <div class="form-group-row">
+                <div class="form-item">
+                    <label>Link Video YouTube</label>
+                    <input type="url" name="link_youtube" placeholder="https://youtube.com/watch?v=...">
+                </div>
+                <div class="form-item">
+                    <label>Link Virtual Tour 360°</label>
+                    <input type="url" name="link_virtual_360" placeholder="https://my.matterport.com/show/?m=...">
+                </div>
+            </div>
+        </section>
+
+        <section class="form-section card">
+            <h2 class="section-title">8. Kontak Penanggung Jawab</h2>
+            <div class="form-grid-3">
+                <div class="form-item">
+                    <label>Nama Kontak <span class="required">*</span></label>
+                    <input type="text" name="kontak_nama" placeholder="Masukkan nama kontak" required>
+                </div>
+                <div class="form-item">
+                    <label>WhatsApp <span class="required">*</span></label>
+                    <input type="tel" name="kontak_whatsapp" placeholder="Contoh: 0812345678" required>
+                </div>
+                <div class="form-item">
+                    <label>Email Kontak <span class="required">*</span></label>
+                    <input type="email" name="kontak_email" placeholder="email@anda.com" required>
+                </div>
+            </div>
+            <div class="form-checkbox-group">
+                <label class="checkbox-label"><input type="checkbox" name="show_hp" checked> Tampilkan Nomor HP di Halaman Iklan</label>
+            </div>
+        </section>
+
+        <div class="form-submit-actions">
+            <button type="submit" class="btn btn-primary btn-large">Tayangkan Iklan Sekarang</button>
+        </div>
+    </form>
+                        </div>
+                
