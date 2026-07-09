@@ -1,0 +1,490 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cari Properti Dijual - TERAVIA</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary: #0F172A;
+            --primary-light: #1E293B;
+            --accent: #0EA5E9;
+            --accent-hover: #0284C7;
+            --success: #10B981;
+            --bg-main: #FAFAFA;
+            --bg-surface: #FFFFFF;
+            --text-main: #0F172A;
+            --text-muted: #64748B;
+            --border-color: #E2E8F0;
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: var(--font-sans);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-main);
+            overflow-x: hidden;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1440px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* NAVBAR STYLING (Sama dengan Index) */
+        .navbar {
+            background-color: var(--bg-surface);
+            border-bottom: 1px solid var(--border-color);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 12px 0;
+        }
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .logo-img {
+            height: 40px;
+            width: auto;
+            display: block;
+        }
+        .nav-links { 
+            display: flex; 
+            list-style: none; 
+            gap: 32px; 
+        }
+        .nav-links a { 
+            text-decoration: none; 
+            color: var(--text-muted); 
+            font-weight: 500; 
+            font-size: 15px; 
+            transition: color 0.3s; 
+        }
+        .nav-links a:hover, .nav-links a.active { 
+            color: var(--accent); 
+        }
+        .nav-actions { display: flex; align-items: center; }
+        
+        .btn { padding: 10px 20px; border-radius: 8px; font-weight: 600; text-decoration: none; font-size: 14px; cursor: pointer; transition: all 0.3s; }
+        .btn-primary { background-color: var(--accent); color: white; border: none; }
+        .btn-primary:hover { background-color: var(--accent-hover); }
+        .btn-outline { background-color: transparent; color: var(--primary); border: 1px solid var(--border-color); margin-right: 12px; }
+        .btn-outline:hover { background-color: #f8fafc; }
+
+        .menu-toggle {
+            display: none;
+            flex-direction: column;
+            gap: 6px;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 4px;
+            z-index: 1001;
+        }
+        .menu-toggle span {
+            display: block;
+            width: 26px;
+            height: 3px;
+            background-color: var(--primary);
+            border-radius: 2px;
+            transition: all 0.3s ease;
+        }
+        .mobile-only { display: none; }
+
+        /* ==========================================
+           MAIN CATALOG LAYOUT (SIDEBAR + GRID)
+           ========================================== */
+        .catalog-section {
+            padding: 40px 0 80px 0;
+        }
+        .catalog-header {
+            margin-bottom: 24px;
+        }
+        .catalog-header h1 {
+            font-size: 28px;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 8px;
+        }
+        .catalog-header p {
+            color: var(--text-muted);
+            font-size: 15px;
+        }
+
+        .catalog-wrapper {
+            display: grid;
+            grid-template-columns: 280px 1fr;
+            gap: 32px;
+            align-items: start;
+        }
+
+        /* FILTER SIDEBAR */
+        .filter-sidebar {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            position: sticky;
+            top: 85px;
+        }
+        .filter-group {
+            margin-bottom: 20px;
+        }
+        .filter-group:last-child {
+            margin-bottom: 0;
+        }
+        .filter-group label {
+            display: block;
+            font-size: 12px;
+            font-weight: 700;
+            color: var(--primary);
+            text-transform: uppercase;
+            margin-bottom: 8px;
+            letter-spacing: 0.5px;
+        }
+        .filter-group select, .filter-group input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid var(--border-color);
+            border-radius: 6px;
+            background-color: #F8FAFC;
+            outline: none;
+            font-size: 14px;
+        }
+        .btn-filter {
+            width: 100%;
+            background-color: var(--primary);
+            color: white;
+            border: none;
+            padding: 12px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-size: 14px;
+        }
+        .btn-filter:hover { background-color: var(--primary-light); }
+
+        /* PROPERTY GRID */
+        .property-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 24px;
+        }
+
+        /* CARD STYLING */
+        .property-card {
+            background-color: var(--bg-surface);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.02);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+        .property-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.05);
+        }
+        .card-image-box {
+            position: relative;
+            height: 200px;
+            background-color: #E2E8F0; /* Fallback warna jika gambar eror */
+        }
+        .card-image-box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .badge-status {
+            position: absolute;
+            top: 12px;
+            left: 12px;
+            background-color: var(--success);
+            color: white;
+            font-size: 11px;
+            font-weight: 700;
+            padding: 4px 10px;
+            border-radius: 4px;
+            text-transform: uppercase;
+        }
+        .card-content {
+            padding: 20px;
+        }
+        .pro-price {
+            font-size: 20px;
+            font-weight: 800;
+            color: var(--accent);
+            margin-bottom: 6px;
+        }
+        .pro-title {
+            font-size: 16px;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 8px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .pro-location {
+            font-size: 13px;
+            color: var(--text-muted);
+            margin-bottom: 16px;
+        }
+        .pro-specs {
+            display: flex;
+            gap: 16px;
+            border-top: 1px solid var(--border-color);
+            padding-top: 14px;
+            font-size: 12px;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        .pro-specs span b { color: var(--primary); }
+
+        /* FOOTER */
+        .main-footer { background-color: #0F172A; color: #94A3B8; padding: 60px 0 30px 0; border-top: 1px solid #1E293B; }
+        .footer-container { display: flex; justify-content: space-between; gap: 48px; flex-wrap: wrap; }
+        .footer-brand { max-width: 400px; }
+        .footer-brand p { font-size: 14px; line-height: 1.6; margin-top: 16px; }
+        .footer-links-group { display: flex; gap: 80px; }
+        .footer-col h3 { color: white; font-size: 15px; margin-bottom: 20px; font-weight: 600; text-transform: uppercase; }
+        .footer-col ul { list-style: none; }
+        .footer-col ul li { margin-bottom: 12px; }
+        .footer-col ul li a { color: #94A3B8; text-decoration: none; font-size: 14px; }
+        .footer-bottom { border-top: 1px solid #1E293B; margin-top: 40px; padding-top: 22px; text-align: center; font-size: 13px; }
+
+        /* ==========================================
+           RESPONSIVE REWIRING (MOBILE OPTIMIZED)
+           ========================================== */
+        @media (max-width: 1024px) {
+            .property-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+        
+        @media (max-width: 768px) {
+            .menu-toggle { display: flex; }
+            .nav-actions { display: none; }
+            .mobile-only { display: block; }
+            .nav-links {
+                display: flex;
+                flex-direction: column;
+                position: fixed;
+                top: 65px;
+                right: -100%;
+                width: 75%;
+                height: calc(100vh - 65px);
+                background-color: var(--bg-surface);
+                box-shadow: -10px 10px 20px rgba(0,0,0,0.05);
+                padding: 40px 24px;
+                gap: 24px;
+                transition: right 0.4s ease;
+                z-index: 999;
+                border-left: 1px solid var(--border-color);
+            }
+            .nav-links.active { right: 0; }
+            .menu-toggle.active span:nth-child(1) { transform: translateY(9px) rotate(45deg); }
+            .menu-toggle.active span:nth-child(2) { opacity: 0; }
+            .menu-toggle.active span:nth-child(3) { transform: translateY(-9px) rotate(-45deg); }
+
+            /* Catalog Mobile Adaption */
+            .catalog-wrapper { grid-template-columns: 1fr; gap: 24px; }
+            .filter-sidebar { position: static; padding: 18px; }
+            .property-grid { grid-template-columns: 1fr; gap: 20px; }
+            .catalog-header h1 { font-size: 24px; }
+            
+            .footer-container { flex-direction: column; gap: 32px; }
+            .footer-links-group { grid-template-columns: 1fr; gap: 24px; width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-container container">
+            <a href="../index.html">
+                <img src="../assets/img/logo.png" alt="TERAVIA Logo" class="logo-img">
+            </a>
+            
+            <button class="menu-toggle" id="mobile-menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <ul class="nav-links" id="nav-menu">
+                <li><a href="../index.html">Beranda</a></li>
+                <li><a href="jual.html">Jual</a></li>
+                <li><a href="beli.html" class="active">Beli</a></li>
+                <li><a href="sewa.html">Sewa</a></li>
+                <li><a href="blog.html">Blog</a></li>
+                <li><a href="tentang.html">Tentang Kami</a></li>
+                <li class="mobile-only"><a href="../login.html">Masuk</a></li>
+                <li class="mobile-only"><a href="../register.html" style="color: var(--accent);">Daftar</a></li>
+            </ul>
+
+            <div class="nav-actions">
+                <a href="../register.html" class="btn btn-outline">DAFTAR</a>
+                <a href="../login.html" class="btn btn-primary">MASUK</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="catalog-section container">
+        <div class="catalog-header">
+            <h1>Rekomendasi Properti Dijual</h1>
+            <p>Menampilkan properti terbaik bersertifikat aman di seluruh Indonesia.</p>
+        </div>
+
+        <div class="catalog-wrapper">
+            <aside class="filter-sidebar">
+                <form id="filter-form">
+                    <div class="filter-group">
+                        <label>Lokasi</label>
+                        <input type="text" placeholder="Kota atau wilayah...">
+                    </div>
+                    <div class="filter-group">
+                        <label>Jenis Properti</label>
+                        <select>
+                            <option value="">Semua Jenis</option>
+                            <option value="rumah">Rumah</option>
+                            <option value="apartemen">Apartemen</option>
+                            <option value="ruko">Ruko</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Harga Minimum</label>
+                        <select>
+                            <option value="">Rp 0</option>
+                            <option value="500000000">500 Juta</option>
+                            <option value="1000000000">1 Miliar</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label>Harga Maksimum</label>
+                        <select>
+                            <option value="">Semua Harga</option>
+                            <option value="1000000000">1 Miliar</option>
+                            <option value="2000000000">2 Miliar</option>
+                            <option value="5000000000">5 Miliar</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn-filter">Terapkan Filter</button>
+                </form>
+            </aside>
+
+            <section class="property-grid">
+                
+                <article class="property-card">
+                    <div class="card-image-box">
+                        <span class="badge-status">Dijual</span>
+                        <img src="../assets/img/hero-bg.png" alt="Properti">
+                    </div>
+                    <div class="card-content">
+                        <div class="pro-price">Rp 1,45 Miliar</div>
+                        <h2 class="pro-title">Cluster Alexandria Modern House</h2>
+                        <p class="pro-location">BSD City, Tangerang Selatan</p>
+                        <div class="pro-specs">
+                            <span>KT: <b>3</b></span>
+                            <span>KM: <b>2</b></span>
+                            <span>LB: <b>90m²</b></span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="property-card">
+                    <div class="card-image-box">
+                        <span class="badge-status">Dijual</span>
+                        <img src="../assets/img/hero-bg.png" alt="Properti">
+                    </div>
+                    <div class="card-content">
+                        <div class="pro-price">Rp 850 Juta</div>
+                        <h2 class="pro-title">Minimalist Scandinavian Townhouse</h2>
+                        <p class="pro-location">Sleman, Yogyakarta</p>
+                        <div class="pro-specs">
+                            <span>KT: <b>2</b></span>
+                            <span>KM: <b>2</b></span>
+                            <span>LB: <b>70m²</b></span>
+                        </div>
+                    </div>
+                </article>
+
+                <article class="property-card">
+                    <div class="card-image-box">
+                        <span class="badge-status">Dijual</span>
+                        <img src="../assets/img/hero-bg.png" alt="Properti">
+                    </div>
+                    <div class="card-content">
+                        <div class="pro-price">Rp 3,20 Miliar</div>
+                        <h2 class="pro-title">Exclusive Penthouse Suite View</h2>
+                        <p class="pro-location">Sudirman, Jakarta Pusat</p>
+                        <div class="pro-specs">
+                            <span>KT: <b>4</b></span>
+                            <span>KM: <b>3</b></span>
+                            <span>LB: <b>150m²</b></span>
+                        </div>
+                    </div>
+                </article>
+
+            </section>
+        </div>
+    </main>
+
+    <footer class="main-footer">
+        <div class="footer-container container">
+            <div class="footer-brand">
+                <img src="../assets/img/logo.png" alt="TERAVIA Logo" class="logo-img">
+                <p>Platform marketplace properti terbesar dan terpercaya di Indonesia. Menghubungkan pembeli, penjual, dan agen secara profesional.</p>
+            </div>
+            <div class="footer-links-group">
+                <div class="footer-col">
+                    <h3>Properti</h3>
+                    <ul>
+                        <li><a href="#">Rumah Dijual</a></li>
+                        <li><a href="#">Apartemen Disewa</a></li>
+                        <li><a href="#">Ruko Komersial</a></li>
+                    </ul>
+                </div>
+                <div class="footer-col">
+                    <h3>Perusahaan</h3>
+                    <ul>
+                        <li><a href="tentang.html">Tentang Kami</a></li>
+                        <li><a href="blog.html">Blog & Berita</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 TERAVIA. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const menuToggle = document.getElementById("mobile-menu");
+            const navMenu = document.getElementById("nav-menu");
+
+            if (menuToggle && navMenu) {
+                menuToggle.addEventListener("click", () => {
+                    menuToggle.classList.toggle("active");
+                    navMenu.classList.toggle("active");
+                });
+            }
+        });
+    </script>
+</body>
+</html>
