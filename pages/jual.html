@@ -1,0 +1,925 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pasang Iklan Properti - TERAVIA</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    
+    <style>
+        /* CSS UTAMA UNTUK MENERJEMAHKAN TAILWIND CLASS DI STRUKTUR USER */
+        :root {
+            --emerald-50: #ecfdf5;
+            --emerald-100: #d1fae5;
+            --emerald-500: #10b981;
+            --emerald-600: #059669;
+            --emerald-700: #047857;
+            --gray-50: #f9fafb;
+            --gray-100: #f3f4f6;
+            --gray-200: #e5e7eb;
+            --gray-500: #6b7280;
+            --gray-600: #4b5563;
+            --gray-700: #374151;
+            --gray-900: #111827;
+            --rose-600: #dc2626;
+            --font-sans: 'Plus Jakarta Sans', sans-serif;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: var(--font-sans); -webkit-font-smoothing: antialiased; }
+        body { background-color: #f8fafc; color: var(--gray-900); padding-bottom: 60px; }
+        
+        /* Utility Classes Simulator Tailwind */
+        .max-w-3xl { max-width: 48rem; }
+        .mx-auto { margin-left: auto; margin-right: auto; }
+        .px-4 { padding-left: 1rem; padding-right: 1rem; }
+        .py-12 { padding-top: 3rem; padding-bottom: 3rem; }
+        .bg-white { background-color: #ffffff; }
+        .p-4 { padding: 1rem; }
+        .p-5 { padding: 1.25rem; }
+        .p-6 { padding: 1.5rem; }
+        .rounded-xl { border-radius: 0.75rem; }
+        .rounded-2xl { border-radius: 1rem; }
+        .shadow-md { box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -1px rgba(0, 0, 0, 0.03); }
+        .shadow-lg { box-shadow: 0 10px 15px -3px rgba(4, 120, 87, 0.2); }
+        .border { border: 1px solid var(--gray-200); }
+        .border-gray-100 { border-color: var(--gray-100); }
+        .border-gray-200 { border-color: var(--gray-200); }
+        .text-2xl { font-size: 1.5rem; line-height: 2rem; }
+        .text-sm { font-size: 0.875rem; }
+        .text-xs { font-size: 0.75rem; }
+        .text-\[10px\] { font-size: 10px; }
+        .font-bold { font-weight: 700; }
+        .font-semibold { font-weight: 600; }
+        .text-gray-500 { color: var(--gray-500); }
+        .text-gray-600 { color: var(--gray-600); }
+        .text-gray-700 { color: var(--gray-700); }
+        .text-gray-900 { color: var(--gray-900); }
+        .text-emerald-700 { color: var(--emerald-700); }
+        .text-rose-600 { color: var(--rose-600); }
+        .uppercase { text-transform: uppercase; }
+        .tracking-wider { letter-spacing: 0.05em; }
+        .mb-1 { margin-bottom: 0.25rem; }
+        .mb-2 { margin-bottom: 0.5rem; }
+        .mb-4 { margin-bottom: 1rem; }
+        .mb-6 { margin-bottom: 1.5rem; }
+        .mt-1 { margin-top: 0.25rem; }
+        .mr-1 { margin-right: 0.25rem; }
+        .w-full { width: 100%; }
+        .space-y-4 > * + * { margin-top: 1rem; }
+        .space-y-6 > * + * { margin-top: 1.5rem; }
+        .space-x-2 > * + * { margin-left: 0.5rem; }
+        
+        /* Grid Layout */
+        .grid { display: grid; }
+        .grid-cols-1 { grid-template-columns: repeat(1, minmax(0, 1fr)); }
+        .gap-2 { gap: 0.5rem; }
+        .gap-3 { gap: 0.75rem; }
+        .gap-4 { gap: 1rem; }
+
+        /* Form Control Core Customization - TINGGI KOLOM TIDAK MEPET FONT */
+        input[type="text"], input[type="number"], select, textarea {
+            width: 100%; 
+            transition: all 0.2s ease-in-out;
+            padding-top: 0.875rem !important;
+            padding-bottom: 0.875rem !important;
+            line-height: 1.25rem;
+        }
+        input:focus, select:focus, textarea:focus {
+            border-color: var(--emerald-600) !important;
+            box-shadow: 0 0 0 3px rgba(16, 185, 129, 0.15);
+        }
+        .file\:mr-4::-webkit-file-upload-button { margin-right: 1rem; padding: 0.625rem 1rem; border-radius: 0.75rem; border: 0; font-size: 0.75rem; font-weight: 700; background-color: var(--emerald-50); color: var(--emerald-700); cursor: pointer; transition: background 0.2s; }
+        .file\:mr-4:hover::-webkit-file-upload-button { background-color: var(--emerald-100); }
+        
+        /* Input Wrapper Untuk Satuan */
+        .input-with-unit { position: relative; display: flex; align-items: center; }
+        .input-with-unit input { padding-right: 4.5rem !important; }
+        .input-unit-tag { position: absolute; right: 1rem; font-size: 0.75rem; font-weight: 700; color: var(--gray-500); pointer-events: none; text-transform: uppercase; }
+
+        .relative { position: relative; }
+        .absolute { position: absolute; }
+        .left-4 { left: 1rem; }
+        .pl-12 { padding-left: 3rem; }
+
+        /* Logic display classes */
+        .hidden { display: none !important; }
+        .opacity-50 { opacity: 0.5; }
+        .pointer-events-none { pointer-events: none; }
+        .flex { display: flex; }
+        .items-center { align-items: center; }
+
+        /* ANIMASI TRANSISI HALUS UNTUK DETAIL SPESIFIKASI */
+        .dynamic-spec-container {
+            animation: fadeInUp 0.35s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        @keyframes fadeInUp {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* CUSTOM CHECKBOX STYLING */
+        .checkbox-grid label {
+            background-color: #ffffff;
+            border: 1px solid var(--gray-200);
+            padding: 0.75rem 1rem;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+        .checkbox-grid label:hover {
+            border-color: var(--emerald-500);
+            background-color: var(--emerald-50);
+        }
+        .checkbox-grid input[type="checkbox"] {
+            width: 1.125rem;
+            height: 1.125rem;
+            accent-color: var(--emerald-600);
+            cursor: pointer;
+        }
+
+        /* CUSTOM BUTTON STYLING - PREMIUM & ENAK DIPANDANG */
+        .btn-submit-properti {
+            width: 100%;
+            background: linear-gradient(135deg, var(--emerald-600) 0%, var(--emerald-700) 100%);
+            color: #ffffff;
+            font-weight: 700;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.075em;
+            padding: 1rem 1.5rem;
+            border: none;
+            border-radius: 0.875rem;
+            box-shadow: 0 4px 14px 0 rgba(5, 150, 105, 0.35);
+            cursor: pointer;
+            transition: all 0.25s ease-in-out;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+        }
+        .btn-submit-properti:hover {
+            background: linear-gradient(135deg, #05a875 0%, var(--emerald-600) 100%);
+            box-shadow: 0 6px 20px 0 rgba(5, 150, 105, 0.45);
+            transform: translateY(-1px);
+        }
+        .btn-submit-properti:active {
+            transform: translateY(1px);
+            box-shadow: 0 3px 10px 0 rgba(5, 150, 105, 0.3);
+        }
+
+        @media (min-width: 640px) {
+            .sm\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .sm\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            .sm\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+        }
+        @media (min-width: 768px) {
+            .md\:p-8 { padding: 2rem; }
+            .md\:grid-cols-2 { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .md\:grid-cols-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+            .md\:grid-cols-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+        }
+    </style>
+</head>
+<body>
+
+    <div id="page-pasang-iklan" class="page">
+        <section class="max-w-3xl mx-auto px-4 py-12">
+            <div class="bg-white p-6 md:p-8 rounded-2xl shadow-md border border-gray-100">
+                <h2 class="text-2xl font-bold text-gray-900 mb-2">Pasang Iklan Properti</h2>
+                <p class="text-sm text-gray-500 mb-6">Isi detail properti Anda dengan lengkap dan benar.</p>
+                
+                <form id="property-form" class="space-y-6" onsubmit="event.preventDefault();">
+                    
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Status Iklan *</label>
+                        <select id="status-iklan" class="w-full px-4 border border-gray-200 rounded-xl focus:outline-none focus:border-emerald-600 text-sm bg-white" required>
+                            <option value="Dijual">Dijual</option>
+                            <option value="Disewa">Disewa</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Kategori Properti *</label>
+                        <select id="kategori-properti" class="w-full px-4 border border-gray-200 rounded-xl focus:outline-none focus:border-emerald-600 text-sm bg-white" required>
+                            <option value="">-- Pilih Kategori Properti --</option>
+                            <option value="Residensial">Residensial (Hunian)</option>
+                            <option value="Komersial">Komersial (Bisnis & Jasa)</option>
+                            <option value="Industri">Industri & Logistik</option>
+                            <option value="Lahan">Tanah & Lahan</option>
+                            <option value="Fasilitas">Fasilitas Publik / Sosial</option>
+                            <option value="Lainnya">Lainnya</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Jenis Properti *</label>
+                        <select id="jenis-properti" class="w-full px-4 border border-gray-200 rounded-xl focus:outline-none focus:border-emerald-600 text-sm bg-white opacity-50 pointer-events-none" required>
+                            <option value="">-- Pilih Jenis Properti --</option>
+                        </select>
+                    </div>
+
+                    <div id="wrapper-jenis-lainnya" class="hidden">
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Sebutkan Jenis Properti *</label>
+                        <input type="text" id="input-jenis-lainnya" placeholder="Masukkan jenis properti Anda..." class="w-full px-4 border border-gray-200 rounded-xl focus:outline-none focus:border-emerald-600 text-sm">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Judul / Nama Properti *</label>
+                        <input type="text" placeholder="Contoh: Gedung RS Medika Penjaringan Siap Operasi" class="w-full px-4 border border-gray-200 rounded-xl focus:outline-none focus:border-emerald-600 text-sm" required>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Pilih Gambar Properti (Maks 10 Gambar, Maks 1MB/gambar) *</label>
+                        <input type="file" id="image-upload" multiple accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer" required>
+                        <p id="upload-error" class="text-xs text-rose-600 mt-1 hidden">Ukuran file atau jumlah file melebihi batas ketentuan!</p>
+                    </div>
+
+
+                    <div id="dynamic-specifications-panel" class="bg-gray-50 p-5 rounded-2xl border border-gray-200 hidden">
+                        <h4 class="text-xs font-bold text-emerald-700 uppercase tracking-wider mb-4"><i class="fa-solid fa-list-check mr-1"></i> Detail Spesifikasi Properti</h4>
+                        <div id="dynamic-fields-container" class="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                            </div>
+                    </div>
+
+
+                    <div id="dynamic-facilities-panel" class="bg-gray-50 p-5 rounded-2xl border border-gray-200 hidden">
+                        <h4 class="text-xs font-bold text-emerald-700 uppercase tracking-wider mb-4"><i class="fa-solid fa-star mr-1"></i> Fasilitas yang Tersedia</h4>
+                        <div id="facilities-checkbox-container" class="grid grid-cols-2 sm:grid-cols-3 checkbox-grid gap-2">
+                            </div>
+                    </div>
+
+
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Legalitas Properti *</label>
+                            <select class="w-full px-4 border border-gray-200 rounded-xl focus:outline-none focus:border-emerald-600 text-sm bg-white" required>
+                                <option value="SHM">SHM (Sertifikat Hak Milik)</option>
+                                <option value="SHGB">SHGB (Sertifikat Hak Guna Bangunan)</option>
+                                <option value="AJB">AJB (Akta Jual Beli)</option>
+                                <option value="GIRIK">GIRIK</option>
+                                <option value="VERPONDING">VERPONDING</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Sistem AC</label>
+                            <select class="w-full px-4 border border-gray-200 rounded-xl bg-white text-sm">
+                                <option value="Central">Central / Sentral</option>
+                                <option value="Split">Split Wall</option>
+                                <option value="Chiller">Chiller / VRV</option>
+                                <option value="Tidak Ada">Tidak Ada</option>
+                            </select>
+                        </div>
+                        <div>
+                            <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Sertifikat Kelayakan (SLF)</label>
+                            <select class="w-full px-4 border border-gray-200 rounded-xl bg-white text-sm">
+                                <option value="Ada">Ada (Sudah Terbit)</option>
+                                <option value="Tidak Ada">Tidak Ada / Proses</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Bisa KPR / Pembiayaan Bank? *</label>
+                        <select class="w-full px-4 border border-gray-200 rounded-xl focus:outline-none focus:border-emerald-600 text-sm bg-white" required>
+                            <option value="IYA">IYA</option>
+                            <option value="TIDAK">TIDAK</option>
+                        </select>
+                    </div>
+
+                    <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200 space-y-4">
+                        <h3 class="text-xs font-bold text-gray-800 uppercase tracking-wider"><i class="fa-solid fa-map-location-dot mr-1"></i> Penempatan Wilayah Properti</h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-500 mb-1">Provinsi</label>
+                                <select id="provinsi" class="w-full p-3 border border-gray-200 rounded-xl text-sm bg-white focus:border-emerald-600 cursor-pointer" required>
+                                    <option value="">-- PILIH PROVINSI --</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-500 mb-1">Kabupaten / Kota</label>
+                                <select id="kabupaten" class="w-full p-3 border border-gray-200 rounded-xl text-sm bg-white focus:border-emerald-600 opacity-50 pointer-events-none" required>
+                                    <option value="">-- PILIH KABUPATEN / KOTA --</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-500 mb-1">Kecamatan</label>
+                                <select id="kecamatan" class="w-full p-3 border border-gray-200 rounded-xl text-sm bg-white focus:border-emerald-600 opacity-50 pointer-events-none" required>
+                                    <option value="">-- PILIH KECAMATAN --</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-500 mb-1">Kelurahan / Desa</label>
+                                <select id="kelurahan" class="w-full p-3 border border-gray-200 rounded-xl text-sm bg-white focus:border-emerald-600 opacity-50 pointer-events-none" required>
+                                    <option value="">-- PILIH KELURAHAN --</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Masukkan Detail Alamat</label>
+                            <textarea rows="2" placeholder="Nama Jalan, Nomor Rumah, RT/RW, Kompleks..." class="w-full p-3 border border-gray-200 rounded-xl text-sm bg-white focus:outline-none focus:border-emerald-600" required></textarea>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Harga Properti *</label>
+                        <div class="relative flex items-center">
+                            <span class="absolute left-4 font-bold text-sm text-gray-500">Rp</span>
+                            <input type="text" id="input-harga" placeholder="0" class="w-full pl-12 pr-4 border border-gray-200 rounded-xl focus:outline-none focus:border-emerald-600 text-sm font-semibold" required>
+                        </div>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Deskripsi Properti *</label>
+                        <textarea rows="4" placeholder="Jelaskan kelebihan strategis, akses jalan tol, kondisi bangunan, izin operasional dsb..." class="w-full p-4 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-emerald-600" required></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit-properti">
+                        <i class="fa-solid fa-paper-plane"></i> Publikasikan Properti
+                    </button>
+                </form>
+            </div>
+        </section>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            
+            // MAP DATA KATEGORI -> JENIS PROPERTI
+            const categoryMapping = {
+                'Residensial': ['Rumah', 'Apartemen', 'Villa', 'Townhouse / Cluster', 'Kontrakan', 'Kost'],
+                'Komersial': ['Ruko', 'Kios', 'Kantor / Gedung Perkantoran', 'Hotel', 'Resort', 'Restoran / Cafe', 'SPBU', 'Rest Area', 'Klinik'],
+                'Industri': ['Gudang', 'Pabrik', 'Tanah Industri'],
+                'Lahan': ['Tanah', 'Kavling', 'Tanah Komersial', 'Tanah Industri', 'Sawah', 'Kebun', 'Tambak'],
+                'Fasilitas': ['Rumah Sakit', 'Sekolah', 'Kampus']
+            };
+
+            // DATA DEFINISI FIELD SPESIFIKASI UNTUK KE-26 JENIS PROPERTI
+            const propertyFieldsDefinition = {
+                'Rumah': [
+                    { label: 'Luas Tanah', type: 'number', placeholder: 'Contoh: 120', unit: 'm²' },
+                    { label: 'Luas Bangunan', type: 'number', placeholder: 'Contoh: 150', unit: 'm²' },
+                    { label: 'Kamar Tidur', type: 'number', placeholder: '0', unit: 'Kamar' },
+                    { label: 'Kamar Mandi', type: 'number', placeholder: '0', unit: 'Kamar' },
+                    { label: 'Garasi', type: 'number', placeholder: '0', unit: 'Mobil' },
+                    { label: 'Carport', type: 'number', placeholder: '0', unit: 'Mobil' },
+                    { label: 'Jumlah Lantai', type: 'number', placeholder: '1', unit: 'Lantai' },
+                    { label: 'Daya Listrik', type: 'number', placeholder: '2200', unit: 'VA' },
+                    { label: 'Sumber Air', type: 'select', options: ['PDAM', 'Sumur Bor', 'Air Tanah'] },
+                    { label: 'Menghadap', type: 'select', options: ['Utara', 'Selatan', 'Timur', 'Barat'] },
+                    { label: 'Kondisi Bangunan', type: 'select', options: ['Baru', 'Bekas', 'Renovasi'] },
+                    { label: 'Tahun Dibangun', type: 'number', placeholder: 'Contoh: 2022', unit: 'Tahun' }
+                ],
+                'Apartemen': [
+                    { label: 'Luas Unit', type: 'number', placeholder: 'Contoh: 45', unit: 'm²' },
+                    { label: 'Bedroom', type: 'number', placeholder: '0', unit: 'Unit' },
+                    { label: 'Bathroom', type: 'number', placeholder: '0', unit: 'Unit' },
+                    { label: 'Lantai', type: 'number', placeholder: '0', unit: 'Lantai' },
+                    { label: 'Tower', type: 'text', placeholder: 'Contoh: Tower A' },
+                    { label: 'Furnished', type: 'select', options: ['Fully Furnished', 'Semi Furnished', 'Unfurnished'] },
+                    { label: 'Balkon', type: 'select', options: ['Ada', 'Tidak Ada'] },
+                    { label: 'Service Charge', type: 'number', placeholder: '0', unit: 'Rp/Bulan' },
+                    { label: 'Daya Listrik', type: 'number', placeholder: '1300', unit: 'VA' },
+                    { label: 'View', type: 'text', placeholder: 'Contoh: City View, Pool' }
+                ],
+                'Villa': [
+                    { label: 'Luas Tanah', type: 'number', placeholder: 'Contoh: 500', unit: 'm²' },
+                    { label: 'Luas Bangunan', type: 'number', placeholder: 'Contoh: 300', unit: 'm²' },
+                    { label: 'Jumlah Kamar', type: 'number', placeholder: '0', unit: 'Kamar' },
+                    { label: 'Jumlah Kamar Mandi', type: 'number', placeholder: '0', unit: 'Kamar' },
+                    { label: 'Kolam Renang', type: 'select', options: ['Private Pool', 'Public Pool', 'Tidak Ada'] },
+                    { label: 'Taman', type: 'select', options: ['Ada', 'Tidak Ada'] },
+                    { label: 'Garasi', type: 'number', placeholder: '0', unit: 'Mobil' },
+                    { label: 'Carport', type: 'number', placeholder: '0', unit: 'Mobil' },
+                    { label: 'View', type: 'text', placeholder: 'Contoh: Gunung, Sawah, Pantai' },
+                    { label: 'Tahun Dibangun', type: 'number', placeholder: '2020', unit: 'Tahun' }
+                ],
+                'Townhouse / Cluster': [
+                    { label: 'Luas Tanah', type: 'number', placeholder: '90', unit: 'm²' },
+                    { label: 'Luas Bangunan', type: 'number', placeholder: '120', unit: 'm²' },
+                    { label: 'Kamar Tidur', type: 'number', placeholder: '0', unit: 'Kamar' },
+                    { label: 'Kamar Mandi', type: 'number', placeholder: '0', unit: 'Kamar' },
+                    { label: 'Garasi', type: 'number', placeholder: '0', unit: 'Mobil' },
+                    { label: 'Carport', type: 'number', placeholder: '0', unit: 'Mobil' },
+                    { label: 'Jumlah Lantai', type: 'number', placeholder: '2', unit: 'Lantai' },
+                    { label: 'Security 24 Jam', type: 'select', options: ['Ya', 'Tidak'] },
+                    { label: 'IPL', type: 'number', placeholder: '0', unit: 'Rp/Bulan' },
+                    { label: 'Tahun Dibangun', type: 'number', placeholder: '2023', unit: 'Tahun' }
+                ],
+                'Kontrakan': [
+                    { label: 'Jumlah Pintu', type: 'number', placeholder: 'Contoh: 5', unit: 'Pintu' },
+                    { label: 'Luas Tanah', type: 'number', placeholder: '200', unit: 'm²' },
+                    { label: 'Luas Bangunan', type: 'number', placeholder: '150', unit: 'm²' },
+                    { label: 'Kamar Tidur', type: 'number', placeholder: '1', unit: 'per Pintu' },
+                    { label: 'Kamar Mandi', type: 'number', placeholder: '1', unit: 'per Pintu' },
+                    { label: 'Pendapatan per Bulan', type: 'number', placeholder: '0', unit: 'Rp' },
+                    { label: 'Tingkat Hunian', type: 'number', placeholder: '100', unit: '%' }
+                ],
+                'Kost': [
+                    { label: 'Jumlah Kamar', type: 'number', placeholder: '10', unit: 'Kamar' },
+                    { label: 'Kamar Terisi', type: 'number', placeholder: '0', unit: 'Kamar' },
+                    { label: 'Kamar Kosong', type: 'number', placeholder: '0', unit: 'Kamar' },
+                    { label: 'Kamar Mandi', type: 'select', options: ['Kamar Mandi Dalam', 'Kamar Mandi Luar', 'Campuran'] },
+                    { label: 'Pendapatan per Bulan', type: 'number', placeholder: '0', unit: 'Rp' },
+                    { label: 'Fasilitas Kost', type: 'text', placeholder: 'Contoh: AC, Kasur, Wifi' }
+                ],
+                'Ruko': [
+                    { label: 'Luas Tanah', type: 'number', placeholder: '60', unit: 'm²' },
+                    { label: 'Luas Bangunan', type: 'number', placeholder: '120', unit: 'm²' },
+                    { label: 'Jumlah Lantai', type: 'number', placeholder: '2', unit: 'Lantai' },
+                    { label: 'Lebar Muka', type: 'number', placeholder: '4', unit: 'Meter' },
+                    { label: 'Daya Listrik', type: 'number', placeholder: '2200', unit: 'VA' },
+                    { label: 'Parkir', type: 'number', placeholder: '0', unit: 'Mobil' },
+                    { label: 'Kondisi Bangunan', type: 'select', options: ['Siap Pakai', 'Butuh Renovasi', 'Baru'] }
+                ],
+                'Kios': [
+                    { label: 'Luas', type: 'number', placeholder: '12', unit: 'm²' },
+                    { label: 'Lantai', type: 'number', placeholder: '1', unit: 'Lantai Ke' },
+                    { label: 'Parkir', type: 'select', options: ['Fasilitas Bersama', 'Tidak Ada'] },
+                    { label: 'Daya Listrik', type: 'number', placeholder: '1300', unit: 'VA' }
+                ],
+                'Kantor / Gedung Perkantoran': [
+                    { label: 'Luas Tanah', type: 'number', placeholder: '1000', unit: 'm²' },
+                    { label: 'Luas Bangunan', type: 'number', placeholder: '3000', unit: 'm²' },
+                    { label: 'Jumlah Lantai', type: 'number', placeholder: '5', unit: 'Lantai' },
+                    { label: 'Lift', type: 'number', placeholder: '0', unit: 'Unit' },
+                    { label: 'Parkir', type: 'number', placeholder: '0', unit: 'Mobil' },
+                    { label: 'Meeting Room', type: 'number', placeholder: '0', unit: 'Ruangan' },
+                    { label: 'Daya Listrik', type: 'number', placeholder: '0', unit: 'KVA' }
+                ],
+                'Gudang': [
+                    { label: 'Luas Tanah', type: 'number', placeholder: '2000', unit: 'm²' },
+                    { label: 'Luas Gudang', type: 'number', placeholder: '1500', unit: 'm²' },
+                    { label: 'Tinggi Bangunan', type: 'number', placeholder: '9', unit: 'Meter' },
+                    { label: 'Loading Dock', type: 'number', placeholder: '0', unit: 'Unit' },
+                    { label: 'Jalan Kontainer', type: 'select', options: ['40 Feet Ready', '20 Feet Ready', 'Tidak Masuk Kontainer'] },
+                    { label: 'Daya Listrik', type: 'number', placeholder: '0', unit: 'VA' },
+                    { label: 'Office Area', type: 'number', placeholder: '0', unit: 'm²' }
+                ],
+                'Pabrik': [
+                    { label: 'Luas Tanah', type: 'number', placeholder: '5000', unit: 'm²' },
+                    { label: 'Luas Bangunan', type: 'number', placeholder: '3500', unit: 'm²' },
+                    { label: 'Tinggi Bangunan', type: 'number', placeholder: '12', unit: 'Meter' },
+                    { label: 'Loading Dock', type: 'number', placeholder: '0', unit: 'Unit' },
+                    { label: 'Office', type: 'number', placeholder: '0', unit: 'm²' },
+                    { label: 'Daya Listrik', type: 'number', placeholder: '0', unit: 'KVA' },
+                    { label: 'Air Industri', type: 'select', options: ['WTP Kawasan', 'Deep Well', 'PDAM'] },
+                    { label: 'Izin Industri', type: 'select', options: ['Sudah Ada', 'Belum Ada / Proses'] }
+                ],
+                'Hotel': [
+                    { label: 'Luas Tanah', type: 'number', placeholder: '3000', unit: 'm²' },
+                    { label: 'Luas Bangunan', type: 'number', placeholder: '7000', unit: 'm²' },
+                    { label: 'Jumlah Kamar', type: 'number', placeholder: '0', unit: 'Kamar' },
+                    { label: 'Jumlah Lantai', type: 'number', placeholder: '0', unit: 'Lantai' },
+                    { label: 'Tingkat Okupansi', type: 'number', placeholder: '70', unit: '%' },
+                    { label: 'Restoran', type: 'number', placeholder: '0', unit: 'Unit' },
+                    { label: 'Ballroom', type: 'number', placeholder: '0', unit: 'Unit' },
+                    { label: 'Kolam Renang', type: 'number', placeholder: '0', unit: 'Unit' },
+                    { label: 'Lift', type: 'number', placeholder: '0', unit: 'Unit' },
+                    { label: 'Area Parkir', type: 'number', placeholder: '0', unit: 'Mobil' }
+                ],
+                'Resort': [
+                    { label: 'Luas Kawasan', type: 'number', placeholder: '10000', unit: 'm²' },
+                    { label: 'Jumlah Villa', type: 'number', placeholder: '0', unit: 'Unit' },
+                    { label: 'Kolam Renang', type: 'number', placeholder: '0', unit: 'Unit' },
+                    { label: 'Restoran', type: 'number', placeholder: '0', unit: 'Unit' },
+                    { label: 'Pantai / Gunung View', type: 'select', options: ['Pantai', 'Gunung', 'Hutan / Alam'] },
+                    { label: 'Tingkat Okupansi', type: 'number', placeholder: '0', unit: '%' }
+                ],
+                'Restoran / Cafe': [
+                    { label: 'Luas Bangunan', type: 'number', placeholder: '250', unit: 'm²' },
+                    { label: 'Kapasitas Pengunjung', type: 'number', placeholder: '0', unit: 'Orang' },
+                    { label: 'Kitchen', type: 'select', options: ['Siap Pakai', 'Kosongan'] },
+                    { label: 'Parkir', type: 'number', placeholder: '0', unit: 'Mobil' },
+                    { label: 'Furnished', type: 'select', options: ['Fully Furnished', 'Semi Furnished', 'Unfurnished'] }
+                ],
+                'SPBU': [
+                    { label: 'Luas Tanah', type: 'number', placeholder: '1500', unit: 'm²' },
+                    { label: 'Luas Bangunan', type: 'number', placeholder: '200', unit: 'm²' },
+                    { label: 'Jumlah Dispenser', type: 'number', placeholder: '4', unit: 'Unit' },
+                    { label: 'Jumlah Tangki', type: 'number', placeholder: '3', unit: 'Unit' },
+                    { label: 'Merek SPBU', type: 'select', options: ['Pertamina', 'Shell', 'BP', 'Vivo'] },
+                    { label: 'Status Operasional', type: 'select', options: ['Aktif Berjalan', 'Berhenti Sementara'] },
+                    { label: 'Mini Market', type: 'select', options: ['Ada', 'Tidak Ada'] },
+                    { label: 'Mushola', type: 'select', options: ['Ada', 'Tidak Ada'] },
+                    { label: 'Toilet', type: 'number', placeholder: '0', unit: 'Pintu' },
+                    { label: 'Car Wash', type: 'select', options: ['Ada', 'Tidak Ada'] },
+                    { label: 'Bengkel', type: 'select', options: ['Ada', 'Tidak Ada'] }
+                ],
+                'Rest Area': [
+                    { label: 'Luas Kawasan', type: 'number', placeholder: '20000', unit: 'm²' },
+                    { label: 'Jumlah Tenant', type: 'number', placeholder: '0', unit: 'Tenant' },
+                    { label: 'Parkir Bus', type: 'number', placeholder: '0', unit: 'Slot' },
+                    { label: 'Parkir Truk', type: 'number', placeholder: '0', unit: 'Slot' },
+                    { label: 'SPBU', type: 'select', options: ['Ada', 'Tidak Ada'] },
+                    { label: 'Mushola', type: 'select', options: ['Ada', 'Tidak Ada'] },
+                    { label: 'Food Court', type: 'select', options: ['Ada', 'Tidak Ada'] },
+                    { label: 'Toilet', type: 'number', placeholder: '0', unit: 'Pintu' }
+                ],
+                'Tanah': [
+                    { label: 'Luas', type: 'number', placeholder: '500', unit: 'm²' },
+                    { label: 'Lebar', type: 'number', placeholder: '0', unit: 'Meter' },
+                    { label: 'Panjang', type: 'number', placeholder: '0', unit: 'Meter' },
+                    { label: 'Kontur', type: 'select', options: ['Rata / Datar', 'Miring / Lereng', 'Berbukit'] },
+                    { label: 'Zonasi', type: 'select', options: ['Kuning (Pemukiman)', 'Hijau (Pertanian)', 'Merah (Komersial)', 'Ungu (Industri)'] },
+                    { label: 'Akses Jalan', type: 'select', options: ['Aspal Dua Mobil', 'Aspal Satu Mobil', 'Jalan Tanah / Makadam'] },
+                    { label: 'Hadap', type: 'select', options: ['Utara', 'Selatan', 'Timur', 'Barat'] },
+                    { label: 'Sudah Dipagar', type: 'select', options: ['Sudah Keliling', 'Belum'] }
+                ],
+                'Kavling': [
+                    { label: 'Luas', type: 'number', placeholder: '120', unit: 'm²' },
+                    { label: 'Lebar', type: 'number', placeholder: '0', unit: 'Meter' },
+                    { label: 'Panjang', type: 'number', placeholder: '0', unit: 'Meter' },
+                    { label: 'Hook', type: 'select', options: ['Ya (Posisi Sudut)', 'Tidak'] },
+                    { label: 'Sudah Pecah SHM', type: 'select', options: ['Sudah per Kavling', 'Belum / Induk'] }
+                ],
+                'Tanah Komersial': [
+                    { label: 'Luas', type: 'number', placeholder: '2000', unit: 'm²' },
+                    { label: 'Lebar Muka', type: 'number', placeholder: '0', unit: 'Meter' },
+                    { label: 'Zonasi', type: 'select', options: ['Komersial / Perdagangan', 'Campuran'] },
+                    { label: 'Cocok Untuk', type: 'text', placeholder: 'Contoh: Mall, Hotel, Ruko' }
+                ],
+                'Tanah Industri': [
+                    { label: 'Luas', type: 'number', placeholder: '10000', unit: 'm²' },
+                    { label: 'Lebar Muka', type: 'number', placeholder: '0', unit: 'Meter' },
+                    { label: 'Zonasi Industri', type: 'select', options: ['Kawasan Industri', 'Zona Industri Non-Kawasan'] },
+                    { label: 'Jalan Kontainer', type: 'select', options: ['40 Feet Ready', '20 Feet Ready'] }
+                ],
+                'Sawah': [
+                    { label: 'Luas', type: 'number', placeholder: '5000', unit: 'm²' },
+                    { label: 'Lebar', type: 'number', placeholder: '0', unit: 'Meter' },
+                    { label: 'Panjang', type: 'number', placeholder: '0', unit: 'Meter' },
+                    { label: 'Irigasi', type: 'select', options: ['Teknis / Lancar', 'Tadah Hujan'] },
+                    { label: 'Jenis Tanah', type: 'select', options: ['Gambut', 'Lempung Organik', 'Alluvial'] },
+                    { label: 'Jumlah Panen per Tahun', type: 'number', placeholder: '2', unit: 'Kali Panen' },
+                    { label: 'Sertifikat', type: 'select', options: ['SHM', 'Girik / Petok'] },
+                    { label: 'Sumber Air', type: 'select', options: ['Sungai / Saluran Irigasi', 'Air Tanah / Pompa'] }
+                ],
+                'Kebun': [
+                    { label: 'Luas', type: 'number', placeholder: '10000', unit: 'm²' },
+                    { label: 'Jenis Tanaman', type: 'text', placeholder: 'Contoh: Sawit, Karet, Durian' },
+                    { label: 'Jumlah Pohon', type: 'number', placeholder: '0', unit: 'Pohon' },
+                    { label: 'Produktivitas', type: 'text', placeholder: 'Contoh: 5 Ton / Panen' },
+                    { label: 'Sumber Air', type: 'select', options: ['Mata Air Alam', 'Sumur / Pompa', 'Tadah Hujan'] }
+                ],
+                'Tambak': [
+                    { label: 'Luas', type: 'number', placeholder: '20000', unit: 'm²' },
+                    { label: 'Jenis Tambak', type: 'text', placeholder: 'Contoh: Udang Vaname, Bandeng' },
+                    { label: 'Air Tawar / Air Laut', type: 'select', options: ['Air Payau / Laut', 'Air Tawar'] },
+                    { label: 'Produksi per Tahun', type: 'text', placeholder: 'Contoh: 15 Ton' },
+                    { label: 'Pompa Air', type: 'number', placeholder: '0', unit: 'Unit' }
+                ],
+                'Rumah Sakit': [
+                    { label: 'Luas Tanah', type: 'number', placeholder: '5000', unit: 'm²' },
+                    { label: 'Luas Bangunan', type: 'number', placeholder: '12000', unit: 'm²' },
+                    { label: 'Jumlah Lantai', type: 'number', placeholder: '0', unit: 'Lantai' },
+                    { label: 'Jumlah Tempat Tidur', type: 'number', placeholder: '0', unit: 'Bed' },
+                    { label: 'Jumlah Ruang Operasi', type: 'number', placeholder: '0', unit: 'Ruangan' },
+                    { label: 'ICU', type: 'number', placeholder: '0', unit: 'Bed' },
+                    { label: 'Parkir', type: 'number', placeholder: '0', unit: 'Mobil' },
+                    { label: 'Lift', type: 'number', placeholder: '0', unit: 'Unit' }
+                ],
+                'Klinik': [
+                    { label: 'Luas Bangunan', type: 'number', placeholder: '150', unit: 'm²' },
+                    { label: 'Jumlah Ruang Periksa', type: 'number', placeholder: '0', unit: 'Ruangan' },
+                    { label: 'Parkir', type: 'number', placeholder: '0', unit: 'Mobil' },
+                    { label: 'Apotek', type: 'select', options: ['Ada di Dalam', 'Tidak Ada'] }
+                ],
+                'Sekolah': [
+                    { label: 'Luas Tanah', type: 'number', placeholder: '3000', unit: 'm²' },
+                    { label: 'Luas Bangunan', type: 'number', placeholder: '2000', unit: 'm²' },
+                    { label: 'Jumlah Ruang Kelas', type: 'number', placeholder: '0', unit: 'Kelas' },
+                    { label: 'Laboratorium', type: 'number', placeholder: '0', unit: 'Ruang' },
+                    { label: 'Lapangan', type: 'number', placeholder: '0', unit: 'Unit' },
+                    { label: 'Parkir', type: 'number', placeholder: '0', unit: 'Mobil' }
+                ],
+                'Kampus': [
+                    { label: 'Luas Tanah', type: 'number', placeholder: '20000', unit: 'm²' },
+                    { label: 'Luas Bangunan', type: 'number', placeholder: '15000', unit: 'm²' },
+                    { label: 'Jumlah Gedung', type: 'number', placeholder: '0', unit: 'Gedung' },
+                    { label: 'Auditorium', type: 'select', options: ['Ada', 'Tidak Ada'] },
+                    { label: 'Laboratorium', type: 'number', placeholder: '0', unit: 'Ruang' },
+                    { label: 'Parkir', type: 'number', placeholder: '0', unit: 'Mobil' }
+                ]
+            };
+
+            // DATA CHECKLIST FASILITAS UNTUK MASING-MASING GRUP UTAMA
+            const propertyFacilitiesDefinition = {
+                'Rumah': ['AC', 'Water Heater', 'Kitchen Set', 'Kolam Renang', 'Taman', 'CCTV', 'Internet Fiber', 'Balkon', 'Rooftop', 'Smart Home'],
+                'Gudang': ['Loading Dock', 'Jalan Kontainer', 'CCTV', 'Office', 'Cold Storage', 'Genset', 'Hydrant', 'Dock Leveler'],
+                'Hotel': ['Kolam Renang', 'Ballroom', 'Lift', 'Restoran', 'Spa', 'Gym', 'Laundry', 'Meeting Room']
+            };
+
+            // CONTROLLER SINKRONISASI DROP-DOWN MENU
+            const katSelect = document.getElementById('kategori-properti');
+            const jenisSelect = document.getElementById('jenis-properti');
+            const wrapperLainnya = document.getElementById('wrapper-jenis-lainnya');
+            const inputLainnya = document.getElementById('input-jenis-lainnya');
+            
+            const specPanel = document.getElementById('dynamic-specifications-panel');
+            const fieldsContainer = document.getElementById('dynamic-fields-container');
+            
+            const facPanel = document.getElementById('dynamic-facilities-panel');
+            const checkboxesContainer = document.getElementById('facilities-checkbox-container');
+
+            katSelect.addEventListener('change', function () {
+                const category = this.value;
+                jenisSelect.innerHTML = '<option value="">-- Pilih Jenis Properti --</option>';
+                
+                // Reset panel dinamis & lainnya
+                wrapperLainnya.classList.add('hidden');
+                inputLainnya.removeAttribute('required');
+                specPanel.classList.add('hidden');
+                fieldsContainer.innerHTML = '';
+                facPanel.classList.add('hidden');
+                checkboxesContainer.innerHTML = '';
+
+                if (!category) {
+                    jenisSelect.classList.add('opacity-50', 'pointer-events-none');
+                    return;
+                }
+
+                if (category === 'Lainnya') {
+                    jenisSelect.classList.add('opacity-50', 'pointer-events-none');
+                    wrapperLainnya.classList.remove('hidden');
+                    inputLainnya.setAttribute('required', 'required');
+                    
+                    // Render Form Umum untuk "Lainnya"
+                    renderFields('Lainnya Umum');
+                    return;
+                }
+
+                // Inject options anak sesuai map kategori
+                const options = categoryMapping[category] || [];
+                options.forEach(opt => {
+                    jenisSelect.innerHTML += `<option value="${opt}">${opt}</option>`;
+                });
+                jenisSelect.innerHTML += `<option value="Lainnya">Lainnya</option>`;
+
+                jenisSelect.classList.remove('opacity-50', 'pointer-events-none');
+            });
+
+            jenisSelect.addEventListener('change', function() {
+                const jenis = this.value;
+                wrapperLainnya.classList.add('hidden');
+                inputLainnya.removeAttribute('required');
+                
+                if (jenis === 'Lainnya') {
+                    wrapperLainnya.classList.remove('hidden');
+                    inputLainnya.setAttribute('required', 'required');
+                    renderFields('Lainnya Umum');
+                    renderFacilities(null);
+                } else if (jenis) {
+                    renderFields(jenis);
+                    renderFacilities(jenis);
+                } else {
+                    specPanel.classList.add('hidden');
+                    fieldsContainer.innerHTML = '';
+                    facPanel.classList.add('hidden');
+                    checkboxesContainer.innerHTML = '';
+                }
+            });
+
+            // FUNGSI INJECT FIELD SPESIFIKASI DINAMIS DENGAN ANIMASI TRANSISI
+            function renderFields(jenisName) {
+                fieldsContainer.innerHTML = '';
+                let fields = [];
+
+                if (jenisName === 'Lainnya Umum') {
+                    fields = [
+                        { label: 'Luas Tanah', type: 'number', placeholder: 'Contoh: 100', unit: 'm²' },
+                        { label: 'Luas Bangunan', type: 'number', placeholder: 'Contoh: 80', unit: 'm²' },
+                        { label: 'Keterangan Tambahan', type: 'text', placeholder: 'Keterangan spesifikasi khusus...' }
+                    ];
+                } else {
+                    fields = propertyFieldsDefinition[jenisName] || [];
+                }
+
+                if (fields.length === 0) {
+                    specPanel.classList.add('hidden');
+                    return;
+                }
+
+                fields.forEach(f => {
+                    const block = document.createElement('div');
+                    block.className = 'dynamic-spec-container'; // Memicu animasi fade-in-up lembut
+                    
+                    const label = document.createElement('label');
+                    label.className = 'block text-[10px] font-bold text-gray-600 uppercase mb-1';
+                    label.textContent = f.label;
+                    block.appendChild(label);
+
+                    if (f.type === 'select') {
+                        const select = document.createElement('select');
+                        select.className = 'w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white';
+                        f.options.forEach(opt => {
+                            select.innerHTML += `<option value="${opt}">${opt}</option>`;
+                        });
+                        block.appendChild(select);
+                    } else {
+                        const wrapper = document.createElement('div');
+                        wrapper.className = f.unit ? 'input-with-unit' : '';
+                        
+                        const input = document.createElement('input');
+                        input.type = f.type;
+                        input.placeholder = f.placeholder || '';
+                        input.className = 'w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white';
+                        
+                        wrapper.appendChild(input);
+                        
+                        if (f.unit) {
+                            const unitTag = document.createElement('span');
+                            unitTag.className = 'input-unit-tag';
+                            unitTag.textContent = f.unit;
+                            wrapper.appendChild(unitTag);
+                        }
+                        block.appendChild(wrapper);
+                    }
+                    fieldsContainer.appendChild(block);
+                });
+
+                specPanel.classList.remove('hidden');
+            }
+
+            // FUNGSI INJECT CHECKLIST FASILITAS DINAMIS
+            function renderFacilities(jenisName) {
+                checkboxesContainer.innerHTML = '';
+                let listFasilitas = [];
+
+                if (jenisName === 'Rumah' || jenisName === 'Apartemen' || jenisName === 'Villa' || jenisName === 'Townhouse / Cluster') {
+                    listFasilitas = propertyFacilitiesDefinition['Rumah'];
+                } else if (jenisName === 'Gudang' || jenisName === 'Pabrik' || jenisName === 'Tanah Industri') {
+                    listFasilitas = propertyFacilitiesDefinition['Gudang'];
+                } else if (jenisName === 'Hotel' || jenisName === 'Resort') {
+                    listFasilitas = propertyFacilitiesDefinition['Hotel'];
+                }
+
+                if (listFasilitas.length === 0) {
+                    facPanel.classList.add('hidden');
+                    return;
+                }
+
+                listFasilitas.forEach(fas => {
+                    const itemLabel = document.createElement('label');
+                    itemLabel.className = 'dynamic-spec-container'; // animasi transisi seragam
+                    
+                    const chk = document.createElement('input');
+                    chk.type = 'checkbox';
+                    chk.value = fas;
+                    
+                    const span = document.createElement('span');
+                    span.className = 'text-xs font-semibold text-gray-700';
+                    span.textContent = fas;
+                    
+                    itemLabel.appendChild(chk);
+                    itemLabel.appendChild(span);
+                    checkboxesContainer.appendChild(itemLabel);
+                });
+
+                facPanel.classList.remove('hidden');
+            }
+
+
+            // =======================================================
+            // KODE ASLI BAWAAN (JANGAN DICOLEK / TETAP AKTIF)
+            // =======================================================
+            
+            // 3. VALIDASI INPUT FILE GAMBAR (Maks 10 files & 1MB/file)
+            const imageUpload = document.getElementById('image-upload');
+            const uploadError = document.getElementById('upload-error');
+
+            imageUpload.addEventListener('change', function () {
+                uploadError.classList.add('hidden');
+                const files = this.files;
+                if (files.length > 10) {
+                    uploadError.textContent = "Maksimal hanya boleh mengunggah 10 gambar!";
+                    uploadError.classList.remove('hidden');
+                    this.value = ""; 
+                    return;
+                }
+                for (let i = 0; i < files.length; i++) {
+                    if (files[i].size > 1024 * 1024) { // 1MB
+                        uploadError.textContent = `File "${files[i].name}" melebihi ukuran 1MB!`;
+                        uploadError.classList.remove('hidden');
+                        this.value = "";
+                        return;
+                    }
+                }
+            });
+
+            // 4. AUTO FORMAT RUPIAH SEPARATOR TITIK
+            const inputHarga = document.getElementById('input-harga');
+            inputHarga.addEventListener('input', function () {
+                let value = this.value.replace(/[^,\d]/g, '').toString();
+                let split = value.split(',');
+                let sisa = split[0].length % 3;
+                let rupiah = split[0].substr(0, sisa);
+                let ribuan = split[0].substr(sisa).match(/\d{3}/gi);
+
+                if (ribuan) {
+                    let separator = sisa ? '.' : '';
+                    rupiah += separator + ribuan.join('.');
+                }
+                rupiah = split[1] != undefined ? rupiah + ',' + split[1] : rupiah;
+                this.value = rupiah;
+            });
+
+            // 5. INTEGRASI API WILAYAH INDONESIA (EMSFA DENGAN EKSTENSI .JSON)
+            const provSelect = document.getElementById('provinsi');
+            const kabSelect = document.getElementById('kabupaten');
+            const kecSelect = document.getElementById('kecamatan');
+            const kelSelect = document.getElementById('kelurahan');
+
+            const baseUrl = 'https://www.emsifa.com/api-wilayah-indonesia/api';
+
+            // Fetch Semua Provinsi saat halaman load (.json)
+            fetch(`${baseUrl}/provinces.json`)
+                .then(res => res.json())
+                .then(provinces => {
+                    provSelect.innerHTML = '<option value="">-- PILIH PROVINSI --</option>';
+                    provinces.forEach(p => {
+                        provSelect.innerHTML += `<option value="${p.id}">${p.name}</option>`;
+                    });
+                }).catch(err => console.error("Gagal load data provinsi:", err));
+
+            function toggleSelectState(element, dataExists) {
+                if (dataExists) {
+                    element.classList.remove('opacity-50', 'pointer-events-none');
+                } else {
+                    element.classList.add('opacity-50', 'pointer-events-none');
+                }
+            }
+
+            // On Change Provinsi -> Load Kabupaten (.json)
+            provSelect.addEventListener('change', function () {
+                const provId = this.value;
+                kabSelect.innerHTML = '<option value="">-- PILIH KABUPATEN / KOTA --</option>';
+                kecSelect.innerHTML = '<option value="">-- PILIH KECAMATAN --</option>';
+                kelSelect.innerHTML = '<option value="">-- PILIH KELURAHAN --</option>';
+                toggleSelectState(kabSelect, false);
+                toggleSelectState(kecSelect, false);
+                toggleSelectState(kelSelect, false);
+
+                if (!provId) return;
+
+                fetch(`${baseUrl}/regencies/${provId}.json`)
+                    .then(res => res.json())
+                    .then(regencies => {
+                        regencies.forEach(k => {
+                            kabSelect.innerHTML += `<option value="${k.id}">${k.name}</option>`;
+                        });
+                        toggleSelectState(kabSelect, true);
+                    }).catch(err => console.error("Gagal load kabupaten:", err));
+            });
+
+            // On Change Kabupaten -> Load Kecamatan (.json)
+            kabSelect.addEventListener('change', function () {
+                const regencyId = this.value;
+                kecSelect.innerHTML = '<option value="">-- PILIH KECAMATAN --</option>';
+                kelSelect.innerHTML = '<option value="">-- PILIH KELURAHAN --</option>';
+                toggleSelectState(kecSelect, false);
+                toggleSelectState(kelSelect, false);
+
+                if (!regencyId) return;
+
+                fetch(`${baseUrl}/districts/${regencyId}.json`)
+                    .then(res => res.json())
+                    .then(districts => {
+                        districts.forEach(k => {
+                            kecSelect.innerHTML += `<option value="${k.id}">${k.name}</option>`;
+                        });
+                        toggleSelectState(kecSelect, true);
+                    }).catch(err => console.error("Gagal load kecamatan:", err));
+            });
+
+            // On Change Kecamatan -> Load Kelurahan (.json)
+            kecSelect.addEventListener('change', function () {
+                const districtId = this.value;
+                kelSelect.innerHTML = '<option value="">-- PILIH KELURAHAN --</option>';
+                toggleSelectState(kelSelect, false);
+
+                if (!districtId) return;
+
+                fetch(`${baseUrl}/villages/${districtId}.json`)
+                    .then(res => res.json())
+                    .then(villages => {
+                        villages.forEach(k => {
+                            kelSelect.innerHTML += `<option value="${k.id}">${k.name}</option>`;
+                        });
+                        toggleSelectState(kelSelect, true);
+                    }).catch(err => console.error("Gagal load kelurahan:", err));
+            });
+
+            // 6. EVENT FORM SUBMIT
+            document.getElementById('property-form').addEventListener('submit', function(e) {
+                alert("Iklan Properti Anda sukses masuk ke antrean validasi TERAVIA!");
+            });
+        });
+    </script>
+</body>
+</html>
