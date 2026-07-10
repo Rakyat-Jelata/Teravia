@@ -52,7 +52,7 @@
         .text-xs { font-size: 0.75rem; }
         .text-\[10px\] { font-size: 10px; }
         .font-bold { font-weight: 700; }
-        .font-semibold { font-semibold: 600; }
+        .font-semibold { font-weight: 600; }
         .text-gray-500 { color: var(--gray-500); }
         .text-gray-600 { color: var(--gray-600); }
         .text-gray-700 { color: var(--gray-700); }
@@ -286,96 +286,6 @@
                         </div>
                     </div>
 
-                    <div id="form-tanah" class="hidden bg-gray-50 p-4 rounded-xl borde                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Jumlah Toilet</label>
-                                <input type="number" placeholder="0" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
-                            </div>
-                            <div>
-                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Jumlah Lift</label>
-                                <input type="number" placeholder="0" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
-                            </div>
-                            <div>
-                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Kapasitas Pasien</label>
-                                <input type="number" placeholder="Bed" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
-                            </div>
-                            <div>
-                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Parkir Mobil (Unit)</label>
-                                <input type="number" placeholder="Kapasitas" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 2. Detail Hotel -->
-                    <div id="form-hotel" class="hidden bg-gray-50 p-5 rounded-2xl border border-gray-200 space-y-4">
-                        <h4 class="text-xs font-bold text-emerald-700 uppercase tracking-wider"><i class="fa-solid fa-hotel mr-1"></i> Detail Spesifikasi Hotel</h4>
-                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                            <div>
-                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Jumlah Lantai</label>
-                                <input type="number" placeholder="0" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
-                            </div>
-                            <div>
-                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Total Kamar</label>
-                                <input type="number" placeholder="0" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
-                            </div>
-                            <div>
-                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Bintang Hotel</label>
-                                <select class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
-                                    <option value="Non Bintang">Non Bintang / Losmen</option>
-                                    <option value="Bintang 1">Bintang 1</option>
-                                    <option value="Bintang 2">Bintang 2</option>
-                                    <option value="Bintang 3">Bintang 3</option>
-                                    <option value="Bintang 4">Bintang 4</option>
-                                    <option value="Bintang 5">Bintang 5</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Tipe Kamar yang Tersedia</label>
-                            <input type="text" placeholder="Contoh: Standard, Deluxe, Suite, Presidential" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-bold text-gray-600 uppercase mb-2">Fasilitas Hotel</label>
-                            <div class="grid grid-cols-2 gap-2 text-xs text-gray-700">
-                                <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Swimming Pool</span></label>
-                                <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Pusat Kebugaran / Gym</span></label>
-                                <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Kids Playground</span></label>
-                                <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Restaurant / Cafe</span></label>
-                                <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Ballroom / Meeting Room</span></label>
-                                <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Spa & Wellness</span></label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 3. Detail Gedung Perkantoran -->
-                    <div id="form-perkantoran" class="hidden bg-gray-50 p-5 rounded-2xl border border-gray-200 space-y-4">
-                        <h4 class="text-xs font-bold text-emerald-700 uppercase tracking-wider"><i class="fa-solid fa-building mr-1"></i> Detail Gedung Perkantoran</h4>
-                        <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
-                            <div>
-                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Jumlah Lantai</label>
-                                <input type="number" placeholder="0" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
-                            </div>
-                            <div>
-                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Jumlah Lift (Unit)</label>
-                                <input type="number" placeholder="0" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
-                            </div>
-                            <div>
-                                <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Kapasitas Parkir</label>
-                                <input type="number" placeholder="Mobil" class="w-full p-2.5 border border-gray-200 rounded-lg text-sm bg-white">
-                            </div>
-                        </div>
-                        <div>
-                            <label class="block text-[10px] font-bold text-gray-600 uppercase mb-2">Fasilitas Gedung & Keamanan</label>
-                            <div class="grid grid-cols-2 gap-2 text-xs text-gray-700">
-                                <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Sistem Keamanan 24 Jam</span></label>
-                                <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Fire Fighting System</span></label>
-                                <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Fiber Optic Ready</span></label>
-                                <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Helipad</span></label>
-                                <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Kantin / Food Court</span></label>
-                                <label class="flex items-center space-x-2"><input type="checkbox" class="rounded text-emerald-600"> <span>Generator Cadangan (Genset)</span></label>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- 4. Detail Tanah / Sawah / Kebun -->
                     <div id="form-tanah" class="hidden bg-gray-50 p-4 rounded-xl border border-gray-100 grid grid-cols-3 gap-3">
                         <div>
                             <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Luas Tanah (m²)</label>
@@ -391,7 +301,6 @@
                         </div>
                     </div>
 
-                    <!-- 5. Detail Rumah / Villa / Sekolah -->
                     <div id="form-rumah" class="hidden bg-gray-50 p-4 rounded-xl border border-gray-100 space-y-4">
                         <div class="grid grid-cols-2 sm:grid-cols-3 gap-3">
                             <div>
@@ -441,7 +350,6 @@
                         </div>
                     </div>
 
-                    <!-- LEGALITAS & SISTEM PENDUKUNG -->
                     <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
                         <div>
                             <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Legalitas Properti *</label>
@@ -479,7 +387,6 @@
                         </select>
                     </div>
 
-                    <!-- WILAYAH -->
                     <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200 space-y-4">
                         <h3 class="text-xs font-bold text-gray-800 uppercase tracking-wider"><i class="fa-solid fa-map-location-dot mr-1"></i> Penempatan Wilayah Properti</h3>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
@@ -514,7 +421,6 @@
                         </div>
                     </div>
 
-                    <!-- Harga & Deskripsi -->
                     <div>
                         <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Harga Properti *</label>
                         <div class="relative flex items-center">
@@ -536,7 +442,6 @@
         </section>
     </div>
 
-    <!-- LOGIKA JAVASCRIPT & INTEGRASI API WILAYAH -->
     <script>
         document.addEventListener('DOMContentLoaded', function () {
             
@@ -614,25 +519,13 @@
                 this.value = rupiah;
             });
 
-            // 5. INTEGRASI API WILAYAH INDONESIA
+            // 5. REVISI INTEGRASI API WILAYAH INDONESIA UTUH (EMSIFA API)
             const provSelect = document.getElementById('provinsi');
             const kabSelect = document.getElementById('kabupaten');
             const kecSelect = document.getElementById('kecamatan');
             const kelSelect = document.getElementById('kelurahan');
 
-            const baseUrl = 'https://regions-api.gofir.co/api';
-
-            // Fetch Semua Provinsi saat halaman load
-            fetch(`${baseUrl}/provinces`)
-                .then(res => res.json())
-                .then(response => {
-                    provSelect.innerHTML = '<option value="">-- PILIH PROVINSI --</option>';
-                    // API mengembalikan data dalam response.data atau langsung array
-                    const provinces = response.data || response;
-                    provinces.forEach(p => {
-                        provSelect.innerHTML += `<option value="${p.id}">${p.name}</option>`;
-                    });
-                }).catch(err => console.error("Gagal load data provinsi:", err));
+            const baseUrl = 'https://www.emsifa.com/api-wilayah-indonesia/api';
 
             function toggleSelectState(element, dataExists) {
                 if (dataExists) {
@@ -641,6 +534,16 @@
                     element.classList.add('opacity-50', 'pointer-events-none');
                 }
             }
+
+            // Fetch Semua Provinsi saat halaman load
+            fetch(`${baseUrl}/provinces.json`)
+                .then(res => res.json())
+                .then(provinces => {
+                    provSelect.innerHTML = '<option value="">-- PILIH PROVINSI --</option>';
+                    provinces.forEach(p => {
+                        provSelect.innerHTML += `<option value="${p.id}">${p.name}</option>`;
+                    });
+                }).catch(err => console.error("Gagal load data provinsi:", err));
 
             // On Change Provinsi -> Load Kabupaten
             provSelect.addEventListener('change', function () {
@@ -654,10 +557,9 @@
 
                 if (!provId) return;
 
-                fetch(`${baseUrl}/regencies?province_id=${provId}`)
+                fetch(`${baseUrl}/regencies/${provId}.json`)
                     .then(res => res.json())
-                    .then(response => {
-                        const regencies = response.data || response;
+                    .then(regencies => {
                         regencies.forEach(k => {
                             kabSelect.innerHTML += `<option value="${k.id}">${k.name}</option>`;
                         });
@@ -675,10 +577,9 @@
 
                 if (!regencyId) return;
 
-                fetch(`${baseUrl}/districts?regency_id=${regencyId}`)
+                fetch(`${baseUrl}/districts/${regencyId}.json`)
                     .then(res => res.json())
-                    .then(response => {
-                        const districts = response.data || response;
+                    .then(districts => {
                         districts.forEach(k => {
                             kecSelect.innerHTML += `<option value="${k.id}">${k.name}</option>`;
                         });
@@ -694,10 +595,9 @@
 
                 if (!districtId) return;
 
-                fetch(`${baseUrl}/villages?district_id=${districtId}`)
+                fetch(`${baseUrl}/villages/${districtId}.json`)
                     .then(res => res.json())
-                    .then(response => {
-                        const villages = response.data || response;
+                    .then(villages => {
                         villages.forEach(k => {
                             kelSelect.innerHTML += `<option value="${k.id}">${k.name}</option>`;
                         });
@@ -713,4 +613,3 @@
     </script>
 </body>
 </html>
-
