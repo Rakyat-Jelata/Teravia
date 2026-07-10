@@ -1,6 +1,19 @@
 
 import { supabase } from '../../database/supabase.js'; 
 
+// --- LOGIKA UI ---
+const hamburger = document.getElementById('hamburgerMenu');
+const navLinks = document.getElementById('navLinks');
+const navActions = document.querySelector('.nav-actions'); // Ambil elemen nav-actions
+
+if (hamburger) {
+    hamburger.addEventListener('click', () => {
+        navLinks.classList.toggle('active');
+        navActions.classList.toggle('active'); // Tambahkan ini agar ikut muncul
+    });
+}
+
+
 // PENTING: Path import supabase mungkin perlu disesuaikan 
 // Jika auth.js di dalam /assets/js/ dan supabase.js di /database/ 
 // maka gunakan: ../database/supabase.js (keluar 1 folder lalu masuk ke database)
