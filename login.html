@@ -121,24 +121,7 @@
         </div>
     </div>
 
-    <script>
-        const hamburger = document.getElementById('hamburgerMenu');
-        const navLinks = document.getElementById('navLinks');
-        hamburger.addEventListener('click', () => { navLinks.classList.toggle('active'); });
-
-        const passField = document.getElementById('login-password');
-        const toggleIcon = document.getElementById('toggle-login-pass');
-        toggleIcon.addEventListener('click', () => {
-            if (passField.type === 'password') {
-                passField.type = 'text';
-                toggleIcon.classList.replace('fa-eye-slash', 'fa-eye');
-            } else {
-                passField.type = 'password';
-                toggleIcon.classList.replace('fa-eye', 'fa-eye-slash');
-            }
-        });
-    </script>
     <script type="module" src="./assets/js/auth.js"></script>
-    
+
 </body>
 </html>
