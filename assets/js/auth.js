@@ -1,4 +1,5 @@
-import { supabase } from '../database/supabase.js'; 
+
+import { supabase } from '../../database/supabase.js'; 
 
 // PENTING: Path import supabase mungkin perlu disesuaikan 
 // Jika auth.js di dalam /assets/js/ dan supabase.js di /database/ 
@@ -29,7 +30,8 @@ document.addEventListener('DOMContentLoaded', () => {
     if (registerForm) {
         registerForm.addEventListener('submit', async (e) => {
             e.preventDefault();
-            const email = document.getElementById('reg-email').value;
+        
+            const email = document.getElementById('login-email').value;
             const password = document.getElementById('reg-password').value;
             const fullName = document.getElementById('reg-name').value;
             
