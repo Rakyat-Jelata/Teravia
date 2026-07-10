@@ -296,32 +296,7 @@
         </div>
     </div>
 
-    <script>
-        // Logika Mata Hide/Unhide Password (TETAP AMAN)
-        const passwordField = document.getElementById('reg-password');
-        const togglePasswordIcon = document.getElementById('toggle-password-icon');
-
-        togglePasswordIcon.addEventListener('click', function() {
-            if (passwordField.type === 'password') {
-                passwordField.type = 'text';
-                togglePasswordIcon.classList.remove('fa-eye-slash');
-                togglePasswordIcon.classList.add('fa-eye');
-            } else {
-                passwordField.type = 'password';
-                togglePasswordIcon.classList.remove('fa-eye');
-                togglePasswordIcon.classList.add('fa-eye-slash');
-            }
-        });
-
-        // REVISI UTAMA: JAVASCRIPT UNTUK KLIK HAMBURGER MENU MOBILE
-        const hamburger = document.getElementById('hamburgerMenu');
-        const navLinks = document.getElementById('navLinks');
-
-        hamburger.addEventListener('click', () => {
-            navLinks.classList.toggle('active');
-        });
-    </script>
-<script type="module" src="./assets/js/auth.js"></script>
+    <script type="module" src="./assets/js/auth.js"></script>
 
 </body>
 </html>
