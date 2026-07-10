@@ -62,10 +62,24 @@
         .auth-redirect a { color: var(--accent); text-decoration: none; font-weight: 600; }
 
         @media (max-width: 768px) {
-            .nav-links, .nav-actions { display: none; }
-            .hamburger { display: flex; }
-            .nav-links.active { display: flex !important; flex-direction: column; position: absolute; top: 100%; left: 0; right: 0; background: var(--bg-surface); padding: 20px; border-bottom: 1px solid var(--border-color); gap: 16px; }
-        }
+    .nav-links, .nav-actions { display: none; } /* Tetap disembunyikan saat tertutup */
+    .hamburger { display: flex; }
+    
+    /* Tambahkan ini agar saat aktif, keduanya muncul */
+    .nav-links.active, .nav-actions.active { 
+        display: flex !important; 
+        flex-direction: column; 
+        position: absolute; 
+        top: 100%; 
+        left: 0; 
+        right: 0; 
+        background: var(--bg-surface); 
+        padding: 20px; 
+        border-bottom: 1px solid var(--border-color); 
+        gap: 16px; 
+    }
+}
+
     </style>
 </head>
 <body>
