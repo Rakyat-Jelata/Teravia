@@ -207,25 +207,25 @@
 
         /* FOKUS REVISI: MEDIA QUERY MOBILE UNTUK MEMUNCULKAN HAMBURGER */
         @media (max-width: 768px) {
-            .nav-links { display: none; }
-            .nav-actions { display: none; } /* Menyembunyikan tombol DAFTAR/MASUK bawaan desktop di navbar */
-            .hamburger { display: flex; } /* MEMUNCULKAN KEMBALI HAMBURGER MENU */
-            
-            /* Menu navigasi drop-down saat hamburger di-klik */
-            .nav-links.active {
-                display: flex !important;
-                flex-direction: column;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: var(--bg-surface);
-                padding: 20px;
-                border-bottom: 1px solid var(--border-color);
-                gap: 16px;
-                box-shadow: 0 4px 6px -1px rgba(0,0,0,0.05);
-            }
-        }
+        @media (max-width: 768px) {
+    .nav-links, .nav-actions { display: none; } /* Tetap disembunyikan saat tertutup */
+    .hamburger { display: flex; }
+    
+    /* Tambahkan ini agar saat aktif, keduanya muncul */
+    .nav-links.active, .nav-actions.active { 
+        display: flex !important; 
+        flex-direction: column; 
+        position: absolute; 
+        top: 100%; 
+        left: 0; 
+        right: 0; 
+        background: var(--bg-surface); 
+        padding: 20px; 
+        border-bottom: 1px solid var(--border-color); 
+        gap: 16px; 
+    }
+}
+
     </style>
 </head>
 <body>
