@@ -1,52 +1,49 @@
 import { supabase } from '../../database/supabase.js';
 
-/**
- * Fungsi untuk memproses, mengompres, dan mengupload foto ke Supabase Storage
- * @param {File} file - File foto dari input HTML
- * @param {string} bucketName - Nama bucket di Supabase (default: 'properti-images')
- * @returns {Promise<string|null>} - URL foto publik atau null jika gagal
- */
 export async function processAndUploadImage(file, bucketName = 'properti-images') {
-    // 1. Validasi tipe file (Pastikan hanya gambar)
-    if (!file.type.startsWith('image/')) {
-        alert("File bukan gambar!");
-        return null;
-    }
+    return new Promise((resolve, reject) => {
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+        
+        reader.onload = (event) => {
+            const img = new Image();
+            img.src = event.target.result;
+            
+            img.onload = async () => {
+                // 1. Buat Canvas untuk Resize
+                const canvas = document.createElement('canvas');
+                const MAX_WIDTH = 1024; // Lebar maksimal 1024px
+                const scale = MAX_WIDTH / img.width;
+                canvas.width = MAX_WIDTH;
+                canvas.height = img.height * scale;
 
-    // 2. Opsi Kompresi: Target max 100KB, dimensi max 1024px
-    const options = {
-        maxSizeMB: 0.1, 
-        maxWidthOrHeight: 1024,
-        useWebWorker: true,
-    };
+                const ctx = canvas.getContext('2d');
+                ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 
-    try {
-        console.log("Memulai kompresi foto...");
-        const compressedFile = await imageCompression(file, options);
-        console.log(`Foto dikompresi: ${(compressedFile.size / 1024).toFixed(2)} KB`);
+                // 2. Convert ke .webp dengan kualitas 0.7 (70% - sangat ringan)
+                canvas.toBlob(async (blob) => {
+                    if (!blob) return reject("Gagal convert gambar");
 
-        // 3. Buat nama file unik agar tidak bentrok
-        const fileExt = file.name.split('.').pop();
-        const fileName = `${Date.now()}_${Math.floor(Math.random() * 1000)}.${fileExt}`;
-        const filePath = `listings/${fileName}`;
+                    // 3. Upload ke Supabase
+                    const fileName = `${Date.now()}_${Math.floor(Math.random() * 1000)}.webp`;
+                    const filePath = `listings/${fileName}`;
 
-        // 4. Upload ke Supabase
-        const { data, error } = await supabase.storage
-            .from(bucketName)
-            .upload(filePath, compressedFile);
+                    const { error } = await supabase.storage
+                        .from(bucketName)
+                        .upload(filePath, blob, {
+                            contentType: 'image/webp'
+                        });
 
-        if (error) throw error;
+                    if (error) return reject(error);
 
-        // 5. Dapatkan Public URL
-        const { data: publicUrlData } = supabase.storage
-            .from(bucketName)
-            .getPublicUrl(filePath);
+                    const { data: publicUrlData } = supabase.storage
+                        .from(bucketName)
+                        .getPublicUrl(filePath);
 
-        return publicUrlData.publicUrl;
-
-    } catch (error) {
-        console.error("Kesalahan saat upload:", error);
-        return null;
-    }
+                    resolve(publicUrlData.publicUrl);
+                }, 'image/webp', 0.7);
+            };
+        };
+        reader.onerror = (error) => reject(error);
+    });
 }
-
