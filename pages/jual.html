@@ -249,14 +249,17 @@
     </style>
 </head>
 <body>
+
     <header>
         <div class="header-container">
             <a href="index.html" class="logo">TERAVIA</a>
+            
             <nav class="nav-desktop">
                 <a href="../index.html" class="btn-kembali">
                     <i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda
                 </a>
             </nav>
+
             <button class="hamburger-btn" id="hamburger-trigger" aria-label="Menu">
                 <i class="fa-solid fa-bars"></i>
             </button>
@@ -277,18 +280,15 @@
                 
                 <form id="property-form" class="space-y-6" onsubmit="event.preventDefault();">
                     
-                    <!-- AREA UPLOAD FOTO YANG SUDAH DIREVISI -->
-                    <div class="bg-emerald-50 p-4 rounded-xl border border-emerald-100">
+                    <div>
                         <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Pilih Gambar Properti (Maks 10, Maks 1MB/gambar) *</label>
-                        <input type="file" id="image-upload" multiple accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:rounded-xl file:border-0 file:bg-emerald-600 file:text-white cursor-pointer" required>
+                        <input type="file" id="image-upload" multiple accept="image/*" class="w-full text-sm text-gray-500 file:mr-4 file:py-2.5 file:px-4 file:rounded-xl file:border-0 file:text-xs file:font-bold file:bg-emerald-50 file:text-emerald-700 hover:file:bg-emerald-100 cursor-pointer" required>
                         
-                        <!-- Area Preview -->
-                        <div id="preview-container" class="grid grid-cols-2 sm:grid-cols-5 gap-2 mt-4"></div>
-                        <div id="status-upload" class="text-xs text-emerald-700 mt-2 font-medium"></div>
+                        <div id="preview-container" class="grid grid-cols-2 sm:grid-cols-5 gap-3 mt-4"></div>
+                        
                         <p id="upload-error" class="text-xs text-rose-600 mt-1 hidden">Ukuran file atau jumlah file melebihi batas ketentuan!</p>
                     </div>
 
-                    <!-- SISA KONTEN FORM ANDA -->
                     <div>
                         <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Status Iklan *</label>
                         <select id="status-iklan" class="w-full px-4 border border-gray-200 rounded-xl focus:outline-none focus:border-emerald-600 text-sm bg-white" required>
@@ -327,7 +327,6 @@
                         <input type="text" placeholder="Contoh: Gedung RS Medika Penjaringan Siap Operasi" class="w-full px-4 border border-gray-200 rounded-xl focus:outline-none focus:border-emerald-600 text-sm" required>
                     </div>
 
-                    <!-- Detail Spesifikasi & Fasilitas -->
                     <div id="dynamic-specifications-panel" class="bg-gray-50 p-5 rounded-2xl border border-gray-200 hidden">
                         <h4 class="text-xs font-bold text-emerald-700 uppercase tracking-wider mb-4"><i class="fa-solid fa-list-check mr-1"></i> Detail Spesifikasi Properti</h4>
                         <div id="dynamic-fields-container" class="grid grid-cols-2 sm:grid-cols-3 gap-4"></div>
@@ -375,29 +374,51 @@
                         </select>
                     </div>
 
-                    <!-- Penempatan Wilayah & Harga -->
                     <div class="bg-gray-50 p-4 rounded-2xl border border-gray-200 space-y-4">
                         <h3 class="text-xs font-bold text-gray-800 uppercase tracking-wider"><i class="fa-solid fa-map-location-dot mr-1"></i> Penempatan Wilayah Properti</h3>
                         <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                            <div><label class="block text-[10px] font-bold text-gray-500 mb-1">Provinsi</label><select id="provinsi" class="w-full p-3 border border-gray-200 rounded-xl text-sm bg-white" required><option value="">-- PILIH PROVINSI --</option></select></div>
-                            <div><label class="block text-[10px] font-bold text-gray-500 mb-1">Kabupaten / Kota</label><select id="kabupaten" class="w-full p-3 border border-gray-200 rounded-xl text-sm bg-white opacity-50 pointer-events-none" required><option value="">-- PILIH KABUPATEN / KOTA --</option></select></div>
-                            <div><label class="block text-[10px] font-bold text-gray-500 mb-1">Kecamatan</label><select id="kecamatan" class="w-full p-3 border border-gray-200 rounded-xl text-sm bg-white opacity-50 pointer-events-none" required><option value="">-- PILIH KECAMATAN --</option></select></div>
-                            <div><label class="block text-[10px] font-bold text-gray-500 mb-1">Kelurahan / Desa</label><select id="kelurahan" class="w-full p-3 border border-gray-200 rounded-xl text-sm bg-white opacity-50 pointer-events-none" required><option value="">-- PILIH KELURAHAN --</option></select></div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-500 mb-1">Provinsi</label>
+                                <select id="provinsi" class="w-full p-3 border border-gray-200 rounded-xl text-sm bg-white focus:border-emerald-600 cursor-pointer" required>
+                                    <option value="">-- PILIH PROVINSI --</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-500 mb-1">Kabupaten / Kota</label>
+                                <select id="kabupaten" class="w-full p-3 border border-gray-200 rounded-xl text-sm bg-white focus:border-emerald-600 opacity-50 pointer-events-none" required>
+                                    <option value="">-- PILIH KABUPATEN / KOTA --</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-500 mb-1">Kecamatan</label>
+                                <select id="kecamatan" class="w-full p-3 border border-gray-200 rounded-xl text-sm bg-white focus:border-emerald-600 opacity-50 pointer-events-none" required>
+                                    <option value="">-- PILIH KECAMATAN --</option>
+                                </select>
+                            </div>
+                            <div>
+                                <label class="block text-[10px] font-bold text-gray-500 mb-1">Kelurahan / Desa</label>
+                                <select id="kelurahan" class="w-full p-3 border border-gray-200 rounded-xl text-sm bg-white focus:border-emerald-600 opacity-50 pointer-events-none" required>
+                                    <option value="">-- PILIH KELURAHAN --</option>
+                                </select>
+                            </div>
                         </div>
-                        <div><label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Masukkan Detail Alamat</label><textarea rows="2" placeholder="Nama Jalan, Nomor, RT/RW, Kompleks..." class="w-full p-3 border border-gray-200 rounded-xl text-sm bg-white" required></textarea></div>
+                        <div>
+                            <label class="block text-[10px] font-bold text-gray-600 uppercase mb-1">Masukkan Detail Alamat</label>
+                            <textarea rows="2" placeholder="Nama Jalan, Nomor Rumah, RT/RW, Kompleks..." class="w-full p-3 border border-gray-200 rounded-xl text-sm bg-white focus:outline-none focus:border-emerald-600" required></textarea>
+                        </div>
                     </div>
 
                     <div>
                         <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Harga Properti *</label>
                         <div class="relative flex items-center">
                             <span class="absolute left-4 font-bold text-sm text-gray-500">Rp</span>
-                            <input type="text" id="input-harga" placeholder="0" class="w-full pl-12 pr-4 border border-gray-200 rounded-xl text-sm font-semibold" required>
+                            <input type="text" id="input-harga" placeholder="0" class="w-full pl-12 pr-4 border border-gray-200 rounded-xl focus:outline-none focus:border-emerald-600 text-sm font-semibold" required>
                         </div>
                     </div>
 
                     <div>
                         <label class="block text-xs font-bold text-gray-700 uppercase mb-2">Deskripsi Properti *</label>
-                        <textarea rows="4" placeholder="Jelaskan kelebihan strategis, akses, dsb..." class="w-full p-4 border border-gray-200 rounded-xl text-sm" required></textarea>
+                        <textarea rows="4" placeholder="Jelaskan kelebihan strategis, akses jalan tol, kondisi bangunan, izin operasional dsb..." class="w-full p-4 border border-gray-200 rounded-xl text-sm focus:outline-none focus:border-emerald-600" required></textarea>
                     </div>
 
                     <button type="submit" class="btn-submit-properti">
@@ -407,6 +428,7 @@
             </div>
         </section>
     </div>
+    
 
     <script>
         document.addEventListener('DOMContentLoaded', function () {
