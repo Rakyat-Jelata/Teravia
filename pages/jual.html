@@ -431,41 +431,24 @@
     
 
     <script>
-        document.addEventListener('DOMContentLoaded', function () {
-            import { processAndUploadImage } from '../assets/js/uploadImage.js';
-
-const fotoInput = document.getElementById('foto-input');
-const previewFoto = document.getElementById('preview-foto');
-const statusUpload = document.getElementById('status-upload');
-
-fotoInput.addEventListener('change', async (e) => {
-    const file = e.target.files[0];
-    if (!file) return;
-
-    // 1. TAMPILKAN PREVIEW INSTAN
-    const reader = new FileReader();
-    reader.onload = (e) => {
-        previewFoto.src = e.target.result;
-        previewFoto.style.display = 'block';
-    };
-    reader.readAsDataURL(file);
-
-    // 2. PROSES UPLOAD
-    statusUpload.innerText = "Sedang mengoptimasi & mengupload...";
-    fotoInput.disabled = true;
-
-    const imageUrl = await processAndUploadImage(file);
-
-    if (imageUrl) {
-        statusUpload.innerText = "Upload berhasil!";
-        document.getElementById('foto-url').value = imageUrl;
-    } else {
-        statusUpload.innerText = "Upload gagal.";
-        previewFoto.style.display = 'none'; // Sembunyikan jika gagal
-    }
-    
-    fotoInput.disabled = false;
-});
+           // 1. LOGIKA PREVIEW GAMBAR
+        const imageUpload = document.getElementById('image-upload');
+        const previewContainer = document.getElementById('preview-container');
+        
+        imageUpload.addEventListener('change', function(e) {
+            previewContainer.innerHTML = ''; // Reset preview
+            Array.from(e.target.files).forEach(file => {
+                if (file.size > 1024 * 1024) return; // Skip jika > 1MB
+                const reader = new FileReader();
+                reader.onload = function(event) {
+                    const img = document.createElement('img');
+                    img.src = event.target.result;
+                    img.className = 'w-full h-20 object-cover rounded-lg border';
+                    previewContainer.appendChild(img);
+                }
+                reader.readAsDataURL(file);
+            });
+        });
             
             
             // TOGGLE HAMBURGER MENU MOBILE
